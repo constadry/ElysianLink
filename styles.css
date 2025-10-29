@@ -95,6 +95,9 @@ body {
   background: linear-gradient(180deg, rgba(20,48,103,0.25), rgba(12,33,80,0.25)); color: var(--blue-100);
 }
 
+.category-section { margin: 20px 0 42px; }
+.section-title { margin: 0 0 14px; font-size: 22px; font-weight: 800; letter-spacing: .2px; }
+
 .subfilters { display: none; margin: 6px 0 14px; }
 .subfilters[hidden] { display: none !important; }
 .subfilter-label { color: var(--muted); font-size: 12px; margin-bottom: 8px; }

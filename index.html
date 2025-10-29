@@ -34,12 +34,29 @@
             Данные загружены из API. Если что-то не отображается, обновите страницу.
         </section>
 
-        <section class="subfilters" id="subfilters" hidden>
-            <div class="subfilter-label">Подкатегории</div>
-            <div class="subfilter-list" id="subfilterList"></div>
+        <section id="section-privileges" class="category-section">
+            <h2 class="section-title">Привилегии</h2>
+            <div class="cards" id="cards-privileges" aria-live="polite"></div>
         </section>
 
-        <section class="cards" id="cards" aria-live="polite"></section>
+        <section id="section-currency" class="category-section">
+            <h2 class="section-title">Валюта</h2>
+            <div class="cards" id="cards-currency" aria-live="polite"></div>
+        </section>
+
+        <section id="section-keys" class="category-section">
+            <h2 class="section-title">Ключи</h2>
+            <section class="subfilters" id="subfilters" hidden>
+                <div class="subfilter-label">Подкатегории</div>
+                <div class="subfilter-list" id="subfilterList"></div>
+            </section>
+            <div class="cards" id="cards-keys" aria-live="polite"></div>
+        </section>
+
+        <section id="section-misc" class="category-section">
+            <h2 class="section-title">Разное</h2>
+            <div class="cards" id="cards-misc" aria-live="polite"></div>
+        </section>
 
         <section class="empty-state" id="emptyState" hidden>
             Ничего не найдено.

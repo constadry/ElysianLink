@@ -3,13 +3,17 @@ const API_URL = './data/products.json';
 
 const state = {
   allProducts: [],
-  activeCategory: 'privileges',
   activeSubcategory: 'all'
 };
 
 const elements = {
   tabs: document.querySelectorAll('.tab-button'),
-  cards: document.getElementById('cards'),
+  cardsByCategory: {
+    privileges: document.getElementById('cards-privileges'),
+    currency: document.getElementById('cards-currency'),
+    keys: document.getElementById('cards-keys'),
+    misc: document.getElementById('cards-misc')
+  },
   cardTemplate: document.getElementById('cardTemplate'),
   emptyState: document.getElementById('emptyState'),
   notice: document.getElementById('apiNotice'),
@@ -80,8 +84,8 @@ function uniqueSubcategories(products) {
   return ['all', ...Array.from(set)];
 }
 
-function renderSubfilters(category) {
-  const productsInCategory = state.allProducts.filter(p => p.category === category);
+function renderSubfilters() {
+  const productsInCategory = state.allProducts.filter(p => p.category === 'keys');
   const subs = uniqueSubcategories(productsInCategory);
   if (subs.length <= 1) {
     elements.subfilters.hidden = true;
@@ -98,31 +102,46 @@ function renderSubfilters(category) {
     btn.textContent = sub === 'all' ? 'Все' : sub;
     btn.addEventListener('click', () => {
       state.activeSubcategory = sub;
-      render();
-      renderSubfilters(category);
+      renderAllCategories();
+      renderSubfilters();
     });
     elements.subfilterList.appendChild(btn);
   });
 }
 
-function render() {
-  const { activeCategory, activeSubcategory } = state;
-  elements.cards.innerHTML = '';
-
-  let list = state.allProducts.filter(p => p.category === activeCategory);
-  if (activeSubcategory !== 'all') {
-    list = list.filter(p => p.subcategory === activeSubcategory);
-  }
-
-  if (list.length === 0) {
-    elements.emptyState.hidden = false;
-    return;
-  }
-
+function renderAllCategories() {
+  // Clear all containers
+  Object.values(elements.cardsByCategory).forEach(node => node.innerHTML = '');
   elements.emptyState.hidden = true;
-  const fragment = document.createDocumentFragment();
-  list.forEach(p => fragment.appendChild(createCard(p)));
-  elements.cards.appendChild(fragment);
+
+  const groups = {
+    privileges: [],
+    currency: [],
+    keys: [],
+    misc: []
+  };
+
+  for (const p of state.allProducts) {
+    if (p.category === 'keys' && state.activeSubcategory !== 'all' && p.subcategory !== state.activeSubcategory) {
+      continue;
+    }
+    if (groups[p.category]) groups[p.category].push(p);
+  }
+
+  let total = 0;
+  for (const [category, list] of Object.entries(groups)) {
+    const container = elements.cardsByCategory[category];
+    if (!container) continue;
+    if (list.length === 0) continue;
+    const fragment = document.createDocumentFragment();
+    list.forEach(p => fragment.appendChild(createCard(p)));
+    container.appendChild(fragment);
+    total += list.length;
+  }
+
+  if (total === 0) {
+    elements.emptyState.hidden = false;
+  }
 }
 
 async function loadProducts() {
@@ -145,10 +164,9 @@ function setupTabs() {
     btn.addEventListener('click', () => {
       elements.tabs.forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
-      state.activeCategory = btn.dataset.category;
-      state.activeSubcategory = 'all';
-      render();
-      renderSubfilters(state.activeCategory);
+      const id = `section-${btn.dataset.category}`;
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 }
@@ -157,8 +175,8 @@ function setupTabs() {
 (async function init() {
   setupTabs();
   await loadProducts();
-  render();
-  renderSubfilters(state.activeCategory);
+  renderAllCategories();
+  renderSubfilters();
 })();
 
 
