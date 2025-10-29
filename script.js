@@ -1,5 +1,8 @@
-// Configuration: replace API_URL with your backend endpoint when ready
-const API_URL = './data/products.json';
+// Data sources: prefer GitHub raw, fallback to local file
+const API_SOURCES = [
+  'https://raw.githubusercontent.com/constadry/ElysianLink/master/data/products.json',
+  './data/products.json'
+];
 
 const state = {
   allProducts: [],
@@ -145,18 +148,21 @@ function renderAllCategories() {
 }
 
 async function loadProducts() {
-  try {
-    const res = await fetch(API_URL, { headers: { 'Accept': 'application/json' } });
-    if (!res.ok) throw new Error('Bad response');
-    const data = await res.json();
-    // Expecting an array of products
-    state.allProducts = Array.isArray(data) ? data : (data.products || []);
-    elements.notice.hidden = false;
-  } catch (e) {
-    // Fallback to empty list; UI will show empty state if needed
-    console.warn('Failed to fetch products:', e);
-    state.allProducts = [];
+  for (const url of API_SOURCES) {
+    try {
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) throw new Error(`Bad response: ${res.status}`);
+      const data = await res.json();
+      state.allProducts = Array.isArray(data) ? data : (data.products || []);
+      elements.notice.hidden = false;
+      return;
+    } catch (e) {
+      console.warn('Fetch failed for', url, e);
+      continue;
+    }
   }
+  // If all sources failed
+  state.allProducts = [];
 }
 
 function setupTabs() {
