@@ -21,7 +21,13 @@ const elements = {
   emptyState: document.getElementById('emptyState'),
   notice: document.getElementById('apiNotice'),
   subfilters: document.getElementById('subfilters'),
-  subfilterList: document.getElementById('subfilterList')
+  subfilterList: document.getElementById('subfilterList'),
+  modal: document.getElementById('productModal'),
+  modalImage: document.getElementById('modalImage'),
+  modalTitle: document.getElementById('modalTitle'),
+  modalNote: document.getElementById('modalNote'),
+  modalPrice: document.getElementById('modalPrice'),
+  modalBuy: document.getElementById('modalBuy')
 };
 
 function formatPriceRUB(value) {
@@ -42,7 +48,11 @@ function createCard(product) {
   title.textContent = product.title;
   note.textContent = product.note || '';
   price.textContent = formatPriceRUB(product.price);
-  buyBtn.addEventListener('click', () => handleBuy(product));
+  buyBtn.addEventListener('click', (e) => { e.stopPropagation(); handleBuy(product); });
+
+  // Open modal on card click or Enter key
+  node.addEventListener('click', () => openModal(product));
+  node.addEventListener('keydown', (e) => { if (e.key === 'Enter') openModal(product); });
 
   // Badge like "Выгодно"
   if (product.badge) {
@@ -81,6 +91,24 @@ function handleBuy(product) {
   // Placeholder: integrate your payment flow here
   alert(`Покупка: ${product.title} — ${formatPriceRUB(product.price)}`);
 }
+
+function openModal(product) {
+  elements.modalImage.src = product.image || placeholderImage();
+  elements.modalImage.alt = product.title;
+  elements.modalTitle.textContent = product.title;
+  elements.modalNote.textContent = product.note || '';
+  elements.modalPrice.textContent = formatPriceRUB(product.price);
+  elements.modalBuy.onclick = () => handleBuy(product);
+  elements.modal.setAttribute('aria-hidden', 'false');
+  document.addEventListener('keydown', escListener);
+}
+
+function closeModal() {
+  elements.modal.setAttribute('aria-hidden', 'true');
+  document.removeEventListener('keydown', escListener);
+}
+
+function escListener(e) { if (e.key === 'Escape') closeModal(); }
 
 function uniqueSubcategories(products) {
   const set = new Set(products.map(p => p.subcategory).filter(Boolean));
@@ -183,6 +211,8 @@ function setupTabs() {
   await loadProducts();
   renderAllCategories();
   renderSubfilters();
+  // Modal close bindings
+  document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeModal));
 })();
 
 

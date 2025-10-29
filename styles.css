@@ -124,8 +124,11 @@ body {
   background: linear-gradient(180deg, #0e1b39, #0b152b);
   box-shadow: 0 6px 20px rgba(0,0,0,0.35);
   display: flex; flex-direction: column;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .card:focus { outline: 2px solid #3e92ff; outline-offset: 2px; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(19,121,255,0.25), 0 0 0 1px rgba(62,146,255,0.35) inset; border-color: #2b4f93; }
 
 .card-badge { position: absolute; top: 10px; left: 10px; padding: 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; color: #061431; background: #9fc9ff; display: none; }
 .card-badge[data-visible="true"] { display: inline-block; }
@@ -147,5 +150,18 @@ body {
 .footer-inner { display: grid; gap: 10px; color: var(--muted); }
 .footer-inner a { color: var(--blue-300); text-decoration: none; }
 .footer-inner a[aria-disabled="true"] { pointer-events: none; opacity: .6; }
+
+/* Modal */
+.modal { position: fixed; inset: 0; display: none; }
+.modal[aria-hidden="false"] { display: block; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(5,10,20,0.6); backdrop-filter: blur(6px); }
+.modal-dialog { position: relative; z-index: 1; width: min(680px, 92%); margin: 40px auto; border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(180deg, #0e1b39, #0b152b); box-shadow: 0 24px 60px rgba(0,0,0,0.45); overflow: hidden; }
+.modal-close { position: absolute; top: 8px; right: 8px; background: transparent; color: var(--blue-200); border: 1px solid var(--border); border-radius: 8px; width: 36px; height: 32px; cursor: pointer; }
+.modal-media { width: 100%; aspect-ratio: 16/9; background: #0a1630; display: grid; place-items: center; border-bottom: 1px solid var(--border); }
+.modal-media img { width: 100%; height: 100%; object-fit: cover; }
+.modal-body { padding: 14px; display: grid; gap: 10px; }
+.modal-title { margin: 0; font-size: 20px; }
+.modal-note { margin: 0; color: var(--muted); }
+.modal-price { font-weight: 800; color: var(--blue-200); font-size: 18px; }
 
 

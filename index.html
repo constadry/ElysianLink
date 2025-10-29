@@ -96,6 +96,23 @@
         </article>
     </template>
 
+    <!-- Modal for card details -->
+    <div class="modal" id="productModal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-dialog" role="document">
+            <button class="modal-close" aria-label="Закрыть" data-close>&times;</button>
+            <div class="modal-media">
+                <img alt="" id="modalImage">
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-note" id="modalNote"></p>
+                <div class="modal-price" id="modalPrice"></div>
+                <button class="btn-primary" id="modalBuy">Купить</button>
+            </div>
+        </div>
+    </div>
+
     <script src="./script.js" defer></script>
     <noscript>
         Для работы магазина требуется JavaScript.
