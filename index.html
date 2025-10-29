@@ -12,7 +12,13 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <div class="brand">
+            <nav class="nav-tabs" role="tablist" aria-label="Категории">
+                <button class="tab-button is-active" data-category="privileges">Привилегии</button>
+                <button class="tab-button" data-category="currency">Валюта</button>
+                <button class="tab-button" data-category="keys">Ключи</button>
+                <button class="tab-button" data-category="misc">Разное</button>
+            </nav>
+            <div class="brand" aria-label="AresMine">
                 <div class="brand-logo" aria-hidden="true">A</div>
                 <div class="brand-text">
                     <div class="brand-title">AresMine</div>
@@ -21,12 +27,6 @@
             </div>
             <!-- Убрано: «Как зайти на сервер?», «Вконтакте», «Телеграм» -->
         </div>
-        <nav class="nav-tabs container" role="tablist" aria-label="Категории">
-            <button class="tab-button is-active" data-category="privileges">Привилегии</button>
-            <button class="tab-button" data-category="currency">Валюта</button>
-            <button class="tab-button" data-category="keys">Ключи</button>
-            <button class="tab-button" data-category="misc">Разное</button>
-        </nav>
     </header>
 
     <main class="container">

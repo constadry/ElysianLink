@@ -44,10 +44,11 @@ body {
 }
 
 .header-inner {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 64px;
+  justify-content: center;
+  min-height: 72px;
 }
 
 .brand { display: flex; align-items: center; gap: 12px; }
@@ -61,7 +62,16 @@ body {
 .brand-subtitle { color: var(--muted); font-size: 12px; }
 
 .nav-tabs {
-  display: flex; gap: 8px; padding: 12px 16px 16px; flex-wrap: wrap;
+  position: absolute;
+  left: 16px; /* навигация слева */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: calc(100% - 200px); /* оставляем место под центрированный бренд */
 }
 .tab-button {
   appearance: none; border: 1px solid var(--border); color: var(--text);
@@ -71,6 +81,14 @@ body {
 }
 .tab-button:hover { transform: translateY(-1px); border-color: #3256a3; }
 .tab-button.is-active { background: linear-gradient(180deg, #143067, #0c2150); border-color: #3e92ff; box-shadow: 0 4px 18px rgba(62,146,255,0.22) inset; }
+
+/* Center brand over the same row visually */
+.brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
 
 .notice {
   margin: 20px 0; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
