@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AresMine — Магазин</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <div class="brand-logo" aria-hidden="true">A</div>
+                <div class="brand-text">
+                    <div class="brand-title">AresMine</div>
+                    <div class="brand-subtitle">Minecraft магазин</div>
+                </div>
+            </div>
+            <!-- Убрано: «Как зайти на сервер?», «Вконтакте», «Телеграм» -->
+        </div>
+        <nav class="nav-tabs container" role="tablist" aria-label="Категории">
+            <button class="tab-button is-active" data-category="privileges">Привилегии</button>
+            <button class="tab-button" data-category="currency">Валюта</button>
+            <button class="tab-button" data-category="keys">Ключи</button>
+            <button class="tab-button" data-category="misc">Разное</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="notice" id="apiNotice" hidden>
+            Данные загружены из API. Если что-то не отображается, обновите страницу.
+        </section>
+
+        <section class="subfilters" id="subfilters" hidden>
+            <div class="subfilter-label">Подкатегории</div>
+            <div class="subfilter-list" id="subfilterList"></div>
+        </section>
+
+        <section class="cards" id="cards" aria-live="polite"></section>
+
+        <section class="empty-state" id="emptyState" hidden>
+            Ничего не найдено.
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="legal">
+                <div>AresMine.ru не связан с Mojang AB, все средства идут на развитие проекта</div>
+                <div class="links">
+                    <a href="#" aria-disabled="true">Соглашение</a>
+                    <a href="#" aria-disabled="true">Политика конфиденциальности</a>
+                    <a href="#" aria-disabled="true">Правила оплаты</a>
+                </div>
+            </div>
+            <div class="company">
+                <div>ИП: Маслов Данила</div>
+                <div>ИНН: · ОГРНИП: </div>
+                <div>Email: <a href="mailto:contact@aresmine.ru">contact@aresmine.ru</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <template id="cardTemplate">
+        <article class="card" tabindex="0">
+            <div class="card-badge" data-badge></div>
+            <div class="card-media">
+                <img data-image alt="" loading="lazy">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title" data-title></h3>
+                <p class="card-note" data-note></p>
+                <div class="card-price" data-price></div>
+                <button class="btn-primary" data-buy>Купить</button>
+            </div>
+        </article>
+    </template>
+
+    <script src="./script.js" defer></script>
+    <noscript>
+        Для работы магазина требуется JavaScript.
+    </noscript>
+</body>
+</html>
+
+

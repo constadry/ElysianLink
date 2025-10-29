@@ -1,0 +1,65 @@
+[
+  { "id": "prv-aristocrat", "category": "privileges", "title": "АРИСТОКРАТ", "price": 14499, "image": "https://via.placeholder.com/640x360/143067/ffffff?text=%D0%90%D0%A0%D0%98%D0%A1%D0%A2%D0%9E%D0%9A%D0%A0%D0%90%D0%A2" },
+  { "id": "prv-ares", "category": "privileges", "title": "АРЕС", "price": 9499 },
+  { "id": "prv-phobos", "category": "privileges", "title": "ФОБОС", "price": 3499 },
+  { "id": "prv-kronos", "category": "privileges", "title": "КРОНОС", "price": 1999 },
+  { "id": "prv-pandar", "category": "privileges", "title": "ПАНДАР", "price": 999 },
+  { "id": "prv-phoenix", "category": "privileges", "title": "ФЕНИКС", "price": 499 },
+  { "id": "prv-triton", "category": "privileges", "title": "ТРИТОН", "price": 299 },
+  { "id": "prv-cerberus", "category": "privileges", "title": "ЦЕРБЕР", "price": 99 },
+  { "id": "prv-hydra", "category": "privileges", "title": "ГИДРА", "price": 19 },
+
+  { "id": "cur-150k", "category": "currency", "title": "150'000 АРЕСОВ", "badge": "Выгодно", "price": 10999 },
+  { "id": "cur-100k", "category": "currency", "title": "100'000 АРЕСОВ", "badge": "Выгодно", "price": 8499 },
+  { "id": "cur-50k", "category": "currency", "title": "50'000 АРЕСОВ", "badge": "Выгодно", "price": 4999 },
+  { "id": "cur-20k", "category": "currency", "title": "20'000 АРЕСОВ", "price": 2499 },
+  { "id": "cur-10k", "category": "currency", "title": "10'000 АРЕСОВ", "price": 1499 },
+  { "id": "cur-5k", "category": "currency", "title": "5'000 АРЕСОВ", "price": 899 },
+  { "id": "cur-2k", "category": "currency", "title": "2'000 АРЕСОВ", "price": 449 },
+  { "id": "cur-1k", "category": "currency", "title": "1'000 АРЕСОВ", "price": 249 },
+  { "id": "cur-500", "category": "currency", "title": "500 АРЕСОВ", "price": 149 },
+  { "id": "cur-100", "category": "currency", "title": "100 АРЕСОВ", "price": 39 },
+
+  { "id": "keys-common-30", "category": "keys", "subcategory": "Кейс с обычными привилегиями", "title": "30 ключей", "badge": "Выгодно", "price": 649 },
+  { "id": "keys-common-20", "category": "keys", "subcategory": "Кейс с обычными привилегиями", "title": "20 ключей", "price": 549 },
+  { "id": "keys-common-10", "category": "keys", "subcategory": "Кейс с обычными привилегиями", "title": "10 ключей", "price": 349 },
+  { "id": "keys-common-5",  "category": "keys", "subcategory": "Кейс с обычными привилегиями", "title": "5 ключей",  "price": 199 },
+  { "id": "keys-common-3",  "category": "keys", "subcategory": "Кейс с обычными привилегиями", "title": "3 ключа",   "price": 149 },
+
+  { "id": "keys-rare-30", "category": "keys", "subcategory": "Кейс с редкими привилегиями", "title": "30 ключей", "badge": "Выгодно", "price": 1799 },
+  { "id": "keys-rare-20", "category": "keys", "subcategory": "Кейс с редкими привилегиями", "title": "20 ключей", "price": 1299 },
+  { "id": "keys-rare-10", "category": "keys", "subcategory": "Кейс с редкими привилегиями", "title": "10 ключей", "price": 799 },
+  { "id": "keys-rare-5",  "category": "keys", "subcategory": "Кейс с редкими привилегиями", "title": "5 ключей",  "price": 449 },
+  { "id": "keys-rare-3",  "category": "keys", "subcategory": "Кейс с редкими привилегиями", "title": "3 ключа",   "price": 349 },
+
+  { "id": "keys-currency-30", "category": "keys", "subcategory": "Кейс с аресами", "title": "30 ключей", "badge": "Выгодно", "price": 649 },
+  { "id": "keys-currency-20", "category": "keys", "subcategory": "Кейс с аресами", "title": "20 ключей", "price": 549 },
+  { "id": "keys-currency-10", "category": "keys", "subcategory": "Кейс с аресами", "title": "10 ключей", "price": 349 },
+  { "id": "keys-currency-5",  "category": "keys", "subcategory": "Кейс с аресами", "title": "5 ключей",  "price": 199 },
+  { "id": "keys-currency-3",  "category": "keys", "subcategory": "Кейс с аресами", "title": "3 ключа",   "price": 149 },
+
+  { "id": "keys-cosmetics-30", "category": "keys", "subcategory": "Кейс с косметикой", "title": "30 ключей", "badge": "Выгодно", "price": 649 },
+  { "id": "keys-cosmetics-20", "category": "keys", "subcategory": "Кейс с косметикой", "title": "20 ключей", "price": 549 },
+  { "id": "keys-cosmetics-10", "category": "keys", "subcategory": "Кейс с косметикой", "title": "10 ключей", "price": 349 },
+  { "id": "keys-cosmetics-5",  "category": "keys", "subcategory": "Кейс с косметикой", "title": "5 ключей",  "price": 199 },
+  { "id": "keys-cosmetics-3",  "category": "keys", "subcategory": "Кейс с косметикой", "title": "3 ключа",   "price": 149 },
+
+  { "id": "keys-items-30", "category": "keys", "subcategory": "Кейс с предметами", "title": "30 ключей", "badge": "Выгодно", "price": 649 },
+  { "id": "keys-items-20", "category": "keys", "subcategory": "Кейс с предметами", "title": "20 ключей", "price": 549 },
+  { "id": "keys-items-10", "category": "keys", "subcategory": "Кейс с предметами", "title": "10 ключей", "price": 349 },
+  { "id": "keys-items-5",  "category": "keys", "subcategory": "Кейс с предметами", "title": "5 ключей",  "price": 199 },
+  { "id": "keys-items-3",  "category": "keys", "subcategory": "Кейс с предметами", "title": "3 ключа",   "price": 149 },
+
+  { "id": "keys-sets-30", "category": "keys", "subcategory": "Кейс с наборами", "title": "30 ключей", "badge": "Выгодно", "price": 349 },
+  { "id": "keys-sets-20", "category": "keys", "subcategory": "Кейс с наборами", "title": "20 ключей", "price": 249 },
+  { "id": "keys-sets-10", "category": "keys", "subcategory": "Кейс с наборами", "title": "10 ключей", "price": 149 },
+  { "id": "keys-sets-5",  "category": "keys", "subcategory": "Кейс с наборами", "title": "5 ключей",  "price": 99 },
+  { "id": "keys-sets-3",  "category": "keys", "subcategory": "Кейс с наборами", "title": "3 ключа",   "price": 79 },
+
+  { "id": "misc-bp", "category": "misc", "title": "БОЕВОЙ ПРОПУСК", "badge": "Выгодно", "price": 599 },
+  { "id": "misc-unban", "category": "misc", "title": "РАЗБАН", "price": 499 },
+  { "id": "misc-unmute", "category": "misc", "title": "РАЗМУТ", "price": 249 },
+  { "id": "misc-immunity", "category": "misc", "title": "ИММУНИТЕТ", "note": "Иммунитет от наказаний привилегированных игроков", "price": 249 }
+]
+
+
