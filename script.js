@@ -88,8 +88,9 @@ function placeholderImage() {
 }
 
 function handleBuy(product) {
-  // Placeholder: integrate your payment flow here
-  alert(`Покупка: ${product.title} — ${formatPriceRUB(product.price)}`);
+  const url = new URL('./payment.html', location.href);
+  url.searchParams.set('id', product.id);
+  location.href = url.toString();
 }
 
 function openModal(product) {

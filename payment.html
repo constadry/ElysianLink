@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElysianLink — Оплата</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+      .pay-container { width: min(720px, 100%); margin: 24px auto; padding: 0 16px; }
+      .pay-card { border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(180deg, #0e1b39, #0b152b); box-shadow: 0 10px 28px rgba(0,0,0,0.35); overflow: hidden; }
+      .pay-header { padding: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .pay-title { margin: 0; font-size: 18px; font-weight: 800; }
+      .pay-price { font-weight: 800; color: var(--blue-200); }
+      .pay-body { padding: 14px; display: grid; gap: 12px; }
+      .field { display: grid; gap: 6px; }
+      .field label { color: var(--muted); font-size: 13px; }
+      .field input[type="text"], .field input[type="email"] { background: #0c1731; border: 1px solid var(--border); color: var(--text); border-radius: 10px; padding: 10px 12px; }
+      .agree { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 14px; }
+      .agree a { color: var(--blue-300); text-decoration: none; }
+      .pay-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
+      .btn-secondary { appearance: none; border: 1px solid var(--border); background: #0c1731; color: var(--text); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+      .error { color: #ff8e8e; font-size: 12px; display: none; }
+      .error[aria-hidden="false"] { display: block; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <nav class="nav-tabs" aria-label="Навигация">
+                <a class="btn-secondary" href="./index.html">← Назад в магазин</a>
+            </nav>
+            <div class="brand" aria-label="ElysianLink">
+                <div class="brand-logo" aria-hidden="true">EL</div>
+                <div class="brand-text">
+                    <div class="brand-title">ElysianLink</div>
+                    <div class="brand-subtitle">Оплата</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pay-container">
+        <div class="pay-card" id="payCard" hidden>
+            <div class="pay-header">
+                <h1 class="pay-title" id="productTitle"></h1>
+                <div class="pay-price" id="productPrice"></div>
+            </div>
+            <form class="pay-body" id="payForm" novalidate>
+                <div class="field">
+                    <label for="nick">Ник</label>
+                    <input id="nick" name="nick" type="text" placeholder="Ваш ник на сервере" required>
+                    <div class="error" id="nickErr" aria-hidden="true">Укажите ник (2+ символа)</div>
+                </div>
+                <div class="field">
+                    <label for="email">Почта</label>
+                    <input id="email" name="email" type="email" placeholder="name@example.com" required>
+                    <div class="error" id="emailErr" aria-hidden="true">Укажите корректную почту</div>
+                </div>
+                <label class="agree">
+                    <input id="agree" type="checkbox" required>
+                    <span>Я принимаю <a href="#" aria-disabled="true">пользовательское соглашение</a></span>
+                </label>
+                <div class="pay-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Отмена</button>
+                    <button type="submit" class="btn-primary" id="payBtn" disabled>Оплатить</button>
+                </div>
+            </form>
+        </div>
+        <div class="empty-state" id="notFound" hidden>Товар не найден.</div>
+    </main>
+
+    <script src="./payment.js" defer></script>
+</body>
+</html>
+
+
