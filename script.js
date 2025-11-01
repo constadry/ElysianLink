@@ -206,9 +206,32 @@ function setupTabs() {
   });
 }
 
+function setupBurgerMenu() {
+  const burgerToggle = document.getElementById('burgerToggle');
+  const navTabs = document.querySelector('.nav-tabs');
+  if (!burgerToggle || !navTabs) return;
+
+  burgerToggle.addEventListener('click', () => {
+    const isExpanded = burgerToggle.getAttribute('aria-expanded') === 'true';
+    burgerToggle.setAttribute('aria-expanded', String(!isExpanded));
+    navTabs.setAttribute('aria-expanded', String(!isExpanded));
+  });
+
+  // Close menu when clicking on a tab (mobile)
+  elements.tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (window.innerWidth <= 1000) {
+        burgerToggle.setAttribute('aria-expanded', 'false');
+        navTabs.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+}
+
 // Init
 (async function init() {
   setupTabs();
+  setupBurgerMenu();
   await loadProducts();
   renderAllCategories();
   renderSubfilters();

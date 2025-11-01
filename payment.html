@@ -24,6 +24,29 @@
       .btn-secondary { appearance: none; border: 1px solid var(--border); background: #0c1731; color: var(--text); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
       .error { color: #ff8e8e; font-size: 12px; display: none; }
       .error[aria-hidden="false"] { display: block; }
+      
+      /* Tablet: ~700px */
+      @media (max-width: 700px) {
+        .pay-container { padding: 0 12px; margin: 20px auto; }
+        .pay-title { font-size: 16px; }
+        .pay-body { padding: 12px; gap: 10px; }
+        .pay-actions { flex-direction: column; gap: 8px; }
+        .pay-actions button { width: 100%; }
+      }
+      
+      /* Mobile: ~400px */
+      @media (max-width: 400px) {
+        .pay-container { padding: 0 12px; margin: 16px auto; }
+        .pay-header { padding: 12px; flex-direction: column; align-items: flex-start; gap: 8px; }
+        .pay-title { font-size: 15px; }
+        .pay-price { font-size: 16px; }
+        .pay-body { padding: 10px; gap: 10px; }
+        .field label { font-size: 12px; }
+        .field input { padding: 9px 10px; font-size: 14px; }
+        .agree { font-size: 12px; }
+        .pay-actions { flex-direction: column-reverse; gap: 8px; }
+        .pay-actions button { width: 100%; font-size: 14px; padding: 10px; }
+      }
     </style>
 </head>
 <body>

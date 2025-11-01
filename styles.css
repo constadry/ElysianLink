@@ -48,17 +48,55 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 72px;
+  min-height: 92px;
 }
 
 .brand { display: flex; align-items: center; gap: 12px; }
 .brand-logo {
-  width: 45px; height: 45px; border-radius: 10px;
+  width: 75px; height: 75px; border-radius: 10px;
   object-fit: contain;
   box-shadow: 0 4.8px 12.8px rgba(19,121,255,0.28);
 }
 .brand-title { font-weight: 700; letter-spacing: 0.2px; font-size: 20px; }
 .brand-subtitle { color: var(--muted); font-size: 12px; }
+
+.burger-toggle {
+  display: none;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s ease;
+}
+.burger-toggle:hover { border-color: #3e92ff; }
+.burger-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--blue-200);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.burger-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
 
 .nav-tabs {
   position: absolute;
@@ -163,4 +201,86 @@ body {
 .modal-note { margin: 0; color: var(--muted); }
 .modal-price { font-weight: 800; color: var(--blue-200); font-size: 18px; }
 
+/* Burger menu at 1000px */
+@media (max-width: 1000px) {
+  .burger-toggle { display: flex; }
+  .nav-tabs {
+    position: fixed;
+    top: 92px;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    max-width: 100%;
+    background: rgba(11, 18, 32, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 99;
+  }
+  .nav-tabs[aria-expanded="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .tab-button {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Tablet: ~700px - немного уменьшаем всё */
+@media (max-width: 700px) {
+  .header-inner { min-height: 80px; }
+  .brand-logo { width: 60px; height: 60px; }
+  .brand-title { font-size: 18px; }
+  .brand-subtitle { font-size: 11px; }
+  .nav-tabs { gap: 6px; }
+  .tab-button { padding: 8px 12px; font-size: 14px; }
+  .section-title { font-size: 20px; }
+  .card-body { padding: 10px; }
+  .card-title { font-size: 15px; }
+  .card-price { font-size: 16px; }
+  .modal-dialog { width: min(600px, 94%); margin: 30px auto; }
+  .modal-title { font-size: 18px; }
+}
+
+/* Mobile: ~400px - мобильная версия */
+@media (max-width: 400px) {
+  .container { padding: 0 12px; }
+  .header-inner { min-height: auto; padding: 12px 0; }
+  .burger-toggle { left: 12px; }
+  .nav-tabs {
+    top: auto;
+  }
+  .brand {
+    position: static;
+    transform: none;
+  }
+  .brand-logo { width: 50px; height: 50px; }
+  .brand-title { font-size: 16px; }
+  .brand-subtitle { font-size: 10px; }
+  .tab-button {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .section-title { font-size: 18px; margin-bottom: 12px; }
+  .category-section { margin: 16px 0 32px; }
+  .cards { gap: 12px; margin: 8px 0 32px; }
+  .card-body { padding: 10px; gap: 8px; }
+  .card-title { font-size: 14px; }
+  .card-note { font-size: 12px; }
+  .card-price { font-size: 16px; }
+  .btn-primary { padding: 9px 12px; font-size: 14px; }
+  .modal-dialog { width: 96%; margin: 20px auto; max-height: 90vh; overflow-y: auto; }
+  .modal-title { font-size: 16px; }
+  .modal-price { font-size: 16px; }
+  .site-footer { padding: 20px 0; }
+  .footer-inner { font-size: 13px; }
+}
 
