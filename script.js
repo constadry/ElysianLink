@@ -201,7 +201,14 @@ function setupTabs() {
       btn.classList.add('is-active');
       const id = `section-${btn.dataset.category}`;
       const target = document.getElementById(id);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (target) {
+        const header = document.querySelector('.site-header');
+        const headerHeight = header ? header.offsetHeight : 92;
+        const targetRect = target.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = targetRect.top + scrollTop - headerHeight - 10; // дополнительный отступ 10px
+        window.scrollTo({ top: Math.max(0, targetPosition), behavior: 'smooth' });
+      }
     });
   });
 }
