@@ -26,6 +26,8 @@ body {
   background: radial-gradient(1200px 600px at 10% -10%, #11234a 0%, transparent 60%),
               radial-gradient(1400px 700px at 100% 0%, #0a3b92 0%, transparent 60%),
               var(--bg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .container {
