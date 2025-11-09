@@ -183,10 +183,12 @@ async function loadProducts() {
       if (!res.ok) throw new Error(`Bad response: ${res.status}`);
       const data = await res.json();
       state.allProducts = Array.isArray(data) ? data : (data.products || []);
-      elements.notice.hidden = false;
+      elements.notice.hidden = true;
       return;
     } catch (e) {
       console.warn('Fetch failed for', url, e);
+      elements.notice.hidden = false;
+      elements.notice.textContent = 'Ошибка при загрузке данных. Пожалуйста, обновите страницу.';
       continue;
     }
   }
