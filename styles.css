@@ -203,6 +203,17 @@ body {
 
 /* Burger menu at 1000px */
 @media (max-width: 1000px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  body {
+    padding-top: 92px;
+  }
   .burger-toggle { display: flex; }
   .nav-tabs {
     position: fixed;
@@ -236,6 +247,17 @@ body {
 
 /* Tablet: ~700px - немного уменьшаем всё */
 @media (max-width: 700px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  body {
+    padding-top: 80px;
+  }
   .header-inner { min-height: 80px; }
   .brand-logo { width: 60px; height: 60px; }
   .brand-title { font-size: 18px; }
@@ -252,6 +274,17 @@ body {
 
 /* Mobile: ~400px - мобильная версия */
 @media (max-width: 400px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  body {
+    padding-top: 70px;
+  }
   .container { padding: 0 12px; }
   .header-inner { min-height: auto; padding: 12px 0; }
   .burger-toggle { left: 12px; }
