@@ -246,6 +246,185 @@ function setupBurgerMenu() {
   renderSubfilters();
   // Modal close bindings
   document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeModal));
+
+  // Setup rules and feedback modals
+  setupRulesModal();
+  setupFeedbackModal();
 })();
 
+// ============================================
+// Rules Modal
+// ============================================
+function setupRulesModal() {
+  const rulesLink = document.querySelector('a[href="#rules"]');
+  const rulesModal = document.getElementById('rulesModal');
+  const closeButtons = document.querySelectorAll('[data-close-rules]');
+
+  if (!rulesLink || !rulesModal) return;
+
+  rulesLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openRulesModal();
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', closeRulesModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && rulesModal.getAttribute('aria-hidden') === 'false') {
+      closeRulesModal();
+    }
+  });
+}
+
+function openRulesModal() {
+  const rulesModal = document.getElementById('rulesModal');
+  rulesModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeRulesModal() {
+  const rulesModal = document.getElementById('rulesModal');
+  rulesModal.setAttribute('aria-hidden', 'true');
+}
+
+// ============================================
+// Feedback Modal & Telegram Integration
+// ============================================
+const TELEGRAM_CONFIG = {
+  botToken: '8304575234:AAEh5vuo0lbdYC8bKEJ_TOMdnBNcMItCHfM',
+  chatId: 'TrueeeD'
+};
+
+function setupFeedbackModal() {
+  const feedbackLink = document.querySelector('a[href="#feedback"]');
+  const feedbackModal = document.getElementById('feedbackModal');
+  const closeButtons = document.querySelectorAll('[data-close-feedback]');
+  const feedbackForm = document.getElementById('feedbackForm');
+
+  if (!feedbackLink || !feedbackModal || !feedbackForm) return;
+
+  feedbackLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openFeedbackModal();
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', closeFeedbackModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && feedbackModal.getAttribute('aria-hidden') === 'false') {
+      closeFeedbackModal();
+    }
+  });
+
+  feedbackForm.addEventListener('submit', handleFeedbackSubmit);
+}
+
+function openFeedbackModal() {
+  const feedbackModal = document.getElementById('feedbackModal');
+  feedbackModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeFeedbackModal() {
+  const feedbackModal = document.getElementById('feedbackModal');
+  feedbackModal.setAttribute('aria-hidden', 'true');
+}
+
+async function handleFeedbackSubmit(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = document.getElementById('submitFeedback');
+  const formMessage = document.getElementById('formMessage');
+
+  // Get form data
+  const formData = {
+    playerNick: form.playerNick.value.trim(),
+    reason: form.reason.value,
+    contactMethod: form.contactMethod.value,
+    contactInfo: form.contactInfo.value.trim(),
+    message: form.message.value.trim()
+  };
+
+  // Validate
+  if (!formData.playerNick || !formData.reason || !formData.contactMethod || !formData.contactInfo || !formData.message) {
+    showFormMessage('Пожалуйста, заполните все поля', 'error');
+    return;
+  }
+
+  // Disable button and show loading
+  submitBtn.disabled = true;
+  formMessage.hidden = true;
+
+  try {
+    await sendToTelegram(formData);
+    showFormMessage('✓ Ваше обращение успешно отправлено!', 'success');
+    form.reset();
+
+    // Close modal after 2 seconds
+    setTimeout(() => {
+      closeFeedbackModal();
+      formMessage.hidden = true;
+    }, 2000);
+  } catch (error) {
+    console.error('Error sending feedback:', error);
+    showFormMessage('Ошибка при отправке. Попробуйте позже.', 'error');
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
+async function sendToTelegram(data) {
+  const message = `
+🎮 <b>Новое обращение с сайта ElysianLink</b>
+
+👤 <b>Игровой ник:</b> ${escapeHtml(data.playerNick)}
+📋 <b>Причина:</b> ${escapeHtml(data.reason)}
+💬 <b>Связь:</b> ${escapeHtml(data.contactMethod)} - ${escapeHtml(data.contactInfo)}
+
+📝 <b>Сообщение:</b>
+${escapeHtml(data.message)}
+  `.trim();
+
+  const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CONFIG.chatId,
+      text: message,
+      parse_mode: 'HTML'
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Telegram API error: ${errorData.description || response.statusText}`);
+  }
+
+  return response.json();
+}
+
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+function showFormMessage(text, type) {
+  const formMessage = document.getElementById('formMessage');
+  formMessage.textContent = text;
+  formMessage.className = `form-message ${type}`;
+  formMessage.hidden = false;
+}
 

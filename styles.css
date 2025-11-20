@@ -412,6 +412,7 @@ body {
   position: fixed;
   inset: 0;
   display: none;
+  z-index: 1000;
 }
 
 .modal[aria-hidden="false"] {
@@ -438,6 +439,13 @@ body {
   overflow: hidden;
 }
 
+.modal-dialog-rules,
+.modal-dialog-feedback {
+  max-height: 85vh;
+  overflow-y: auto;
+  top: 5%;
+}
+
 .modal-close {
   position: absolute;
   top: 8px;
@@ -449,6 +457,13 @@ body {
   width: 36px;
   height: 32px;
   cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  border-color: var(--blue-400);
+  color: var(--blue-100);
 }
 
 .modal-media {
@@ -487,6 +502,146 @@ body {
   color: var(--blue-200);
   font-size: 18px;
 }
+
+/* Rules Modal Styles */
+.rules-content {
+  margin-top: 16px;
+}
+
+.rules-section {
+  margin-bottom: 20px;
+}
+
+.rules-section h3 {
+  color: var(--blue-200);
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.rules-section ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text);
+}
+
+.rules-section li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+/* Feedback Form Styles */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue-200);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  appearance: none;
+  background: linear-gradient(180deg, #0c1731, #0a1428);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--blue-400);
+  box-shadow: 0 0 0 3px rgba(62, 146, 255, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+.btn-submit {
+  margin-top: 8px;
+  position: relative;
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-loading {
+  display: none;
+}
+
+.btn-submit:disabled .btn-text {
+  display: none;
+}
+
+.btn-submit:disabled .btn-loading {
+  display: inline;
+}
+
+.form-message {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+.form-message.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+
+.form-message.error {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--warning);
+  color: var(--warning);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Burger menu at 1000px */
 @media (max-width: 1000px) {

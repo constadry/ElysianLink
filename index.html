@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -118,11 +120,113 @@
         </div>
     </div>
 
+    <!-- Rules Modal -->
+    <div class="modal" id="rulesModal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" data-close-rules></div>
+        <div class="modal-dialog modal-dialog-rules" role="document">
+            <button class="modal-close" aria-label="Закрыть" data-close-rules>&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">Правила сервера ElysianLink</h2>
+                <div class="rules-content">
+                    <section class="rules-section">
+                        <h3>1. Общие правила</h3>
+                        <ul>
+                            <li>Уважайте других игроков</li>
+                            <li>Запрещены оскорбления, мат и токсичное поведение</li>
+                            <li>Запрещена реклама других серверов</li>
+                            <li>Запрещено использование читов и модификаций, дающих преимущество</li>
+                        </ul>
+                    </section>
+                    <section class="rules-section">
+                        <h3>2. Игровой процесс</h3>
+                        <ul>
+                            <li>Запрещен гриф без согласия владельца территории</li>
+                            <li>Запрещены ловушки на спавне и в общественных местах</li>
+                            <li>Запрещено убийство игроков без их согласия (вне PvP зон)</li>
+                            <li>Запрещено использование багов и дюпов</li>
+                        </ul>
+                    </section>
+                    <section class="rules-section">
+                        <h3>3. Постройки</h3>
+                        <ul>
+                            <li>Стройте на расстоянии минимум 100 блоков от чужих построек</li>
+                            <li>Запрещены постройки непристойного содержания</li>
+                            <li>Запрещены лаг-машины и механизмы, создающие нагрузку на сервер</li>
+                        </ul>
+                    </section>
+                    <section class="rules-section">
+                        <h3>4. Наказания</h3>
+                        <ul>
+                            <li>Предупреждение - за первое нарушение</li>
+                            <li>Мут/Бан на время - за повторные нарушения</li>
+                            <li>Перманентный бан - за серьезные нарушения</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal" id="feedbackModal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" data-close-feedback></div>
+        <div class="modal-dialog modal-dialog-feedback" role="document">
+            <button class="modal-close" aria-label="Закрыть" data-close-feedback>&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">Обратная связь</h2>
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="playerNick">Игровой ник</label>
+                        <input type="text" id="playerNick" name="playerNick" required placeholder="Введите ваш ник">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reasonSelect">Причина обращения</label>
+                        <select id="reasonSelect" name="reason" required>
+                            <option value="">Выберите причину</option>
+                            <option value="Жалоба на игрока">Жалоба на игрока</option>
+                            <option value="Жалоба на модерацию">Жалоба на модерацию</option>
+                            <option value="Предложения">Предложения</option>
+                            <option value="Замечания">Замечания</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMethod">Как с вами связаться?</label>
+                        <select id="contactMethod" name="contactMethod" required>
+                            <option value="">Выберите способ связи</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="Discord">Discord</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactInfo">Ваш контакт</label>
+                        <input type="text" id="contactInfo" name="contactInfo" required
+                            placeholder="Введите ваш ник/username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageText">Текст обращения</label>
+                        <textarea id="messageText" name="message" required rows="6"
+                            placeholder="Опишите вашу проблему или предложение"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-submit" id="submitFeedback">
+                        <span class="btn-text">Отправить</span>
+                        <span class="btn-loading" hidden>Отправка...</span>
+                    </button>
+
+                    <div class="form-message" id="formMessage" hidden></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="./script.js" defer></script>
     <noscript>
         Для работы магазина требуется JavaScript.
     </noscript>
 </body>
+
 </html>
-
-
