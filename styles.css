@@ -374,7 +374,7 @@ body {
 
 .card-media {
   width: 100%;
-  aspect-ratio: 9/11;
+  aspect-ratio: 4/3;
   background: #0a1630;
   display: flex;
   align-items: center;
@@ -396,6 +396,14 @@ body {
   height: 130%;
   object-fit: cover;
   margin-left: calc(var(--img-position, 0) * -0.875%);
+}
+
+/* Separate key images - smaller and centered for better clarity */
+.card-media img.key-separate-image {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  margin: auto;
 }
 
 .card-body {
