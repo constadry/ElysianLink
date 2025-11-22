@@ -165,15 +165,55 @@ function renderAllCategories() {
     const container = elements.cardsByCategory[category];
     if (!container) continue;
     if (list.length === 0) continue;
-    const fragment = document.createDocumentFragment();
-    list.forEach(p => fragment.appendChild(createCard(p)));
-    container.appendChild(fragment);
-    total += list.length;
+
+    // Special handling for keys category - group by subcategory
+    if (category === 'keys') {
+      renderKeysGrouped(container, list);
+      total += list.length;
+    } else {
+      const fragment = document.createDocumentFragment();
+      list.forEach(p => fragment.appendChild(createCard(p)));
+      container.appendChild(fragment);
+      total += list.length;
+    }
   }
 
   if (total === 0) {
     elements.emptyState.hidden = false;
   }
+}
+
+function renderKeysGrouped(container, keysList) {
+  // Group keys by subcategory
+  const subcategoryGroups = {};
+  keysList.forEach(key => {
+    const sub = key.subcategory || 'Другое';
+    if (!subcategoryGroups[sub]) {
+      subcategoryGroups[sub] = [];
+    }
+    subcategoryGroups[sub].push(key);
+  });
+
+  // Render each subcategory group
+  Object.entries(subcategoryGroups).forEach(([subcategory, products]) => {
+    // Create group container
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'keys-group';
+
+    // Create group header
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'keys-group-header';
+    headerDiv.textContent = subcategory;
+    groupDiv.appendChild(headerDiv);
+
+    // Create cards container
+    const cardsDiv = document.createElement('div');
+    cardsDiv.className = 'keys-group-cards';
+    products.forEach(p => cardsDiv.appendChild(createCard(p)));
+    groupDiv.appendChild(cardsDiv);
+
+    container.appendChild(groupDiv);
+  });
 }
 
 async function loadProducts() {
@@ -427,4 +467,3 @@ function showFormMessage(text, type) {
   formMessage.className = `form-message ${type}`;
   formMessage.hidden = false;
 }
-
