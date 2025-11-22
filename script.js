@@ -67,6 +67,28 @@ function createCard(product) {
   img.alt = product.title;
   img.addEventListener('error', () => { img.src = placeholderImage(); });
 
+  // Set image position for keys based on quantity
+  if (product.category === 'keys' && product.title) {
+    const keyCount = parseInt(product.title.match(/\d+/)?.[0]);
+    if (keyCount) {
+      // Map key count to image position (showing 1/4 of the image)
+      // Image is 400% wide, so we need to shift by multiples of 100% to show each quarter
+      // 1 key = leftmost quarter (0%), 3 keys = second quarter (100%), 
+      // 5 keys = third quarter (200%), 10 keys = rightmost quarter (300%)
+      const positionMap = {
+        1: '0',      // Shows 0-25% of original image
+        3: '100',    // Shows 25-50% of original image
+        5: '200',    // Shows 50-75% of original image
+        10: '300'    // Shows 75-100% of original image
+      };
+      const position = positionMap[keyCount];
+      if (position) {
+        img.setAttribute('data-key-position', position);
+        img.style.setProperty('--img-position', position);
+      }
+    }
+  }
+
   return node;
 }
 

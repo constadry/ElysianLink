@@ -376,15 +376,26 @@ body {
   width: 100%;
   aspect-ratio: 16/9;
   background: #0a1630;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
 
 .card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Keys images - show only 1/4 of the image */
+.card-media img[data-key-position] {
+  width: 400%;
+  height: 100%;
+  object-fit: cover;
+  margin-left: calc(var(--img-position, 0) * -1%);
 }
 
 .card-body {
