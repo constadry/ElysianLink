@@ -293,7 +293,7 @@ function closeRulesModal() {
 // ============================================
 const TELEGRAM_CONFIG = {
   botToken: '8304575234:AAEh5vuo0lbdYC8bKEJ_TOMdnBNcMItCHfM',
-  chatId: 'TrueeeD'
+  chatId: '-4997605312'
 };
 
 function setupFeedbackModal() {
