@@ -123,7 +123,7 @@
     "subcategory": "Все или ничего",
     "title": "10 ключей",
     "price": 349,
-    "image": "./assets/key1.jpg"
+    "image": "./assets/key1_10.jpg"
   },
   {
     "id": "keys-allornothing-5",
@@ -131,7 +131,7 @@
     "subcategory": "Все или ничего",
     "title": "5 ключей",
     "price": 199,
-    "image": "./assets/key1.jpg"
+    "image": "./assets/key1_5.jpg"
   },
   {
     "id": "keys-allornothing-3",
@@ -139,7 +139,7 @@
     "subcategory": "Все или ничего",
     "title": "3 ключа",
     "price": 149,
-    "image": "./assets/key1.jpg"
+    "image": "./assets/key1_3.jpg"
   },
   {
     "id": "keys-allornothing-1",
@@ -147,7 +147,7 @@
     "subcategory": "Все или ничего",
     "title": "1 ключ",
     "price": 79,
-    "image": "./assets/key1.jpg"
+    "image": "./assets/key1_1.jpg"
   },
   {
     "id": "keys-foreveryours-10",

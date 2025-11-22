@@ -69,17 +69,22 @@ function createCard(product) {
 
   // Set image position for keys based on quantity
   if (product.category === 'keys' && product.title) {
+    // Skip positioning for "Все или ничего" - they use separate images
+    if (product.subcategory === 'Все или ничего') {
+      return node;
+    }
+
     const keyCount = parseInt(product.title.match(/\d+/)?.[0]);
     if (keyCount) {
-      // Map key count to image position (showing 1/4 of the image)
-      // Image is 400% wide, so we need to shift by multiples of 100% to show each quarter
-      // 1 key = leftmost quarter (0%), 3 keys = second quarter (100%), 
-      // 5 keys = third quarter (200%), 10 keys = rightmost quarter (300%)
+      // Map key count to image position (showing different parts of the image)
+      // Image is 350% wide, so we shift to show different parts
+      // 1 key = leftmost part, 3 keys = center-left, 
+      // 5 keys = center-right, 10 keys = rightmost part
       const positionMap = {
-        1: '0',      // Shows 0-25% of original image
-        3: '100',    // Shows 25-50% of original image
-        5: '200',    // Shows 50-75% of original image
-        10: '300'    // Shows 75-100% of original image
+        1: '0',      // Shows left part of image
+        3: '83',     // Shows center-left part
+        5: '167',    // Shows center-right part
+        10: '250'    // Shows right part of image
       };
       const position = positionMap[keyCount];
       if (position) {

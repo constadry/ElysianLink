@@ -374,7 +374,7 @@ body {
 
 .card-media {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 9/11;
   background: #0a1630;
   display: flex;
   align-items: center;
@@ -392,10 +392,10 @@ body {
 
 /* Keys images - show only 1/4 of the image */
 .card-media img[data-key-position] {
-  width: 400%;
-  height: 100%;
+  width: 350%;
+  height: 130%;
   object-fit: cover;
-  margin-left: calc(var(--img-position, 0) * -1%);
+  margin-left: calc(var(--img-position, 0) * -0.875%);
 }
 
 .card-body {
