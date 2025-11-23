@@ -123,7 +123,8 @@
     "subcategory": "Все или ничего",
     "title": "10 ключей",
     "price": 349,
-    "image": "./assets/key1_10.jpg"
+    "image": "./assets/key1_10.jpg",
+    "backgroundColor": "rgb(36, 0, 0)"
   },
   {
     "id": "keys-allornothing-5",
@@ -131,7 +132,8 @@
     "subcategory": "Все или ничего",
     "title": "5 ключей",
     "price": 199,
-    "image": "./assets/key1_5.jpg"
+    "image": "./assets/key1_5.jpg",
+    "backgroundColor": "rgb(36, 0, 0)"
   },
   {
     "id": "keys-allornothing-3",
@@ -139,7 +141,8 @@
     "subcategory": "Все или ничего",
     "title": "3 ключа",
     "price": 149,
-    "image": "./assets/key1_3.jpg"
+    "image": "./assets/key1_3.jpg",
+    "backgroundColor": "rgb(36, 0, 0)"
   },
   {
     "id": "keys-allornothing-1",
@@ -147,7 +150,8 @@
     "subcategory": "Все или ничего",
     "title": "1 ключ",
     "price": 79,
-    "image": "./assets/key1_1.jpg"
+    "image": "./assets/key1_1.jpg",
+    "backgroundColor": "rgb(36, 0, 0)"
   },
   {
     "id": "keys-foreveryours-10",
@@ -155,7 +159,8 @@
     "subcategory": "Навсегда твой",
     "title": "10 ключей",
     "price": 799,
-    "image": "./assets/key2.jpg"
+    "image": "./assets/key2.jpg",
+    "backgroundColor": "rgb(26, 5, 0)"
   },
   {
     "id": "keys-foreveryours-5",
@@ -163,7 +168,8 @@
     "subcategory": "Навсегда твой",
     "title": "5 ключей",
     "price": 449,
-    "image": "./assets/key2.jpg"
+    "image": "./assets/key2.jpg",
+    "backgroundColor": "rgb(26, 5, 0)"
   },
   {
     "id": "keys-foreveryours-3",
@@ -171,7 +177,8 @@
     "subcategory": "Навсегда твой",
     "title": "3 ключа",
     "price": 349,
-    "image": "./assets/key2.jpg"
+    "image": "./assets/key2.jpg",
+    "backgroundColor": "rgb(26, 5, 0)"
   },
   {
     "id": "keys-foreveryours-1",
@@ -179,7 +186,8 @@
     "subcategory": "Навсегда твой",
     "title": "1 ключ",
     "price": 199,
-    "image": "./assets/key2.jpg"
+    "image": "./assets/key2.jpg",
+    "backgroundColor": "rgb(26, 5, 0)"
   },
   {
     "id": "keys-temppower-10",
@@ -187,7 +195,8 @@
     "subcategory": "Временная сила",
     "title": "10 ключей",
     "price": 349,
-    "image": "./assets/key3.jpg"
+    "image": "./assets/key3.jpg",
+    "backgroundColor": "rgb(18, 3, 0)"
   },
   {
     "id": "keys-temppower-5",
@@ -195,7 +204,8 @@
     "subcategory": "Временная сила",
     "title": "5 ключей",
     "price": 199,
-    "image": "./assets/key3.jpg"
+    "image": "./assets/key3.jpg",
+    "backgroundColor": "rgb(18, 3, 0)"
   },
   {
     "id": "keys-temppower-3",
@@ -203,7 +213,8 @@
     "subcategory": "Временная сила",
     "title": "3 ключа",
     "price": 149,
-    "image": "./assets/key3.jpg"
+    "image": "./assets/key3.jpg",
+    "backgroundColor": "rgb(18, 3, 0)"
   },
   {
     "id": "keys-temppower-1",
@@ -211,7 +222,8 @@
     "subcategory": "Временная сила",
     "title": "1 ключ",
     "price": 79,
-    "image": "./assets/key3.jpg"
+    "image": "./assets/key3.jpg",
+    "backgroundColor": "rgb(18, 3, 0)"
   },
   {
     "id": "keys-moneyflow-10",
@@ -219,7 +231,8 @@
     "subcategory": "Денежный поток",
     "title": "10 ключей",
     "price": 349,
-    "image": "./assets/key4.jpg"
+    "image": "./assets/key4.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-moneyflow-5",
@@ -227,7 +240,8 @@
     "subcategory": "Денежный поток",
     "title": "5 ключей",
     "price": 199,
-    "image": "./assets/key4.jpg"
+    "image": "./assets/key4.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-moneyflow-3",
@@ -235,7 +249,8 @@
     "subcategory": "Денежный поток",
     "title": "3 ключа",
     "price": 149,
-    "image": "./assets/key4.jpg"
+    "image": "./assets/key4.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-moneyflow-1",
@@ -243,7 +258,8 @@
     "subcategory": "Денежный поток",
     "title": "1 ключ",
     "price": 79,
-    "image": "./assets/key4.jpg"
+    "image": "./assets/key4.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-focusboost-10",
@@ -251,7 +267,8 @@
     "subcategory": "Фокус усиления",
     "title": "10 ключей",
     "price": 349,
-    "image": "./assets/key5.jpg"
+    "image": "./assets/key5.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-focusboost-5",
@@ -259,7 +276,8 @@
     "subcategory": "Фокус усиления",
     "title": "5 ключей",
     "price": 199,
-    "image": "./assets/key5.jpg"
+    "image": "./assets/key5.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-focusboost-3",
@@ -267,7 +285,8 @@
     "subcategory": "Фокус усиления",
     "title": "3 ключа",
     "price": 149,
-    "image": "./assets/key5.jpg"
+    "image": "./assets/key5.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-focusboost-1",
@@ -275,7 +294,8 @@
     "subcategory": "Фокус усиления",
     "title": "1 ключ",
     "price": 79,
-    "image": "./assets/key5.jpg"
+    "image": "./assets/key5.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-privileges-10",
@@ -283,7 +303,8 @@
     "subcategory": "Модуль привилегий",
     "title": "10 ключей",
     "price": 149,
-    "image": "./assets/key6.jpg"
+    "image": "./assets/key6.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-privileges-5",
@@ -291,7 +312,8 @@
     "subcategory": "Модуль привилегий",
     "title": "5 ключей",
     "price": 99,
-    "image": "./assets/key6.jpg"
+    "image": "./assets/key6.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-privileges-3",
@@ -299,7 +321,8 @@
     "subcategory": "Модуль привилегий",
     "title": "3 ключа",
     "price": 79,
-    "image": "./assets/key6.jpg"
+    "image": "./assets/key6.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "keys-privileges-1",
@@ -307,7 +330,8 @@
     "subcategory": "Модуль привилегий",
     "title": "1 ключ",
     "price": 49,
-    "image": "./assets/key6.jpg"
+    "image": "./assets/key6.jpg",
+    "backgroundColor": "rgb(0, 37, 2)"
   },
   {
     "id": "misc-bp",

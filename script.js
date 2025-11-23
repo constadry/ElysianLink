@@ -67,6 +67,14 @@ function createCard(product) {
   img.alt = product.title;
   img.addEventListener('error', () => { img.src = placeholderImage(); });
 
+  // Apply backgroundColor to .card-media for keys
+  if (product.category === 'keys' && product.backgroundColor) {
+    const cardMedia = node.querySelector('.card-media');
+    if (cardMedia) {
+      cardMedia.style.backgroundColor = product.backgroundColor;
+    }
+  }
+
   // Set image position for keys based on quantity
   // Skip positioning for "Все или ничего" - they use separate images
   if (product.category === 'keys' && product.title) {
