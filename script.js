@@ -75,32 +75,10 @@ function createCard(product) {
     }
   }
 
-  // Set image position for keys based on quantity
-  // Skip positioning for "Все или ничего" - they use separate images
-  if (product.category === 'keys' && product.title) {
-    if (product.subcategory === 'Все или ничего') {
-      // Mark these images for special styling
-      img.classList.add('key-separate-image');
-    } else {
-      const keyCount = parseInt(product.title.match(/\d+/)?.[0]);
-      if (keyCount) {
-        // Map key count to image position (showing different parts of the image)
-        // Image is 350% wide, so we shift to show different parts
-        // 1 key = leftmost part, 3 keys = center-left, 
-        // 5 keys = center-right, 10 keys = rightmost part
-        const positionMap = {
-          1: '0',      // Shows left part of image
-          3: '83',     // Shows center-left part
-          5: '167',    // Shows center-right part
-          10: '250'    // Shows right part of image
-        };
-        const position = positionMap[keyCount];
-        if (position) {
-          img.setAttribute('data-key-position', position);
-          img.style.setProperty('--img-position', position);
-        }
-      }
-    }
+  // Apply special styling for all key images
+  // All key categories now use separate images for each quantity
+  if (product.category === 'keys') {
+    img.classList.add('key-separate-image');
   }
 
   return node;
