@@ -1,8 +1,10 @@
-// Data sources: prefer GitHub raw, fallback to local file
-const API_SOURCES = [
-  'https://raw.githubusercontent.com/constadry/ElysianLink/master/data/products.json',
-  './data/products.json'
-];
+// Backend API configuration
+const API_CONFIG = {
+  baseURL: 'https://localhost:7089',
+  endpoints: {
+    products: '/shopitems'  // ASP.NET Core endpoint для получения услуг
+  }
+};
 
 const state = {
   allProducts: [],
@@ -75,9 +77,9 @@ function createCard(product) {
     }
   }
 
-  // Apply special styling for all key images
-  // All key categories now use separate images for each quantity
-  if (product.category === 'keys') {
+  // Set image handling for keys
+  if (product.category === 'keys' && product.title) {
+    // Use separate image for each key count
     img.classList.add('key-separate-image');
   }
 
@@ -231,24 +233,62 @@ function renderKeysGrouped(container, keysList) {
 }
 
 async function loadProducts() {
-  for (const url of API_SOURCES) {
+  try {
+    // Try to load from backend API
+    const url = `${API_CONFIG.baseURL}${API_CONFIG.endpoints.products}`;
+    const res = await fetch(url, {
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    // Map backend ShopItem model to frontend format
+    // Backend uses PascalCase (Id, Title, etc.), frontend expects camelCase
+    state.allProducts = Array.isArray(data) ? data.map(item => ({
+      id: item.id || item.Id,
+      category: item.category || item.Category,
+      subcategory: item.subcategory || item.Subcategory,
+      title: item.title || item.Title,
+      price: item.price || item.Price,
+      image: item.image || item.Image,
+      backgroundColor: item.backgroundColor || item.BackgroundColor,
+      note: item.description || item.Description || ''
+    })) : [];
+
+    elements.notice.hidden = true;
+    console.log(`✓ Products loaded from backend API (${state.allProducts.length} items)`);
+  } catch (error) {
+    console.warn('⚠ Failed to load from backend:', error.message);
+
+    // Fallback to local file
     try {
-      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-      if (!res.ok) throw new Error(`Bad response: ${res.status}`);
-      const data = await res.json();
-      state.allProducts = Array.isArray(data) ? data : (data.products || []);
-      elements.notice.hidden = true;
-      return;
-    } catch (e) {
-      console.warn('Fetch failed for', url, e);
+      console.log('→ Attempting to load from local file...');
+      const fallbackRes = await fetch('./data/products.json', {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!fallbackRes.ok) {
+        throw new Error(`Fallback failed: ${fallbackRes.status}`);
+      }
+
+      const fallbackData = await fallbackRes.json();
+      state.allProducts = Array.isArray(fallbackData) ? fallbackData : (fallbackData.products || []);
+      elements.notice.textContent = '⚠ Загружены локальные данные (бэкенд недоступен)';
       elements.notice.hidden = false;
+      console.log('✓ Products loaded from local file');
+    } catch (fallbackError) {
+      console.error('✗ All data sources failed:', fallbackError.message);
       elements.notice.textContent = 'Ошибка при загрузке данных. Пожалуйста, обновите страницу.';
-      continue;
+      elements.notice.hidden = false;
+      state.allProducts = [];
     }
   }
-  // If all sources failed
-  state.allProducts = [];
 }
+
 
 function setupTabs() {
   elements.tabs.forEach(btn => {

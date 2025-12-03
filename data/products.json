@@ -3,8 +3,7 @@
     "id": "prv-aristocrat",
     "category": "privileges",
     "title": "АРИСТОКРАТ",
-    "price": 14499,
-    "image": "https://via.placeholder.com/640x360/143067/ffffff?text=%D0%90%D0%A0%D0%98%D0%A1%D0%A2%D0%9E%D0%9A%D0%A0%D0%90%D0%A2"
+    "price": 14499
   },
   {
     "id": "prv-ares",
