@@ -518,6 +518,10 @@ body {
   flex-direction: column;
 }
 
+#productModal .modal-dialog.is-narrow {
+  width: min(340px, 90%);
+}
+
 #productModal .modal-body {
   overflow-y: auto;
 }

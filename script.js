@@ -124,6 +124,14 @@ function openModal(product) {
     mediaContainer.style.backgroundColor = ''; // Reset to default CSS
   }
 
+  // Adjust width if description is empty
+  const dialog = elements.modal.querySelector('.modal-dialog');
+  if (!product.note) {
+    dialog.classList.add('is-narrow');
+  } else {
+    dialog.classList.remove('is-narrow');
+  }
+
   elements.modalBuy.onclick = () => handleBuy(product);
   elements.modal.setAttribute('aria-hidden', 'false');
   document.addEventListener('keydown', escListener);
