@@ -115,6 +115,15 @@ function openModal(product) {
   elements.modalTitle.textContent = product.title;
   elements.modalNote.textContent = product.note || '';
   elements.modalPrice.textContent = formatPriceRUB(product.price);
+
+  // Apply background color if exists
+  const mediaContainer = elements.modalImage.parentElement;
+  if (product.backgroundColor) {
+    mediaContainer.style.backgroundColor = product.backgroundColor;
+  } else {
+    mediaContainer.style.backgroundColor = ''; // Reset to default CSS
+  }
+
   elements.modalBuy.onclick = () => handleBuy(product);
   elements.modal.setAttribute('aria-hidden', 'false');
   document.addEventListener('keydown', escListener);
