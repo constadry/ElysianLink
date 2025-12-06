@@ -1,0 +1,3 @@
+const CONFIG = {
+    API_URL: "REPLACE_ME_API_URL"
+};

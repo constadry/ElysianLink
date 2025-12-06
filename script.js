@@ -1,6 +1,6 @@
 // Backend API configuration
 const API_CONFIG = {
-  baseURL: 'https://localhost:7089',
+  baseURL: `${CONFIG.API_URL}`,
   endpoints: {
     products: '/shopitems'  // ASP.NET Core endpoint для получения услуг
   }
