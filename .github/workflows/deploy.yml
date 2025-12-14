@@ -19,7 +19,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
           server-dir: /www/elysianlink.ru/  # ⚠️ Укажите точный путь на хостинге!
           # Если сайт лежит прямо в корне FTP-пользователя, оставьте просто /
           exclude: |  # Если нужно что-то исключить
