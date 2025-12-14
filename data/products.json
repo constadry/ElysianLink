@@ -318,18 +318,5 @@
     "price": 249,
     "image": "./assets/mute.jpg",
     "description": "Вы получаете снятие мута на всех режимах"
-  },
-  {
-    "category": "misc",
-    "subcategory": "",
-    "title": "ИММУНИТЕТ",
-    "price": 249,
-    "description": "Иммунитет от наказаний привилегированных игроков"
-  },
-  {
-    "category": "misc",
-    "subcategory": "",
-    "title": "БОЕВОЙ ПРОПУСК",
-    "price": 599
   }
 ]
