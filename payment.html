@@ -1,54 +1,196 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElysianLink — Оплата</title>
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="apple-touch-icon" href="./favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <style>
-      .pay-container { width: min(720px, 100%); margin: 24px auto; padding: 0 16px; }
-      .pay-card { border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(180deg, #0e1b39, #0b152b); box-shadow: 0 10px 28px rgba(0,0,0,0.35); overflow: hidden; }
-      .pay-header { padding: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-      .pay-title { margin: 0; font-size: 18px; font-weight: 800; }
-      .pay-price { font-weight: 800; color: var(--blue-200); }
-      .pay-body { padding: 14px; display: grid; gap: 12px; }
-      .field { display: grid; gap: 6px; }
-      .field label { color: var(--muted); font-size: 13px; }
-      .field input[type="text"], .field input[type="email"] { background: #0c1731; border: 1px solid var(--border); color: var(--text); border-radius: 10px; padding: 10px 12px; }
-      .agree { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 14px; }
-      .agree a { color: var(--blue-300); text-decoration: none; }
-      .pay-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
-      .btn-secondary { appearance: none; border: 1px solid var(--border); background: #0c1731; color: var(--text); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
-      .error { color: #ff8e8e; font-size: 12px; display: none; }
-      .error[aria-hidden="false"] { display: block; }
-      
-      /* Tablet: ~700px */
-      @media (max-width: 700px) {
-        .pay-container { padding: 0 12px; margin: 20px auto; }
-        .pay-title { font-size: 16px; }
-        .pay-body { padding: 12px; gap: 10px; }
-        .pay-actions { flex-direction: column; gap: 8px; }
-        .pay-actions button { width: 100%; }
-      }
-      
-      /* Mobile: ~400px */
-      @media (max-width: 400px) {
-        .pay-container { padding: 0 12px; margin: 16px auto; }
-        .pay-header { padding: 12px; flex-direction: column; align-items: flex-start; gap: 8px; }
-        .pay-title { font-size: 15px; }
-        .pay-price { font-size: 16px; }
-        .pay-body { padding: 10px; gap: 10px; }
-        .field label { font-size: 12px; }
-        .field input { padding: 9px 10px; font-size: 14px; }
-        .agree { font-size: 12px; }
-        .pay-actions { flex-direction: column-reverse; gap: 8px; }
-        .pay-actions button { width: 100%; font-size: 14px; padding: 10px; }
-      }
+        .pay-container {
+            width: min(720px, 100%);
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .pay-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: linear-gradient(180deg, #0e1b39, #0b152b);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+        }
+
+        .pay-header {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .pay-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .pay-price {
+            font-weight: 800;
+            color: var(--blue-200);
+        }
+
+        .pay-body {
+            padding: 14px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .field {
+            display: grid;
+            gap: 6px;
+        }
+
+        .field label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .field input[type="text"],
+        .field input[type="email"] {
+            background: #0c1731;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .agree {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .agree a {
+            color: var(--blue-300);
+            text-decoration: none;
+        }
+
+        .pay-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 4px;
+        }
+
+        .btn-secondary {
+            appearance: none;
+            border: 1px solid var(--border);
+            background: #0c1731;
+            color: var(--text);
+            border-radius: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: #ff8e8e;
+            font-size: 12px;
+            display: none;
+        }
+
+        .error[aria-hidden="false"] {
+            display: block;
+        }
+
+        /* Tablet: ~700px */
+        @media (max-width: 700px) {
+            .pay-container {
+                padding: 0 12px;
+                margin: 20px auto;
+            }
+
+            .pay-title {
+                font-size: 16px;
+            }
+
+            .pay-body {
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .pay-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .pay-actions button {
+                width: 100%;
+            }
+        }
+
+        /* Mobile: ~400px */
+        @media (max-width: 400px) {
+            .pay-container {
+                padding: 0 12px;
+                margin: 16px auto;
+            }
+
+            .pay-header {
+                padding: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .pay-title {
+                font-size: 15px;
+            }
+
+            .pay-price {
+                font-size: 16px;
+            }
+
+            .pay-body {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .field label {
+                font-size: 12px;
+            }
+
+            .field input {
+                padding: 9px 10px;
+                font-size: 14px;
+            }
+
+            .agree {
+                font-size: 12px;
+            }
+
+            .pay-actions {
+                flex-direction: column-reverse;
+                gap: 8px;
+            }
+
+            .pay-actions button {
+                width: 100%;
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -97,6 +239,5 @@
 
     <script src="./payment.js" defer></script>
 </body>
+
 </html>
-
-
