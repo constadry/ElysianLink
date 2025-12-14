@@ -1,258 +1,237 @@
 [
   {
-    "id": "prv-aristocrat",
     "category": "privileges",
-    "title": "АРИСТОКРАТ",
-    "price": 14499
+    "subcategory": "",
+    "title": "Rover",
+    "price": 99,
+    "image": "./assets/priv_Rover.jpg",
+    "description": "Доступные команды:\n/kit rover - набор предметов Rover\n/hat - надеть блок на голову\n/feed - насытиться\n/warp create - установить публичную точку варпа\n/sit - сесть\n\nОсобые возможности:\n1 приватный варп\n1 публичный варп\n4 привата территории"
   },
   {
-    "id": "prv-ares",
     "category": "privileges",
-    "title": "АРЕС",
-    "price": 9499
+    "subcategory": "",
+    "title": "Adept",
+    "price": 249,
+    "image": "./assets/priv_Adept.jpg",
+    "description": "Включает все возможности Rover +\nНовые команды:\n/kit adept - набор предметов Adept\n/ext - потушиться от огня\n/ignore - игнорировать игроков\n/ec - доступ к эндерсундуку\n/clan create - создать клан\n\nРасширенные возможности:\n2 приватных варпа\n2 публичных варпа\n6 приватов территории"
   },
   {
-    "id": "prv-phobos",
     "category": "privileges",
-    "title": "ФОБОС",
-    "price": 3499
+    "subcategory": "",
+    "title": "Mythic",
+    "price": 599,
+    "image": "./assets/priv_Mythic.jpg",
+    "description": "Включает все возможности Adept +\nНовые команды:\n/kit mythic - набор предметов Mythic\n/fly - полет\n/repair - починка предметов\n/ptime - изменение времени\n/near - просмотр ближайших игроков\n\nУникальные возможности:\nОткрытие шалкера в инвентаре (Shift+ПКМ)\nВозможность переименовать шалкер\n3 приватных варпа\n2 публичных варпа\n8 приватов территории"
   },
   {
-    "id": "prv-kronos",
     "category": "privileges",
-    "title": "КРОНОС",
-    "price": 1999
+    "subcategory": "",
+    "title": "Linker",
+    "price": 999,
+    "image": "./assets/priv_Linker.jpg",
+    "description": "Включает все возможности Mythic +\nНовые команды:\n/kit linker - набор предметов Linker\n/tptoggle - отключение телепортов к себе\n/heal - лечение\n/invsee - просмотр инвентаря других игроков\n/nick - установка фейк-ника\n\nЭлитные возможности:\n3 приватных варпа\n3 публичных варпа\n10 приватов территории"
   },
   {
-    "id": "prv-pandar",
     "category": "privileges",
-    "title": "ПАНДАР",
-    "price": 999
+    "subcategory": "",
+    "title": "Nexus",
+    "price": 1499,
+    "image": "./assets/priv_Nexus.jpg",
+    "description": "Включает все возможности Linker +\nНовые команды:\n/kit nexus - набор предметов Nexus\n/realname - просмотр реального ника\n/time set - изменение времени сервера\n/weather - изменение погоды\n/tempmute - временное заглушение игроков\n/autocollect - автоматический сбор предметов в шалкер\n\nУникальные возможности:\nЦветное имя шалкера\n10 приватных варпов\n5 публичных варпов\n10 приватов территории"
   },
   {
-    "id": "prv-phoenix",
     "category": "privileges",
-    "title": "ФЕНИКС",
-    "price": 499
+    "subcategory": "",
+    "title": "Спонсор",
+    "price": 9990,
+    "image": "./assets/investor.jpg",
+    "description": "Становясь спонсором вы обсуждаете все нужные вам команды и возможности лично с администратором проекта."
   },
   {
-    "id": "prv-triton",
-    "category": "privileges",
-    "title": "ТРИТОН",
-    "price": 299
-  },
-  {
-    "id": "prv-cerberus",
-    "category": "privileges",
-    "title": "ЦЕРБЕР",
-    "price": 99
-  },
-  {
-    "id": "prv-hydra",
-    "category": "privileges",
-    "title": "ГИДРА",
-    "price": 19
-  },
-  {
-    "id": "cur-150k",
     "category": "currency",
-    "title": "150'000 АРЕСОВ",
-    "badge": "Выгодно",
-    "price": 10999
+    "subcategory": "",
+    "title": "100 Линков",
+    "price": 99,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-100k",
     "category": "currency",
-    "title": "100'000 АРЕСОВ",
-    "badge": "Выгодно",
-    "price": 8499
+    "subcategory": "",
+    "title": "250 Линков",
+    "price": 229,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-50k",
     "category": "currency",
-    "title": "50'000 АРЕСОВ",
-    "badge": "Выгодно",
-    "price": 4999
+    "subcategory": "",
+    "title": "500 Линков",
+    "price": 439,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-20k",
     "category": "currency",
-    "title": "20'000 АРЕСОВ",
-    "price": 2499
+    "subcategory": "",
+    "title": "1000 Линков",
+    "price": 849,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-10k",
     "category": "currency",
-    "title": "10'000 АРЕСОВ",
-    "price": 1499
+    "subcategory": "",
+    "title": "2500 Линков",
+    "price": 1999,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-5k",
     "category": "currency",
-    "title": "5'000 АРЕСОВ",
-    "price": 899
+    "subcategory": "",
+    "title": "5000 Линков",
+    "price": 3799,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-2k",
     "category": "currency",
-    "title": "2'000 АРЕСОВ",
-    "price": 449
+    "subcategory": "",
+    "title": "10000 Линков",
+    "price": 6999,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-1k",
     "category": "currency",
-    "title": "1'000 АРЕСОВ",
-    "price": 249
+    "subcategory": "",
+    "title": "25000 Линков",
+    "price": 15999,
+    "image": "./assets/money.jpg",
+    "description": "Вы получаете игровую валюту на выбранный тип режима"
   },
   {
-    "id": "cur-500",
-    "category": "currency",
-    "title": "500 АРЕСОВ",
-    "price": 149
-  },
-  {
-    "id": "cur-100",
-    "category": "currency",
-    "title": "100 АРЕСОВ",
-    "price": 39
-  },
-  {
-    "id": "keys-allornothing-10",
     "category": "keys",
     "subcategory": "Все или ничего",
     "title": "10 ключей",
-    "price": 349,
+    "price": 339,
     "image": "./assets/key1_10.jpg",
     "backgroundColor": "rgb(36, 0, 0)"
   },
   {
-    "id": "keys-allornothing-5",
     "category": "keys",
     "subcategory": "Все или ничего",
     "title": "5 ключей",
-    "price": 199,
+    "price": 179,
     "image": "./assets/key1_5.jpg",
     "backgroundColor": "rgb(36, 0, 0)"
   },
   {
-    "id": "keys-allornothing-3",
     "category": "keys",
     "subcategory": "Все или ничего",
     "title": "3 ключа",
-    "price": 149,
+    "price": 109,
     "image": "./assets/key1_3.jpg",
     "backgroundColor": "rgb(36, 0, 0)"
   },
   {
-    "id": "keys-allornothing-1",
     "category": "keys",
     "subcategory": "Все или ничего",
     "title": "1 ключ",
-    "price": 79,
+    "price": 39,
     "image": "./assets/key1_1.jpg",
     "backgroundColor": "rgb(32, 1, 0)"
   },
   {
-    "id": "keys-foreveryours-10",
     "category": "keys",
     "subcategory": "Навсегда твой",
     "title": "10 ключей",
-    "price": 799,
+    "price": 1190,
     "image": "./assets/key2_10.jpg",
     "backgroundColor": "rgb(26, 5, 0)"
   },
   {
-    "id": "keys-foreveryours-5",
     "category": "keys",
     "subcategory": "Навсегда твой",
     "title": "5 ключей",
-    "price": 449,
+    "price": 649,
     "image": "./assets/key2_5.jpg",
     "backgroundColor": "rgb(26, 5, 0)"
   },
   {
-    "id": "keys-foreveryours-3",
     "category": "keys",
     "subcategory": "Навсегда твой",
     "title": "3 ключа",
-    "price": 349,
+    "price": 399,
     "image": "./assets/key2_3.jpg",
     "backgroundColor": "rgb(26, 5, 0)"
   },
   {
-    "id": "keys-foreveryours-1",
     "category": "keys",
     "subcategory": "Навсегда твой",
     "title": "1 ключ",
-    "price": 199,
+    "price": 149,
     "image": "./assets/key2_1.jpg",
     "backgroundColor": "rgb(20, 5, 0)"
   },
   {
-    "id": "keys-temppower-10",
     "category": "keys",
     "subcategory": "Временная сила",
     "title": "10 ключей",
-    "price": 349,
+    "price": 699,
     "image": "./assets/key3_10.jpg",
     "backgroundColor": "rgb(18, 3, 0)"
   },
   {
-    "id": "keys-temppower-5",
     "category": "keys",
     "subcategory": "Временная сила",
     "title": "5 ключей",
-    "price": 199,
+    "price": 369,
     "image": "./assets/key3_5.jpg",
     "backgroundColor": "rgb(18, 3, 0)"
   },
   {
-    "id": "keys-temppower-3",
     "category": "keys",
     "subcategory": "Временная сила",
     "title": "3 ключа",
-    "price": 149,
+    "price": 229,
     "image": "./assets/key3_3.jpg",
     "backgroundColor": "rgb(18, 3, 0)"
   },
   {
-    "id": "keys-temppower-1",
     "category": "keys",
     "subcategory": "Временная сила",
     "title": "1 ключ",
-    "price": 79,
+    "price": 89,
     "image": "./assets/key3_1.jpg",
     "backgroundColor": "rgb(18, 3, 0)"
   },
   {
-    "id": "keys-moneyflow-10",
     "category": "keys",
     "subcategory": "Денежный поток",
     "title": "10 ключей",
-    "price": 349,
+    "price": 649,
     "image": "./assets/key4_10.jpg",
     "backgroundColor": "rgb(1, 34, 3)"
   },
   {
-    "id": "keys-moneyflow-5",
     "category": "keys",
     "subcategory": "Денежный поток",
     "title": "5 ключей",
-    "price": 199,
+    "price": 339,
     "image": "./assets/key4_5.jpg",
     "backgroundColor": "rgb(1, 34, 3)"
   },
   {
-    "id": "keys-moneyflow-3",
     "category": "keys",
     "subcategory": "Денежный поток",
     "title": "3 ключа",
-    "price": 149,
+    "price": 219,
     "image": "./assets/key4_3.jpg",
     "backgroundColor": "rgb(1, 34, 3)"
   },
   {
-    "id": "keys-moneyflow-1",
     "category": "keys",
     "subcategory": "Денежный поток",
     "title": "1 ключ",
@@ -261,101 +240,96 @@
     "backgroundColor": "rgb(1, 30, 3)"
   },
   {
-    "id": "keys-focusboost-10",
     "category": "keys",
     "subcategory": "Фокус усиления",
     "title": "10 ключей",
-    "price": 349,
+    "price": 499,
     "image": "./assets/key5_10.jpg",
     "backgroundColor": "rgb(30, 0, 21)"
   },
   {
-    "id": "keys-focusboost-5",
     "category": "keys",
     "subcategory": "Фокус усиления",
     "title": "5 ключей",
-    "price": 199,
+    "price": 259,
     "image": "./assets/key5_5.jpg",
     "backgroundColor": "rgb(30, 0, 21)"
   },
   {
-    "id": "keys-focusboost-3",
     "category": "keys",
     "subcategory": "Фокус усиления",
     "title": "3 ключа",
-    "price": 149,
+    "price": 159,
     "image": "./assets/key5_3.jpg",
     "backgroundColor": "rgb(30, 0, 21)"
   },
   {
-    "id": "keys-focusboost-1",
     "category": "keys",
     "subcategory": "Фокус усиления",
     "title": "1 ключ",
-    "price": 79,
+    "price": 59,
     "image": "./assets/key5_1.jpg",
     "backgroundColor": "rgb(30, 0, 21)"
   },
   {
-    "id": "keys-privileges-10",
     "category": "keys",
     "subcategory": "Модуль привилегий",
     "title": "10 ключей",
-    "price": 149,
+    "price": 999,
     "image": "./assets/key6_10.jpg",
     "backgroundColor": "rgb(1, 18, 59)"
   },
   {
-    "id": "keys-privileges-5",
     "category": "keys",
     "subcategory": "Модуль привилегий",
     "title": "5 ключей",
-    "price": 99,
+    "price": 539,
     "image": "./assets/key6_5.jpg",
     "backgroundColor": "rgb(1, 18, 59)"
   },
   {
-    "id": "keys-privileges-3",
     "category": "keys",
     "subcategory": "Модуль привилегий",
     "title": "3 ключа",
-    "price": 79,
+    "price": 329,
     "image": "./assets/key6_3.jpg",
     "backgroundColor": "rgb(1, 18, 59)"
   },
   {
-    "id": "keys-privileges-1",
     "category": "keys",
     "subcategory": "Модуль привилегий",
     "title": "1 ключ",
-    "price": 49,
+    "price": 119,
     "image": "./assets/key6_1.jpg",
     "backgroundColor": "rgb(1, 18, 59)"
   },
   {
-    "id": "misc-bp",
     "category": "misc",
-    "title": "БОЕВОЙ ПРОПУСК",
-    "badge": "Выгодно",
-    "price": 599
+    "subcategory": "",
+    "title": "Разбан",
+    "price": 499,
+    "image": "./assets/unban.jpg",
+    "description": "Вы получаете снятие бана на всех режимах"
   },
   {
-    "id": "misc-unban",
     "category": "misc",
-    "title": "РАЗБАН",
-    "price": 499
+    "subcategory": "",
+    "title": "Мут",
+    "price": 249,
+    "image": "./assets/mute.jpg",
+    "description": "Вы получаете снятие мута на всех режимах"
   },
   {
-    "id": "misc-unmute",
     "category": "misc",
-    "title": "РАЗМУТ",
-    "price": 249
-  },
-  {
-    "id": "misc-immunity",
-    "category": "misc",
+    "subcategory": "",
     "title": "ИММУНИТЕТ",
-    "note": "Иммунитет от наказаний привилегированных игроков",
-    "price": 249
+    "price": 249,
+    "description": "Иммунитет от наказаний привилегированных игроков"
+  },
+  {
+    "category": "misc",
+    "subcategory": "",
+    "title": "БОЕВОЙ ПРОПУСК",
+    "price": 599
   }
 ]

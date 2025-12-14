@@ -597,6 +597,28 @@ body {
 .modal-note {
   margin: 0;
   color: var(--muted);
+  line-height: 1.8;
+}
+
+/* Command highlighting styles */
+.command-highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(19, 121, 255, 0.15));
+  color: var(--cyan-500);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-weight: 600;
+  padding: 4px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  border-left: 3px solid var(--cyan-500);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.description-text {
+  display: inline-block;
+  margin: 6px 0;
+  line-height: 1.6;
 }
 
 .modal-price {

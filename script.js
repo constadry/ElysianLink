@@ -109,11 +109,82 @@ function handleBuy(product) {
   location.href = url.toString();
 }
 
+// Format description with commands highlighted
+function formatDescription(text) {
+  if (!text) return '';
+
+  // Split text into parts: regular text and commands
+  // Commands start with / and end at the next space or end of text
+  const parts = [];
+  let currentIndex = 0;
+
+  // Find all commands (words starting with /)
+  const commandRegex = /\/[a-zA-Z0-9_]+(?:\s+[^\/\n,;.!?]+)?/g;
+  let match;
+
+  while ((match = commandRegex.exec(text)) !== null) {
+    // Add text before the command
+    if (match.index > currentIndex) {
+      parts.push({
+        type: 'text',
+        content: text.slice(currentIndex, match.index)
+      });
+    }
+
+    // Add the command
+    parts.push({
+      type: 'command',
+      content: match[0].trim()
+    });
+
+    currentIndex = match.index + match[0].length;
+  }
+
+  // Add remaining text
+  if (currentIndex < text.length) {
+    parts.push({
+      type: 'text',
+      content: text.slice(currentIndex)
+    });
+  }
+
+  // Build HTML
+  let html = '';
+  parts.forEach((part, index) => {
+    if (part.type === 'command') {
+      html += `<span class="command-highlight">${escapeHtml(part.content)}</span>`;
+      // Add line break after command if it's not the last part
+      if (index < parts.length - 1) {
+        html += '<br>';
+      }
+    } else {
+      // Clean up text and wrap it properly
+      const cleanText = part.content.trim();
+      if (cleanText) {
+        html += `<span class="description-text">${escapeHtml(cleanText)}</span>`;
+        // Add line break if next part is a command
+        if (parts[index + 1]?.type === 'command') {
+          html += '<br>';
+        }
+      }
+    }
+  });
+
+  return html;
+}
+
 function openModal(product) {
   elements.modalImage.src = product.image || placeholderImage();
   elements.modalImage.alt = product.title;
   elements.modalTitle.textContent = product.title;
-  elements.modalNote.textContent = product.note || '';
+
+  // Format description with commands highlighted
+  const formattedNote = formatDescription(product.note);
+  if (formattedNote) {
+    elements.modalNote.innerHTML = formattedNote;
+  } else {
+    elements.modalNote.textContent = '';
+  }
   elements.modalPrice.textContent = formatPriceRUB(product.price);
 
   // Apply background color if exists
