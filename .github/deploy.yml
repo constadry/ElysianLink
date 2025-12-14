@@ -1,0 +1,28 @@
+name: 🚀 Deploy to Reg.ru
+
+on:
+  push:
+    branches:
+      - main  # или master, смотря какая у вас основная ветка
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /www/elysianlink.ru/  # ⚠️ Укажите точный путь на хостинге!
+          # Если сайт лежит прямо в корне FTP-пользователя, оставьте просто /
+          exclude: |  # Если нужно что-то исключить
+            .git*
+            .github
+            .config.js
+
