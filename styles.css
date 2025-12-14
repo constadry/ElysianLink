@@ -613,8 +613,7 @@ body {
 }
 
 .description-text {
-  display: inline-block;
-  margin: 6px 0;
+  display: inline;
   line-height: 1.6;
 }
 

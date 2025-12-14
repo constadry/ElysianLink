@@ -103,6 +103,7 @@ function placeholderImage() {
   return `data:image/svg+xml;charset=UTF-8,${svg}`;
 }
 
+
 function handleBuy(product) {
   const url = new URL('./payment.html', location.href);
   url.searchParams.set('id', product.id);
@@ -113,64 +114,84 @@ function handleBuy(product) {
 function formatDescription(text) {
   if (!text) return '';
 
-  // Split text into parts: regular text and commands
-  // Commands start with / and end at the next space or end of text
-  const parts = [];
-  let currentIndex = 0;
+  // Split by lines first to preserve paragraph structure
+  const lines = text.split('\n');
+  const htmlLines = [];
 
-  // Find all commands (words starting with /)
-  const commandRegex = /\/[a-zA-Z0-9_]+(?:\s+[^\/\n,;.!?]+)?/g;
-  let match;
+  lines.forEach(line => {
+    if (!line.trim()) {
+      // Empty line - add a break
+      htmlLines.push('<br>');
+      return;
+    }
 
-  while ((match = commandRegex.exec(text)) !== null) {
-    // Add text before the command
-    if (match.index > currentIndex) {
+    // Process commands in this line
+    const parts = [];
+    let currentIndex = 0;
+    const commandRegex = /\/[a-zA-Z0-9_]+(?:\s+[^\/\n,;.!?]+)?/g;
+    let match;
+
+    while ((match = commandRegex.exec(line)) !== null) {
+      // Add text before the command
+      if (match.index > currentIndex) {
+        const textBefore = line.slice(currentIndex, match.index).trim();
+        if (textBefore) {
+          parts.push({
+            type: 'text',
+            content: textBefore
+          });
+        }
+      }
+
+      // Add the command
       parts.push({
-        type: 'text',
-        content: text.slice(currentIndex, match.index)
+        type: 'command',
+        content: match[0].trim()
+      });
+
+      currentIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text in the line
+    if (currentIndex < line.length) {
+      const remaining = line.slice(currentIndex).trim();
+      if (remaining) {
+        parts.push({
+          type: 'text',
+          content: remaining
+        });
+      }
+    }
+
+    // Build HTML for this line
+    if (parts.length === 0) {
+      // Line with only whitespace
+      htmlLines.push(escapeHtml(line.trim()));
+    } else {
+      parts.forEach((part, index) => {
+        if (part.type === 'command') {
+          htmlLines.push(`<span class="command-highlight">${escapeHtml(part.content)}</span>`);
+        } else {
+          htmlLines.push(`<span class="description-text">${escapeHtml(part.content)}</span>`);
+        }
+
+        // Add space between parts on the same line
+        if (index < parts.length - 1 && parts[index + 1].type !== 'command') {
+          htmlLines.push(' ');
+        }
       });
     }
 
-    // Add the command
-    parts.push({
-      type: 'command',
-      content: match[0].trim()
-    });
-
-    currentIndex = match.index + match[0].length;
-  }
-
-  // Add remaining text
-  if (currentIndex < text.length) {
-    parts.push({
-      type: 'text',
-      content: text.slice(currentIndex)
-    });
-  }
-
-  // Build HTML
-  let html = '';
-  parts.forEach((part, index) => {
-    if (part.type === 'command') {
-      html += `<span class="command-highlight">${escapeHtml(part.content)}</span>`;
-      // Add line break after command if it's not the last part
-      if (index < parts.length - 1) {
-        html += '<br>';
-      }
-    } else {
-      // Clean up text and wrap it properly
-      const cleanText = part.content.trim();
-      if (cleanText) {
-        html += `<span class="description-text">${escapeHtml(cleanText)}</span>`;
-        // Add line break if next part is a command
-        if (parts[index + 1]?.type === 'command') {
-          html += '<br>';
-        }
-      }
-    }
+    // Add line break after each line
+    htmlLines.push('<br>');
   });
 
-  return html;
+  // Remove the last <br> if exists
+  if (htmlLines[htmlLines.length - 1] === '<br>') {
+    htmlLines.pop();
+  }
+
+  return htmlLines.join('');
 }
 
 function openModal(product) {
