@@ -1,6 +1,6 @@
 // Same data sources as on main page
 const API_SOURCES = [
-  'https://raw.githubusercontent.com/constadry/ElysianLink/master/data/products.json',
+  'https://raw.githubusercontent.com/constadry/ArcWeave/master/data/products.json',
   './data/products.json'
 ];
 

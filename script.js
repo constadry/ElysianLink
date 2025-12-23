@@ -652,7 +652,7 @@ async function handleFeedbackSubmit(e) {
 
 async function sendToTelegram(data) {
   const message = `
-🎮 <b>Новое обращение с сайта ElysianLink</b>
+🎮 <b>Новое обращение с сайта ArcWeave</b>
 
 👤 <b>Игровой ник:</b> ${escapeHtml(data.playerNick)}
 📋 <b>Причина:</b> ${escapeHtml(data.reason)}

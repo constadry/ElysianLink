@@ -19,7 +19,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /www/elysianlink.ru/  # ⚠️ Укажите точный путь на хостинге!
+          server-dir: /www/arcweave.ru/  # ⚠️ Укажите точный путь на хостинге!
           # Если сайт лежит прямо в корне FTP-пользователя, оставьте просто /
           exclude: |  # Если нужно что-то исключить
             .git*
