@@ -50,6 +50,34 @@ body {
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
   overflow-y: auto;
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  /* Hide scrollbar for a cleaner look */
+}
+
+.landing-page::-webkit-scrollbar {
+  display: none;
+}
+
+.welcome-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+  display: flex !important;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.join-section {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  background: var(--bg);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(62, 146, 255, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(11, 35, 74, 0.2) 0px, transparent 50%);
+  box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.9);
+  border-top: 1px solid rgba(62, 146, 255, 0.1);
 }
 
 .landing-page.is-hidden {
@@ -66,12 +94,15 @@ body {
   justify-content: center;
   padding: 40px 20px;
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .landing-content {
   max-width: 800px;
   width: 100%;
   text-align: center;
+  will-change: transform, opacity;
 }
 
 .landing-title {
@@ -105,40 +136,51 @@ body {
   box-shadow: 0 10px 30px rgba(19, 121, 255, 0.4);
 }
 
-/* Scroll Indicator */
+/* Scroll Indicator Redesign */
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 40px;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  opacity: 0.8;
+  gap: 12px;
+  color: var(--blue-200);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   animation: landingFadeInUp 1.2s ease-out 1s both;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
 }
 
 .mouse {
-  width: 24px;
-  height: 40px;
-  border: 2px solid var(--muted);
-  border-radius: 12px;
+  width: 18px;
+  height: 30px;
+  border: 2px solid var(--blue-400);
+  border-radius: 9px;
   position: relative;
+  box-shadow: 0 0 10px rgba(62, 146, 255, 0.2);
 }
 
 .wheel {
-  width: 4px;
-  height: 8px;
-  background: var(--blue-400);
-  border-radius: 2px;
+  width: 2px;
+  height: 5px;
+  background: var(--cyan-500);
+  border-radius: 1px;
   position: absolute;
   top: 6px;
   left: 50%;
   transform: translateX(-50%);
-  animation: scrollWheel 2s infinite;
+  animation: scrollWheel 2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94);
 }
 
 @keyframes scrollWheel {
@@ -147,8 +189,13 @@ body {
     opacity: 1;
   }
 
+  30% {
+    transform: translate(-50%, 3px);
+    opacity: 1;
+  }
+
   100% {
-    transform: translate(-50%, 15px);
+    transform: translate(-50%, 12px);
     opacity: 0;
   }
 }

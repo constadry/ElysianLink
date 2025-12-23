@@ -493,15 +493,34 @@ function setupLandingPage() {
     });
   }
 
-  // Hide scroll indicator on scroll
+  // Enhanced layering effect on scroll
   if (scrollIndicator) {
     landingPage.addEventListener('scroll', () => {
-      if (landingPage.scrollTop > 50) {
-        scrollIndicator.style.opacity = '0';
-        scrollIndicator.style.visibility = 'hidden';
-      } else {
-        scrollIndicator.style.opacity = '0.8';
-        scrollIndicator.style.visibility = 'visible';
+      const scrolled = landingPage.scrollTop;
+      const vh = window.innerHeight;
+      const welcomeSection = document.getElementById('welcome-section');
+      const welcomeContent = welcomeSection?.querySelector('.landing-content');
+
+      // 1. Smoothly fade out scroll indicator
+      const indicatorOpacity = Math.max(0, 1 - scrolled / 300);
+      scrollIndicator.style.opacity = indicatorOpacity;
+      scrollIndicator.style.visibility = indicatorOpacity <= 0.05 ? 'hidden' : 'visible';
+
+      // 2. Layering effect: Welcome section shrinks/fades as Join section slides over
+      if (welcomeSection && scrolled <= vh) {
+        const scrollRatio = scrolled / vh;
+
+        // Scale down slightly and fade out
+        const scale = 1 - (scrollRatio * 0.1);
+        const opacity = 1 - (scrollRatio * 1.2); // Fades a bit faster than scroll
+
+        if (welcomeContent) {
+          welcomeContent.style.transform = `translateY(${scrolled * 0.25}px) scale(${scale})`;
+          welcomeContent.style.opacity = Math.max(0, opacity);
+        }
+
+        // Darken the background of the first section as it's being covered
+        welcomeSection.style.filter = `brightness(${1 - scrollRatio * 0.5})`;
       }
     });
   }
