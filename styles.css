@@ -43,15 +43,13 @@ body {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   background: radial-gradient(1200px 600px at 10% -10%, #11234a 0%, transparent 60%),
     radial-gradient(1400px 700px at 100% 0%, #0a3b92 0%, transparent 60%),
     var(--bg);
-  padding: 20px;
+  padding: 0;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .landing-page.is-hidden {
@@ -60,9 +58,20 @@ body {
   pointer-events: none;
 }
 
+.landing-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
 .landing-content {
   max-width: 800px;
-  animation: landingFadeInDown 1.2s ease-out;
+  width: 100%;
+  text-align: center;
 }
 
 .landing-title {
@@ -74,6 +83,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
+  animation: landingFadeInDown 1.2s ease-out;
 }
 
 .landing-info {
@@ -82,13 +92,82 @@ body {
   line-height: 1.6;
   margin: 0 auto 40px auto;
   max-width: 600px;
+  animation: landingFadeInDown 1.2s ease-out 0.2s both;
+}
+
+.landing-actions {
+  animation: landingFadeInUp 1.2s ease-out 0.4s both;
 }
 
 .landing-btn {
   font-size: 18px;
   padding: 16px 32px;
   box-shadow: 0 10px 30px rgba(19, 121, 255, 0.4);
-  animation: landingFadeInUp 1.2s ease-out 0.3s both;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  opacity: 0.8;
+  animation: landingFadeInUp 1.2s ease-out 1s both;
+}
+
+.mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--muted);
+  border-radius: 12px;
+  position: relative;
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--blue-400);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, 15px);
+    opacity: 0;
+  }
+}
+
+.join-section {
+  background: rgba(15, 23, 48, 0.5);
+  border-top: 1px solid rgba(62, 146, 255, 0.1);
+}
+
+.back-to-top {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.back-to-top:hover {
+  background: rgba(62, 146, 255, 0.1);
+  border-color: var(--blue-400);
 }
 
 @keyframes landingFadeInDown {

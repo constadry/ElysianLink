@@ -32,7 +32,9 @@ const elements = {
   modalBuy: document.getElementById('modalBuy'),
   landingPage: document.getElementById('landing-page'),
   storeContent: document.getElementById('store-content'),
-  enterStoreBtn: document.getElementById('enter-store')
+  enterStoreBtn: document.getElementById('enter-store'),
+  backToTopBtn: document.getElementById('back-to-top'),
+  scrollIndicator: document.getElementById('scroll-indicator')
 };
 
 function formatPriceRUB(value) {
@@ -463,10 +465,11 @@ function setupBurgerMenu() {
 // Landing Page Transition
 // ============================================
 function setupLandingPage() {
-  const { landingPage, storeContent, enterStoreBtn } = elements;
+  const { landingPage, storeContent, enterStoreBtn, backToTopBtn, scrollIndicator } = elements;
   if (!landingPage || !storeContent || !enterStoreBtn) return;
 
-  // Initial state: body has landing-active to disable scroll
+  // Initial state: body has landing-active to disable scroll on the main body
+  // because the landing page itself has overflow-y: auto
   document.body.classList.add('landing-active');
 
   enterStoreBtn.addEventListener('click', () => {
@@ -482,6 +485,26 @@ function setupLandingPage() {
       landingPage.style.display = 'none'; // Completely remove from layout
     }, 800);
   });
+
+  // Back to Top logic
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      landingPage.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Hide scroll indicator on scroll
+  if (scrollIndicator) {
+    landingPage.addEventListener('scroll', () => {
+      if (landingPage.scrollTop > 50) {
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.visibility = 'hidden';
+      } else {
+        scrollIndicator.style.opacity = '0.8';
+        scrollIndicator.style.visibility = 'visible';
+      }
+    });
+  }
 }
 
 // ============================================
