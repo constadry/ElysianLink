@@ -29,7 +29,10 @@ const elements = {
   modalTitle: document.getElementById('modalTitle'),
   modalNote: document.getElementById('modalNote'),
   modalPrice: document.getElementById('modalPrice'),
-  modalBuy: document.getElementById('modalBuy')
+  modalBuy: document.getElementById('modalBuy'),
+  landingPage: document.getElementById('landing-page'),
+  storeContent: document.getElementById('store-content'),
+  enterStoreBtn: document.getElementById('enter-store')
 };
 
 function formatPriceRUB(value) {
@@ -453,7 +456,33 @@ function setupBurgerMenu() {
   // Setup rules and feedback modals
   setupRulesModal();
   setupFeedbackModal();
+  setupLandingPage();
 })();
+
+// ============================================
+// Landing Page Transition
+// ============================================
+function setupLandingPage() {
+  const { landingPage, storeContent, enterStoreBtn } = elements;
+  if (!landingPage || !storeContent || !enterStoreBtn) return;
+
+  // Initial state: body has landing-active to disable scroll
+  document.body.classList.add('landing-active');
+
+  enterStoreBtn.addEventListener('click', () => {
+    // Hide landing page with transition
+    landingPage.classList.add('is-hidden');
+
+    // Show store content immediately (it's under the landing page)
+    storeContent.hidden = false;
+
+    // Remove landing-active from body after transition
+    setTimeout(() => {
+      document.body.classList.remove('landing-active');
+      landingPage.style.display = 'none'; // Completely remove from layout
+    }, 800);
+  });
+}
 
 // ============================================
 // Rules Modal

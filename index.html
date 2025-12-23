@@ -15,81 +15,97 @@
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <button class="burger-toggle" id="burgerToggle" aria-label="Меню" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-            <nav class="nav-tabs" role="tablist" aria-label="Категории" aria-expanded="false">
-                <button class="tab-button is-active" data-category="privileges">Привилегии</button>
-                <button class="tab-button" data-category="currency">Валюта</button>
-                <button class="tab-button" data-category="keys">Ключи</button>
-                <button class="tab-button" data-category="misc">Разное</button>
-            </nav>
-            <nav class="header-links" aria-label="Дополнительные ссылки">
-                <a href="#rules" class="header-link">Правила</a>
-                <a href="#feedback" class="header-link">Обратная связь</a>
-            </nav>
-            <div class="brand" aria-label="ElysianLink">
-                <img class="brand-logo" src="./assets/elysianlink-logo.jpg" alt="ElysianLink" aria-hidden="true">
-                <div class="brand-text">
-                    <div class="brand-title">ElysianLink</div>
-                    <div class="brand-subtitle">Minecraft сервер</div>
+    <div id="store-content" hidden>
+        <header class="site-header">
+            <div class="container header-inner">
+                <button class="burger-toggle" id="burgerToggle" aria-label="Меню" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="nav-tabs" role="tablist" aria-label="Категории" aria-expanded="false">
+                    <button class="tab-button is-active" data-category="privileges">Привилегии</button>
+                    <button class="tab-button" data-category="currency">Валюта</button>
+                    <button class="tab-button" data-category="keys">Ключи</button>
+                    <button class="tab-button" data-category="misc">Разное</button>
+                </nav>
+                <nav class="header-links" aria-label="Дополнительные ссылки">
+                    <a href="#rules" class="header-link">Правила</a>
+                    <a href="#feedback" class="header-link">Обратная связь</a>
+                </nav>
+                <div class="brand" aria-label="ElysianLink">
+                    <img class="brand-logo" src="./assets/elysianlink-logo.jpg" alt="ElysianLink" aria-hidden="true">
+                    <div class="brand-text">
+                        <div class="brand-title">ElysianLink</div>
+                        <div class="brand-subtitle">Minecraft сервер</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container">
-        <section class="notice" id="apiNotice" hidden>
-        </section>
-
-        <section id="section-privileges" class="category-section">
-            <h2 class="section-title">Привилегии</h2>
-            <div class="cards" id="cards-privileges" aria-live="polite"></div>
-        </section>
-
-        <section id="section-currency" class="category-section">
-            <h2 class="section-title">Валюта</h2>
-            <div class="cards" id="cards-currency" aria-live="polite"></div>
-        </section>
-
-        <section id="section-keys" class="category-section">
-            <h2 class="section-title">Ключи</h2>
-            <section class="subfilters" id="subfilters" hidden>
-                <div class="subfilter-label">Подкатегории</div>
-                <div class="subfilter-list" id="subfilterList"></div>
+        <main class="container">
+            <section class="notice" id="apiNotice" hidden>
             </section>
-            <div class="cards keys-container" id="cards-keys" aria-live="polite"></div>
-        </section>
 
-        <section id="section-misc" class="category-section">
-            <h2 class="section-title">Разное</h2>
-            <div class="cards" id="cards-misc" aria-live="polite"></div>
-        </section>
+            <section id="section-privileges" class="category-section">
+                <h2 class="section-title">Привилегии</h2>
+                <div class="cards" id="cards-privileges" aria-live="polite"></div>
+            </section>
 
-        <section class="empty-state" id="emptyState" hidden>
-            Ничего не найдено.
-        </section>
-    </main>
+            <section id="section-currency" class="category-section">
+                <h2 class="section-title">Валюта</h2>
+                <div class="cards" id="cards-currency" aria-live="polite"></div>
+            </section>
 
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="legal">
-                <div>ElysianLink.ru не связан с Mojang AB, все средства идут на развитие проекта</div>
-                <div class="links">
-                    <a href="./agreement.html">Соглашение</a>
-                    <a href="#" aria-disabled="true">Политика конфиденциальности</a>
-                    <a href="#" aria-disabled="true">Правила оплаты</a>
+            <section id="section-keys" class="category-section">
+                <h2 class="section-title">Ключи</h2>
+                <section class="subfilters" id="subfilters" hidden>
+                    <div class="subfilter-label">Подкатегории</div>
+                    <div class="subfilter-list" id="subfilterList"></div>
+                </section>
+                <div class="cards keys-container" id="cards-keys" aria-live="polite"></div>
+            </section>
+
+            <section id="section-misc" class="category-section">
+                <h2 class="section-title">Разное</h2>
+                <div class="cards" id="cards-misc" aria-live="polite"></div>
+            </section>
+
+            <section class="empty-state" id="emptyState" hidden>
+                Ничего не найдено.
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <div class="legal">
+                    <div>ElysianLink.ru не связан с Mojang AB, все средства идут на развитие проекта</div>
+                    <div class="links">
+                        <a href="./agreement.html">Соглашение</a>
+                        <a href="#" aria-disabled="true">Политика конфиденциальности</a>
+                        <a href="#" aria-disabled="true">Правила оплаты</a>
+                    </div>
+                </div>
+                <div class="company">
+                    <div>Маслов Д.Н.</div>
+                    <div>ИНН: 613205889452</div>
+                    <div>Обратная связь: <a href="https://t.me/constadry">@constadry</a></div>
                 </div>
             </div>
-            <div class="company">
-                <div>Маслов Д.Н.</div>
-                <div>ИНН: 613205889452</div>
-                <div>Обратная связь: <a href="https://t.me/constadry">@constadry</a></div>
-            </div>
+        </footer>
+    </div>
+
+    <!-- Landing Page -->
+    <section id="landing-page" class="landing-page">
+        <div class="landing-content">
+            <h1 class="landing-title">Добро пожаловать в ElysianLink</h1>
+            <p class="landing-info">
+                ElysianLink — это уникальный майнкрафт сервер с продуманной экономикой,
+                интересными механиками и дружелюбным сообществом.
+                Мы стремимся создать идеальное место для вашей игры.
+            </p>
+            <button class="btn-primary landing-btn" id="enter-store">Перейти к товарам</button>
         </div>
-    </footer>
+    </section>
+
 
     <template id="cardTemplate">
         <article class="card" tabindex="0">

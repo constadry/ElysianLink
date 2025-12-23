@@ -38,6 +38,88 @@ body {
   padding-top: 92px;
 }
 
+/* Landing Page Styles */
+.landing-page {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(1200px 600px at 10% -10%, #11234a 0%, transparent 60%),
+    radial-gradient(1400px 700px at 100% 0%, #0a3b92 0%, transparent 60%),
+    var(--bg);
+  padding: 20px;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+.landing-page.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing-content {
+  max-width: 800px;
+  animation: landingFadeInDown 1.2s ease-out;
+}
+
+.landing-title {
+  font-size: clamp(32px, 8vw, 64px);
+  font-weight: 800;
+  margin: 0 0 24px 0;
+  background: linear-gradient(135deg, var(--blue-200), var(--blue-600));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.landing-info {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 auto 40px auto;
+  max-width: 600px;
+}
+
+.landing-btn {
+  font-size: 18px;
+  padding: 16px 32px;
+  box-shadow: 0 10px 30px rgba(19, 121, 255, 0.4);
+  animation: landingFadeInUp 1.2s ease-out 0.3s both;
+}
+
+@keyframes landingFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes landingFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disable scrolling when landing is active */
+body.landing-active {
+  overflow: hidden;
+}
+
 .container {
   width: min(1200px, 100%);
   margin: 0 auto;
