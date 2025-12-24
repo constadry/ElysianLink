@@ -16,14 +16,11 @@ const elements = {
   cardsByCategory: {
     privileges: document.getElementById('cards-privileges'),
     currency: document.getElementById('cards-currency'),
-    keys: document.getElementById('cards-keys'),
     misc: document.getElementById('cards-misc')
   },
   cardTemplate: document.getElementById('cardTemplate'),
   emptyState: document.getElementById('emptyState'),
   notice: document.getElementById('apiNotice'),
-  subfilters: document.getElementById('subfilters'),
-  subfilterList: document.getElementById('subfilterList'),
   modal: document.getElementById('productModal'),
   modalImage: document.getElementById('modalImage'),
   modalTitle: document.getElementById('modalTitle'),
@@ -74,19 +71,7 @@ function createCard(product) {
   img.alt = product.title;
   img.addEventListener('error', () => { img.src = placeholderImage(); });
 
-  // Apply backgroundColor to .card-media for keys
-  if (product.category === 'keys' && product.backgroundColor) {
-    const cardMedia = node.querySelector('.card-media');
-    if (cardMedia) {
-      cardMedia.style.backgroundColor = product.backgroundColor;
-    }
-  }
 
-  // Set image handling for keys
-  if (product.category === 'keys' && product.title) {
-    // Use separate image for each key count
-    img.classList.add('key-separate-image');
-  }
 
   return node;
 }
@@ -241,34 +226,10 @@ function closeModal() {
 
 function escListener(e) { if (e.key === 'Escape') closeModal(); }
 
-function uniqueSubcategories(products) {
-  const set = new Set(products.map(p => p.subcategory).filter(Boolean));
-  return ['all', ...Array.from(set)];
-}
+
 
 function renderSubfilters() {
-  const productsInCategory = state.allProducts.filter(p => p.category === 'keys');
-  const subs = uniqueSubcategories(productsInCategory);
-  if (subs.length <= 1) {
-    elements.subfilters.hidden = true;
-    elements.subfilterList.innerHTML = '';
-    state.activeSubcategory = 'all';
-    return;
-  }
-  elements.subfilters.hidden = false;
-  elements.subfilterList.innerHTML = '';
-  subs.forEach(sub => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'subfilter-button' + (sub === state.activeSubcategory ? ' is-active' : '');
-    btn.textContent = sub === 'all' ? 'Все' : sub;
-    btn.addEventListener('click', () => {
-      state.activeSubcategory = sub;
-      renderAllCategories();
-      renderSubfilters();
-    });
-    elements.subfilterList.appendChild(btn);
-  });
+  // Subfilters were only used for keys, which or now removed.
 }
 
 function renderAllCategories() {
@@ -279,14 +240,10 @@ function renderAllCategories() {
   const groups = {
     privileges: [],
     currency: [],
-    keys: [],
     misc: []
   };
 
   for (const p of state.allProducts) {
-    if (p.category === 'keys' && state.activeSubcategory !== 'all' && p.subcategory !== state.activeSubcategory) {
-      continue;
-    }
     if (groups[p.category]) groups[p.category].push(p);
   }
 
@@ -296,16 +253,10 @@ function renderAllCategories() {
     if (!container) continue;
     if (list.length === 0) continue;
 
-    // Special handling for keys category - group by subcategory
-    if (category === 'keys') {
-      renderKeysGrouped(container, list);
-      total += list.length;
-    } else {
-      const fragment = document.createDocumentFragment();
-      list.forEach(p => fragment.appendChild(createCard(p)));
-      container.appendChild(fragment);
-      total += list.length;
-    }
+    const fragment = document.createDocumentFragment();
+    list.forEach(p => fragment.appendChild(createCard(p)));
+    container.appendChild(fragment);
+    total += list.length;
   }
 
   if (total === 0) {
@@ -313,38 +264,7 @@ function renderAllCategories() {
   }
 }
 
-function renderKeysGrouped(container, keysList) {
-  // Group keys by subcategory
-  const subcategoryGroups = {};
-  keysList.forEach(key => {
-    const sub = key.subcategory || 'Другое';
-    if (!subcategoryGroups[sub]) {
-      subcategoryGroups[sub] = [];
-    }
-    subcategoryGroups[sub].push(key);
-  });
 
-  // Render each subcategory group
-  Object.entries(subcategoryGroups).forEach(([subcategory, products]) => {
-    // Create group container
-    const groupDiv = document.createElement('div');
-    groupDiv.className = 'keys-group';
-
-    // Create group header
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'keys-group-header';
-    headerDiv.textContent = subcategory;
-    groupDiv.appendChild(headerDiv);
-
-    // Create cards container
-    const cardsDiv = document.createElement('div');
-    cardsDiv.className = 'keys-group-cards';
-    products.forEach(p => cardsDiv.appendChild(createCard(p)));
-    groupDiv.appendChild(cardsDiv);
-
-    container.appendChild(groupDiv);
-  });
-}
 
 async function loadProducts() {
   try {
@@ -362,16 +282,18 @@ async function loadProducts() {
 
     // Map backend ShopItem model to frontend format
     // Backend uses PascalCase (Id, Title, etc.), frontend expects camelCase
-    state.allProducts = Array.isArray(data) ? data.map(item => ({
-      id: item.id || item.Id,
-      category: item.category || item.Category,
-      subcategory: item.subcategory || item.Subcategory,
-      title: item.title || item.Title,
-      price: item.price || item.Price,
-      image: item.image || item.Image,
-      backgroundColor: item.backgroundColor || item.BackgroundColor,
-      note: item.description || item.Description || ''
-    })) : [];
+    state.allProducts = Array.isArray(data) ? data
+      .map(item => ({
+        id: item.id || item.Id,
+        category: item.category || item.Category,
+        subcategory: item.subcategory || item.Subcategory,
+        title: item.title || item.Title,
+        price: item.price || item.Price,
+        image: item.image || item.Image,
+        backgroundColor: item.backgroundColor || item.BackgroundColor,
+        note: item.description || item.Description || ''
+      }))
+      .filter(p => p.category !== 'keys') : [];
 
     elements.notice.hidden = true;
     console.log(`✓ Products loaded from backend API (${state.allProducts.length} items)`);
@@ -390,7 +312,8 @@ async function loadProducts() {
       }
 
       const fallbackData = await fallbackRes.json();
-      state.allProducts = Array.isArray(fallbackData) ? fallbackData : (fallbackData.products || []);
+      const rawProducts = Array.isArray(fallbackData) ? fallbackData : (fallbackData.products || []);
+      state.allProducts = rawProducts.filter(p => p.category !== 'keys');
       elements.notice.textContent = '⚠ Загружены локальные данные (бэкенд недоступен)';
       elements.notice.hidden = false;
       console.log('✓ Products loaded from local file');
