@@ -30,6 +30,7 @@
                 <nav class="header-links" aria-label="Дополнительные ссылки">
                     <a href="#rules" class="header-link">Правила</a>
                     <a href="#feedback" class="header-link">Обратная связь</a>
+                    <a href="#team" class="header-link">Вступить в команду</a>
                 </nav>
                 <div class="brand" aria-label="ArcWeave">
                     <img class="brand-logo" src="./assets/Arcweave.jpg" alt="ArcWeave" aria-hidden="true">
@@ -379,6 +380,70 @@
                     </button>
 
                     <div class="form-message" id="formMessage" hidden></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Application Modal -->
+    <div class="modal" id="teamModal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" data-close-team></div>
+        <div class="modal-dialog modal-dialog-team" role="document">
+            <button class="modal-close" aria-label="Закрыть" data-close-team>&times;</button>
+            <div class="modal-body">
+                <h2 class="modal-title">Подать заявку в команду</h2>
+                <form id="teamForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="teamNick">1. Ваш игровой ник</label>
+                        <input type="text" id="teamNick" name="playerNick" required placeholder="Введите ваш ник">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamServer">2. Сервер</label>
+                        <select id="teamServer" name="server" required>
+                            <option value="ArcWeave Main">ArcWeave Main</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamRole">3. Кем хотите быть?</label>
+                        <select id="teamRole" name="role" required>
+                            <option value="">Выберите роль</option>
+                            <option value="Модератор">Модератор</option>
+                            <option value="Строитель">Строитель</option>
+                            <option value="Гейм-Дизайнер">Гейм-Дизайнер</option>
+                            <option value="Другое">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamHours">4. Кол-во наигранных часов</label>
+                        <input type="number" id="teamHours" name="hours" required min="0" placeholder="Например: 100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamHistory">5. Были ли у вас баны/муты/варны?</label>
+                        <textarea id="teamHistory" name="history" required rows="3"
+                            placeholder="Опишите ваши наказания или напишите 'Нет'"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamDiscord">6. Ваш Discord</label>
+                        <input type="text" id="teamDiscord" name="discord" required placeholder="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamReason">7. По какой причине вы решили подать заявку?</label>
+                        <textarea id="teamReason" name="reason" required rows="4"
+                            placeholder="Ваша мотивация"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-submit" id="submitTeam">
+                        <span class="btn-text">Отправить заявку</span>
+                        <span class="btn-loading" hidden>Отправка...</span>
+                    </button>
+
+                    <div class="form-message" id="teamFormMessage" hidden></div>
                 </form>
             </div>
         </div>

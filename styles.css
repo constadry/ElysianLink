@@ -632,7 +632,7 @@ body.landing-active {
   position: fixed;
   inset: 0;
   display: none;
-  z-index: 1000;
+  z-index: 3000;
 }
 
 .modal[aria-hidden="false"] {
@@ -687,7 +687,8 @@ body.landing-active {
 }
 
 .modal-dialog-rules,
-.modal-dialog-feedback {
+.modal-dialog-feedback,
+.modal-dialog-team {
   max-height: 85vh;
   overflow-y: auto;
   top: 5%;

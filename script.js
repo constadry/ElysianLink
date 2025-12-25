@@ -381,6 +381,7 @@ function setupBurgerMenu() {
   // Setup rules and feedback modals
   setupRulesModal();
   setupFeedbackModal();
+  setupTeamModal();
   setupLandingPage();
 })();
 
@@ -618,9 +619,122 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, m => map[m]);
 }
 
-function showFormMessage(text, type) {
-  const formMessage = document.getElementById('formMessage');
+function showFormMessage(text, type, elementId = 'formMessage') {
+  const formMessage = document.getElementById(elementId);
+  if (!formMessage) return;
   formMessage.textContent = text;
   formMessage.className = `form-message ${type}`;
   formMessage.hidden = false;
 }
+
+// ============================================
+// Team Application Modal
+// ============================================
+function setupTeamModal() {
+  const teamLinks = document.querySelectorAll('a[href="#team"], .team-link');
+  const teamModal = document.getElementById('teamModal');
+  const closeButtons = document.querySelectorAll('[data-close-team]');
+  const teamForm = document.getElementById('teamForm');
+
+  if (!teamModal || !teamForm) return;
+
+  teamLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openTeamModal();
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', closeTeamModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && teamModal.getAttribute('aria-hidden') === 'false') {
+      closeTeamModal();
+    }
+  });
+
+  teamForm.addEventListener('submit', handleTeamSubmit);
+}
+
+function openTeamModal() {
+  const teamModal = document.getElementById('teamModal');
+  teamModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeTeamModal() {
+  const teamModal = document.getElementById('teamModal');
+  teamModal.setAttribute('aria-hidden', 'true');
+}
+
+async function handleTeamSubmit(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = document.getElementById('submitTeam');
+  const formMessageId = 'teamFormMessage';
+
+  const formData = {
+    playerNick: form.teamNick.value.trim(),
+    server: form.teamServer.value,
+    role: form.teamRole.value,
+    hours: form.teamHours.value,
+    history: form.teamHistory.value.trim(),
+    discord: form.teamDiscord.value.trim(),
+    reason: form.teamReason.value.trim()
+  };
+
+  submitBtn.disabled = true;
+  document.getElementById(formMessageId).hidden = true;
+
+  try {
+    await sendTeamApplicationToTelegram(formData);
+    showFormMessage('✓ Ваша заявка успешно отправлена!', 'success', formMessageId);
+    form.reset();
+
+    setTimeout(() => {
+      closeTeamModal();
+      document.getElementById(formMessageId).hidden = true;
+    }, 2500);
+  } catch (error) {
+    console.error('Error sending team application:', error);
+    showFormMessage('Ошибка при отправке. Попробуйте позже.', 'error', formMessageId);
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
+async function sendTeamApplicationToTelegram(data) {
+  const message = `
+📝 <b>НОВАЯ ЗАЯВКА В КОМАНДУ</b>
+
+👤 <b>Ник:</b> ${escapeHtml(data.playerNick)}
+🌐 <b>Сервер:</b> ${escapeHtml(data.server)}
+🛠 <b>Роль:</b> ${escapeHtml(data.role)}
+⏳ <b>Часы:</b> ${escapeHtml(data.hours)}
+🚫 <b>История наказаний:</b>
+${escapeHtml(data.history)}
+
+📱 <b>Discord:</b> ${escapeHtml(data.discord)}
+
+🎯 <b>Причина/Мотивация:</b>
+${escapeHtml(data.reason)}
+  `.trim();
+
+  const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CONFIG.chatId,
+      text: message,
+      parse_mode: 'HTML'
+    })
+  });
+
+  if (!response.ok) throw new Error('Telegram API error');
+  return response.json();
+}
+
