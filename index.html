@@ -10,12 +10,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Проверка: если пользователь еще не видел приветственный экран, отправляем его туда
+        if (!localStorage.getItem('welcomeSeen')) {
+            window.location.replace('./welcome.html');
+        }
+    </script>
     <link rel="stylesheet" href="./styles.css">
     <script src="config.js"></script>
 </head>
 
 <body>
-    <div id="store-content" hidden>
+    <div id="store-content">
         <header class="site-header">
             <div class="container header-inner">
                 <button class="burger-toggle" id="burgerToggle" aria-label="Меню" aria-expanded="false">
@@ -24,7 +30,6 @@
                 <nav class="nav-tabs" role="tablist" aria-label="Категории" aria-expanded="false">
                     <button class="tab-button is-active" data-category="privileges">Привилегии</button>
                     <button class="tab-button" data-category="currency">Валюта</button>
-
                     <button class="tab-button" data-category="misc">Разное</button>
                 </nav>
                 <nav class="header-links" aria-label="Дополнительные ссылки">
@@ -56,8 +61,6 @@
                 <div class="cards" id="cards-currency" aria-live="polite"></div>
             </section>
 
-
-
             <section id="section-misc" class="category-section">
                 <h2 class="section-title">Разное</h2>
                 <div class="cards" id="cards-misc" aria-live="polite"></div>
@@ -86,42 +89,6 @@
             </div>
         </footer>
     </div>
-
-    <!-- Landing Page -->
-    <section id="landing-page" class="landing-page">
-        <div class="landing-section welcome-section" id="welcome-section">
-            <div class="landing-content">
-                <h1 class="landing-title">Добро пожаловать в ArcWeave</h1>
-                <p class="landing-info">
-                    ArcWeave — это уникальный майнкрафт сервер с продуманной экономикой,
-                    интересными механиками и дружелюбным сообществом.
-                    Мы стремимся создать идеальное место для вашей игры.
-                </p>
-                <div class="landing-actions">
-                    <button class="btn-primary landing-btn" id="enter-store">Перейти к товарам</button>
-                </div>
-            </div>
-            <div class="scroll-indicator" id="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
-                <div>Листайте вниз</div>
-            </div>
-        </div>
-
-        <div class="landing-section join-section" id="join-section">
-            <div class="landing-content">
-                <h2 class="landing-title">Как зайти на сервер?</h2>
-                <div class="join-info">
-                    <p class="landing-info">
-                        [Информация о том, как зайти на сервер появится здесь]
-                    </p>
-                </div>
-                <button class="btn-primary landing-btn back-to-top" id="back-to-top">Наверх</button>
-            </div>
-        </div>
-    </section>
-
 
     <template id="cardTemplate">
         <article class="card" tabindex="0">

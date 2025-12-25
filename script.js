@@ -27,11 +27,7 @@ const elements = {
   modalNote: document.getElementById('modalNote'),
   modalPrice: document.getElementById('modalPrice'),
   modalBuy: document.getElementById('modalBuy'),
-  landingPage: document.getElementById('landing-page'),
-  storeContent: document.getElementById('store-content'),
-  enterStoreBtn: document.getElementById('enter-store'),
-  backToTopBtn: document.getElementById('back-to-top'),
-  scrollIndicator: document.getElementById('scroll-indicator')
+  storeContent: document.getElementById('store-content')
 };
 
 function formatPriceRUB(value) {
@@ -382,73 +378,8 @@ function setupBurgerMenu() {
   setupRulesModal();
   setupFeedbackModal();
   setupTeamModal();
-  setupLandingPage();
 })();
 
-// ============================================
-// Landing Page Transition
-// ============================================
-function setupLandingPage() {
-  const { landingPage, storeContent, enterStoreBtn, backToTopBtn, scrollIndicator } = elements;
-  if (!landingPage || !storeContent || !enterStoreBtn) return;
-
-  // Initial state: body has landing-active to disable scroll on the main body
-  // because the landing page itself has overflow-y: auto
-  document.body.classList.add('landing-active');
-
-  enterStoreBtn.addEventListener('click', () => {
-    // Hide landing page with transition
-    landingPage.classList.add('is-hidden');
-
-    // Show store content immediately (it's under the landing page)
-    storeContent.hidden = false;
-
-    // Remove landing-active from body after transition
-    setTimeout(() => {
-      document.body.classList.remove('landing-active');
-      landingPage.style.display = 'none'; // Completely remove from layout
-    }, 800);
-  });
-
-  // Back to Top logic
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      landingPage.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // Enhanced layering effect on scroll
-  if (scrollIndicator) {
-    landingPage.addEventListener('scroll', () => {
-      const scrolled = landingPage.scrollTop;
-      const vh = window.innerHeight;
-      const welcomeSection = document.getElementById('welcome-section');
-      const welcomeContent = welcomeSection?.querySelector('.landing-content');
-
-      // 1. Smoothly fade out scroll indicator
-      const indicatorOpacity = Math.max(0, 1 - scrolled / 300);
-      scrollIndicator.style.opacity = indicatorOpacity;
-      scrollIndicator.style.visibility = indicatorOpacity <= 0.05 ? 'hidden' : 'visible';
-
-      // 2. Layering effect: Welcome section shrinks/fades as Join section slides over
-      if (welcomeSection && scrolled <= vh) {
-        const scrollRatio = scrolled / vh;
-
-        // Scale down slightly and fade out
-        const scale = 1 - (scrollRatio * 0.1);
-        const opacity = 1 - (scrollRatio * 1.2); // Fades a bit faster than scroll
-
-        if (welcomeContent) {
-          welcomeContent.style.transform = `translateY(${scrolled * 0.25}px) scale(${scale})`;
-          welcomeContent.style.opacity = Math.max(0, opacity);
-        }
-
-        // Darken the background of the first section as it's being covered
-        welcomeSection.style.filter = `brightness(${1 - scrollRatio * 0.5})`;
-      }
-    });
-  }
-}
 
 // ============================================
 // Rules Modal

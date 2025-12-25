@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать в ArcWeave</title>
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body {
+            padding-top: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="landing-active">
+    <section id="landing-page" class="landing-page">
+        <div class="landing-section welcome-section" id="welcome-section">
+            <div class="landing-content">
+                <h1 class="landing-title">Добро пожаловать в ArcWeave</h1>
+                <p class="landing-info">
+                    ArcWeave — это уникальный майнкрафт сервер с продуманной экономикой,
+                    интересными механиками и дружелюбным сообществом.
+                    Мы стремимся создать идеальное место для вашей игры.
+                </p>
+                <div class="landing-actions">
+                    <button class="btn-primary landing-btn" id="enter-store">Перейти к товарам</button>
+                </div>
+            </div>
+            <div class="scroll-indicator" id="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div>Листайте вниз</div>
+            </div>
+        </div>
+
+        <div class="landing-section join-section" id="join-section">
+            <div class="landing-content">
+                <h2 class="landing-title">Как зайти на сервер?</h2>
+                <div class="join-info">
+                    <p class="landing-info">
+                        [Информация о том, как зайти на сервер появится здесь]
+                    </p>
+                </div>
+                <button class="btn-primary landing-btn back-to-top" id="back-to-top">Наверх</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const landingPage = document.getElementById('landing-page');
+        const enterStoreBtn = document.getElementById('enter-store');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const scrollIndicator = document.getElementById('scroll-indicator');
+
+        enterStoreBtn.addEventListener('click', () => {
+            localStorage.setItem('welcomeSeen', 'true');
+            landingPage.classList.add('is-hidden');
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 800);
+        });
+
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                landingPage.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        if (scrollIndicator) {
+            landingPage.addEventListener('scroll', () => {
+                const scrolled = landingPage.scrollTop;
+                const vh = window.innerHeight;
+                const welcomeSection = document.getElementById('welcome-section');
+                const welcomeContent = welcomeSection?.querySelector('.landing-content');
+
+                const indicatorOpacity = Math.max(0, 1 - scrolled / 300);
+                scrollIndicator.style.opacity = indicatorOpacity;
+                scrollIndicator.style.visibility = indicatorOpacity <= 0.05 ? 'hidden' : 'visible';
+
+                if (welcomeSection && scrolled <= vh) {
+                    const scrollRatio = scrolled / vh;
+                    const scale = 1 - (scrollRatio * 0.1);
+                    const opacity = 1 - (scrollRatio * 1.2);
+
+                    if (welcomeContent) {
+                        welcomeContent.style.transform = `translateY(${scrolled * 0.25}px) scale(${scale})`;
+                        welcomeContent.style.opacity = Math.max(0, opacity);
+                    }
+                    welcomeSection.style.filter = `brightness(${1 - scrollRatio * 0.5})`;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
