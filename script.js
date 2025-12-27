@@ -97,8 +97,33 @@ function handleBuy(product) {
 }
 
 // Format description with commands highlighted
-function formatDescription(text) {
-  const deliveryNotice = '<div class="description-notice">После завершения оплаты привилегия будет автоматически выдана на ваш аккаунт в течение 5 минут</div>';
+function formatDescription(text, product) {
+  let itemTerm = 'привилегия';
+  let verbEnding = 'а'; // выдана
+
+  if (product) {
+    const category = product.category?.toLowerCase();
+    const title = product.title?.toLowerCase();
+
+    if (category === 'currency') {
+      itemTerm = 'линки будут';
+      verbEnding = 'ы'; // выданы
+    } else if (title.includes('разбан')) {
+      itemTerm = 'разбан будет';
+      verbEnding = ''; // выдан
+    } else if (title.includes('мут')) {
+      itemTerm = 'размут будет';
+      verbEnding = ''; // выдан
+    } else {
+      itemTerm = 'привилегия будет';
+      verbEnding = 'а'; // выдана
+    }
+  } else {
+    itemTerm = 'привилегия будет';
+    verbEnding = 'а';
+  }
+
+  const deliveryNotice = `<div class="description-notice">После завершения оплаты ${itemTerm} автоматически выдан${verbEnding} на ваш аккаунт в течение 5 минут</div>`;
 
   if (!text) return deliveryNotice;
 
@@ -188,7 +213,7 @@ function openModal(product) {
   elements.modalTitle.textContent = product.title;
 
   // Format description with commands highlighted
-  const formattedNote = formatDescription(product.note);
+  const formattedNote = formatDescription(product.note || product.description, product);
   if (formattedNote) {
     elements.modalNote.innerHTML = formattedNote;
   } else {
