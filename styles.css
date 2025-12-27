@@ -399,6 +399,35 @@ body.landing-active {
   background: rgba(62, 146, 255, 0.1);
 }
 
+.home-link {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  background: rgba(62, 146, 255, 0.15) !important;
+  color: var(--blue-300) !important;
+  border: 1px solid rgba(62, 146, 255, 0.2);
+  margin-right: 8px;
+}
+
+.home-link:hover {
+  background: rgba(62, 146, 255, 0.25) !important;
+  color: var(--blue-100) !important;
+  border-color: rgba(62, 146, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.home-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+@media (max-width: 650px) {
+  .home-link span {
+    display: none;
+  }
+}
+
 /* Brand positioned on the right */
 .brand {
   display: flex;
