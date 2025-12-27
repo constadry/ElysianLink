@@ -35,7 +35,7 @@ body {
     var(--bg);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  padding-top: 92px;
+  padding-top: 132px;
 }
 
 /* Landing Page Styles */
@@ -783,6 +783,51 @@ body.landing-active {
   font-style: italic;
   line-height: 1.5;
   opacity: 0.8;
+}
+
+.promo-banner {
+  position: fixed;
+  top: 92px;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 0;
+  font-size: 13px;
+  backdrop-filter: blur(8px);
+}
+
+.banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.banner-inner strong {
+  color: var(--blue-300);
+  font-weight: 700;
+}
+
+.banner-inner s {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.banner-inner span {
+  color: var(--muted);
+}
+
+/* Adjust body padding for mobile if banner wraps */
+@media (max-width: 600px) {
+  body {
+    padding-top: 154px;
+  }
 }
 
 .modal-price {

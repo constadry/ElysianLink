@@ -98,9 +98,9 @@ function handleBuy(product) {
 
 // Format description with commands highlighted
 function formatDescription(text) {
-  const notice = '<div class="description-notice">После завершения оплаты привилегия будет автоматически выдана на ваш аккаунт в течение 5 минут</div>';
+  const deliveryNotice = '<div class="description-notice">После завершения оплаты привилегия будет автоматически выдана на ваш аккаунт в течение 5 минут</div>';
 
-  if (!text) return notice;
+  if (!text) return deliveryNotice;
 
   // Split by lines first to preserve paragraph structure
   const lines = text.split('\n');
@@ -179,7 +179,7 @@ function formatDescription(text) {
     htmlLines.pop();
   }
 
-  return htmlLines.join('') + notice;
+  return htmlLines.join('') + deliveryNotice;
 }
 
 function openModal(product) {
