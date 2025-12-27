@@ -35,7 +35,8 @@ body {
     var(--bg);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  padding-top: 132px;
+  padding-top: 140px;
+  /* Base header height + banner */
 }
 
 /* Landing Page Styles */
@@ -258,10 +259,12 @@ body.landing-active {
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 100;
-  background: rgb(9 24 55 / 80%);
-  backdrop-filter: blur(4px);
+  z-index: 1000;
+  background: rgb(9 24 55 / 85%);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
 }
 
 .header-inner {
@@ -785,18 +788,15 @@ body.landing-active {
   opacity: 0.8;
 }
 
+
+
 .promo-banner {
-  position: fixed;
-  top: 92px;
-  left: 0;
-  right: 0;
-  z-index: 90;
   background: var(--bg-soft);
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
   color: var(--text);
   padding: 8px 0;
   font-size: 13px;
-  backdrop-filter: blur(8px);
+  width: 100%;
 }
 
 .banner-inner {
@@ -807,6 +807,8 @@ body.landing-active {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
 }
 
 .banner-inner strong {
@@ -819,14 +821,24 @@ body.landing-active {
   text-decoration: line-through;
 }
 
-.banner-inner span {
+.banner-inner em {
   color: var(--muted);
+  font-style: italic;
+  font-size: 12px;
 }
 
-/* Adjust body padding for mobile if banner wraps */
-@media (max-width: 600px) {
+
+
+@media (max-width: 700px) {
   body {
-    padding-top: 154px;
+    padding-top: 124px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 164px;
+    /* Banner might wrap to 2 lines */
   }
 }
 
