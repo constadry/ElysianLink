@@ -205,12 +205,14 @@
                 </div>
             </div>
         </div>
-        <div class="promo-banner">
+        <div class="promo-banner" id="promoBanner">
             <div class="container banner-inner">
-                🔥 Привилегии на месяц ➔ <strong>НА ЦЕЛЫЙ ГОД</strong>. Получи любую привилегию на целый год по цене
-                месяца!
-                <em>*акция действует до конца вайпа*</em>
+                🔥 Привилегии<s>на месяц</s> ➔ <strong>НА ЦЕЛЫЙ ГОД</strong> Получи любую привилегию на целый год
+                по цене месяца! 🚀<em>*акция действует до конца вайпа*</em>
             </div>
+            <button class="banner-close"
+                onclick="document.getElementById('promoBanner').classList.add('is-hidden'); document.body.style.paddingTop = '92px';"
+                aria-label="Закрыть уведомление">&times;</button>
         </div>
     </header>
 

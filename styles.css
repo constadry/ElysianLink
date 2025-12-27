@@ -797,6 +797,12 @@ body.landing-active {
   padding: 8px 0;
   font-size: 13px;
   width: 100%;
+  position: relative;
+  /* For close button */
+}
+
+.promo-banner.is-hidden {
+  display: none !important;
 }
 
 .banner-inner {
@@ -807,8 +813,33 @@ body.landing-active {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 48px 0 16px;
+  /* Space for close button */
   text-align: center;
+}
+
+.banner-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.banner-close:hover {
+  color: var(--text);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .banner-inner strong {
