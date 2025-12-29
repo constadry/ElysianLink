@@ -353,16 +353,25 @@ async function loadProducts() {
 function setupTabs() {
   elements.tabs.forEach(btn => {
     btn.addEventListener('click', () => {
-      elements.tabs.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const id = `section-${btn.dataset.category}`;
+      const category = btn.dataset.category;
+
+      // Update all buttons with the same category to be active
+      elements.tabs.forEach(b => {
+        if (b.dataset.category === category) {
+          b.classList.add('is-active');
+        } else {
+          b.classList.remove('is-active');
+        }
+      });
+
+      const id = `section-${category}`;
       const target = document.getElementById(id);
       if (target) {
         const header = document.querySelector('.site-header');
         const headerHeight = header ? header.offsetHeight : 92;
         const targetRect = target.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetPosition = targetRect.top + scrollTop - headerHeight - 10; // дополнительный отступ 10px
+        const targetPosition = targetRect.top + scrollTop - headerHeight - 10;
         window.scrollTo({ top: Math.max(0, targetPosition), behavior: 'smooth' });
       }
     });
@@ -371,22 +380,43 @@ function setupTabs() {
 
 function setupBurgerMenu() {
   const burgerToggle = document.getElementById('burgerToggle');
-  const navTabs = document.querySelector('.nav-tabs');
-  if (!burgerToggle || !navTabs) return;
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('menuClose');
 
-  burgerToggle.addEventListener('click', () => {
-    const isExpanded = burgerToggle.getAttribute('aria-expanded') === 'true';
-    burgerToggle.setAttribute('aria-expanded', String(!isExpanded));
-    navTabs.setAttribute('aria-expanded', String(!isExpanded));
+  if (!burgerToggle || !mobileMenu) return;
+
+  const toggleMenu = (show) => {
+    const isExpanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+    const nextState = typeof show === 'boolean' ? show : !isExpanded;
+
+    burgerToggle.setAttribute('aria-expanded', String(nextState));
+    mobileMenu.setAttribute('aria-expanded', String(nextState));
+    document.body.style.overflow = nextState ? 'hidden' : '';
+  };
+
+  burgerToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
   });
 
-  // Close menu when clicking on a tab (mobile)
-  elements.tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (window.innerWidth <= 1000) {
-        burgerToggle.setAttribute('aria-expanded', 'false');
-        navTabs.setAttribute('aria-expanded', 'false');
-      }
+  if (menuClose) {
+    menuClose.addEventListener('click', () => toggleMenu(false));
+  }
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.getAttribute('aria-expanded') === 'true' &&
+      !mobileMenu.contains(e.target) &&
+      !burgerToggle.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+  // Close menu when clicking on a tab or home item
+  const menuItems = mobileMenu.querySelectorAll('.menu-item');
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      toggleMenu(false);
     });
   });
 }
