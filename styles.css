@@ -452,6 +452,17 @@ body.landing-active {
   }
 }
 
+/* Mobile components hidden by default on desktop */
+.mobile-menu,
+.menu-close {
+  display: none;
+}
+
+/* Desktop-only home link adjustments */
+.desktop-home {
+  display: flex;
+}
+
 /* Brand positioned on the right */
 .brand {
   display: flex;
@@ -1122,11 +1133,11 @@ body.landing-active {
     height: 100vh;
     background: #0b1220;
     z-index: 5000;
-    /* Extremely high to be above everything */
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     visibility: hidden;
-    display: flex;
+    display: flex !important;
+    /* Show on mobile */
     flex-direction: column;
     overflow-y: auto;
   }
@@ -1148,7 +1159,7 @@ body.landing-active {
     height: 50px;
     border-radius: 12px;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     line-height: 1;
