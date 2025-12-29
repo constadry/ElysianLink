@@ -1104,12 +1104,7 @@ body.landing-active {
   }
 
   .header-links {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-    padding: 8px 0;
-    border-top: 1px solid var(--border);
+    display: none !important;
   }
 
   .desktop-tabs {

@@ -442,15 +442,17 @@ function setupBurgerMenu() {
 // Rules Modal
 // ============================================
 function setupRulesModal() {
-  const rulesLink = document.querySelector('a[href="#rules"]');
+  const rulesLinks = document.querySelectorAll('a[href="#rules"]');
   const rulesModal = document.getElementById('rulesModal');
   const closeButtons = document.querySelectorAll('[data-close-rules]');
 
-  if (!rulesLink || !rulesModal) return;
+  if (!rulesLinks.length || !rulesModal) return;
 
-  rulesLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    openRulesModal();
+  rulesLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openRulesModal();
+    });
   });
 
   closeButtons.forEach(btn => {
@@ -483,16 +485,18 @@ const TELEGRAM_CONFIG = {
 };
 
 function setupFeedbackModal() {
-  const feedbackLink = document.querySelector('a[href="#feedback"]');
+  const feedbackLinks = document.querySelectorAll('a[href="#feedback"]');
   const feedbackModal = document.getElementById('feedbackModal');
   const closeButtons = document.querySelectorAll('[data-close-feedback]');
   const feedbackForm = document.getElementById('feedbackForm');
 
-  if (!feedbackLink || !feedbackModal || !feedbackForm) return;
+  if (!feedbackLinks.length || !feedbackModal || !feedbackForm) return;
 
-  feedbackLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    openFeedbackModal();
+  feedbackLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openFeedbackModal();
+    });
   });
 
   closeButtons.forEach(btn => {
