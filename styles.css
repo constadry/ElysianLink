@@ -675,9 +675,11 @@ body.landing-active {
 }
 
 .footer-inner {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   color: var(--muted);
+  text-align: center;
 }
 
 .footer-inner a {
@@ -688,6 +690,43 @@ body.landing-active {
 .footer-inner a[aria-disabled="true"] {
   pointer-events: none;
   opacity: .6;
+}
+
+/* Footer Social Links */
+.footer-social {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--blue-200);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: rgba(62, 146, 255, 0.1);
+  border-color: var(--blue-400);
+  color: var(--blue-100);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.social-link svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
 }
 
 .form-group option {
