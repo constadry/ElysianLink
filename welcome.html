@@ -42,13 +42,126 @@
 
         <div class="landing-section join-section" id="join-section">
             <div class="landing-content">
-                <h2 class="landing-title">Как зайти на сервер?</h2>
-                <div class="join-info">
-                    <p class="landing-info">
-                        [Информация о том, как зайти на сервер появится здесь]
-                    </p>
+                <div class="version-badge">Версия Minecraft: 1.20.1</div>
+                <h2 class="landing-section-title">Как зайти на ArcWeave?</h2>
+
+                <div class="join-steps">
+                    <!-- Step 1 -->
+                    <div class="join-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Добавьте сервер</h3>
+                            <p>Перейдите в «Сетевая игра» → «Добавить сервер».</p>
+                            <div class="address-box">
+                                <span class="address-text" id="server-address">mc.arcweave.ru</span>
+                                <button class="copy-btn" onclick="copyAddress()">Скопировать</button>
+                            </div>
+                            <img src="./assets/how_to_join_1.jpg" alt="Добавление сервера" class="step-img">
+                            <p>Заполните форму, как показано на картинке. После того как введете адрес, нажмите «Готово»
+                                — сервер появится в списке.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="join-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Зарегистрируйтесь</h3>
+                            <p>После входа создайте пароль командой в чате:</p>
+                            <div class="address-box">
+                                <span class="address-text">/reg &lt;пароль&gt;</span>
+                            </div>
+                            <img src="./assets/how_to_join_2.png" alt="Регистрация на сервере" class="step-img">
+                            <p>Придумайте пароль, чтобы создать свой аккаунт на сервере. </p>
+                            <p><strong>✅ Приятной игры!</strong></p>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn-primary landing-btn back-to-top" id="back-to-top">Наверх</button>
+
+                <h2 class="landing-section-title">О сервере ArcWeave</h2>
+                <p class="landing-info" style="max-width: 800px;">
+                    Ванильный Minecraft с глубокими RPG механиками, где каждый найдет свое приключение!
+                    ArcWeave — это уникальный мир, сочетающий классический геймплей и продуманные системы развития.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🛡</span>
+                        <h3 class="feature-title">Клановая система</h3>
+                        <ul class="feature-list">
+                            <li>Создавайте гильдии и стройте крепости</li>
+                            <li>Войны кланов за территории</li>
+                            <li>Развитая экономика поселений</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚔️</span>
+                        <h3 class="feature-title">PvP и дуэли</h3>
+                        <ul class="feature-list">
+                            <li>Арены для поединков 1х1</li>
+                            <li>Масштабные битвы кланов</li>
+                            <li>Сезонные турниры с призами</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3 class="feature-title">РПГ-система</h3>
+                        <ul class="feature-list">
+                            <li>Прокачиваемые навыки</li>
+                            <li>Комбинации с артефактами</li>
+                            <li>Классы: Танк, ДД, Саппорт</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🗺</span>
+                        <h3 class="feature-title">Мир и активности</h3>
+                        <ul class="feature-list">
+                            <li>Эпические данжи и боссы</li>
+                            <li>Разлом Элизиума: 2 сложности</li>
+                            <li>Регулярные ивенты и мини-игры</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💰</span>
+                        <h3 class="feature-title">Экономика</h3>
+                        <ul class="feature-list">
+                            <li>Торговля между игроками</li>
+                            <li>Сбалансированный магазин</li>
+                            <li>Клановая казна проектов</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💎</span>
+                        <h3 class="feature-title">Система доната</h3>
+                        <ul class="feature-list">
+                            <li>Уникальные предметы</li>
+                            <li>Получение за активность</li>
+                            <li>Честный баланс без P2W</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="why-us">
+                    <h3 class="feature-title" style="font-size: 24px; text-align: center;">Почему стоит выбрать
+                        ArcWeave?</h3>
+                    <div class="why-grid">
+                        <div class="why-item">
+                            <span class="why-title">⚖️ Стабильность</span>
+                            <span class="why-desc">Продуманная экономика и надежная работа сервера 24/7.</span>
+                        </div>
+                        <div class="why-item">
+                            <span class="why-title">🤝 Сообщество</span>
+                            <span class="why-desc">Дружелюбные игроки и отзывчивая администрация.</span>
+                        </div>
+                        <div class="why-item">
+                            <span class="why-title">🚀 Обновления</span>
+                            <span class="why-desc">Регулярный новый контент и захватывающие сезонные события.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary landing-btn back-to-top" id="back-to-top"
+                    style="margin-top: 60px;">Наверх</button>
             </div>
         </div>
     </section>
@@ -58,6 +171,20 @@
         const enterStoreBtn = document.getElementById('enter-store');
         const backToTopBtn = document.getElementById('back-to-top');
         const scrollIndicator = document.getElementById('scroll-indicator');
+
+        function copyAddress() {
+            const address = "mc.arcweave.ru";
+            navigator.clipboard.writeText(address).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.innerText;
+                btn.innerText = "Скопировано!";
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
 
         enterStoreBtn.addEventListener('click', () => {
             localStorage.setItem('welcomeSeen', 'true');
