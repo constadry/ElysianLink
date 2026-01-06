@@ -1559,6 +1559,10 @@ body.landing-active {
   display: block;
 }
 
+.step-img-2 {
+  max-width: 350px;
+}
+
 /* Features grid */
 .features-grid {
   display: grid;
