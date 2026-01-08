@@ -13,7 +13,8 @@
     <style>
         body {
             padding-top: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -42,7 +43,7 @@
 
         <div class="landing-section join-section" id="join-section">
             <div class="landing-content">
-                <div class="version-badge">Версия Minecraft: 1.20.1</div>
+                <div class="version-badge">1.20.1 — идеально для игры на сервере</div>
                 <h2 class="landing-section-title">Как зайти на ArcWeave?</h2>
 
                 <div class="join-steps">
@@ -56,7 +57,8 @@
                                 <span class="address-text" id="server-address">mc.arcweave.ru</span>
                                 <button class="copy-btn" onclick="copyAddress()">Скопировать</button>
                             </div>
-                            <img src="./assets/how_to_join_1.jpg" alt="Добавление сервера" class="step-img">
+                            <img src="./assets/how_to_join_1.jpg" alt="Добавление сервера" class="step-img"
+                                loading="lazy" decoding="async">
                             <p>Заполните форму, как показано на картинке. После того как введете адрес, нажмите «Готово»
                                 — сервер появится в списке.</p>
                         </div>
@@ -72,7 +74,7 @@
                                 <span class="address-text">/reg &lt;пароль&gt; &lt;повтор_пароля&gt;</span>
                             </div>
                             <img src="./assets/how_to_join_2.png" alt="Регистрация на сервере"
-                                class="step-img step-img-2">
+                                class="step-img step-img-2" loading="lazy" decoding="async">
                             <p>Придумайте пароль, чтобы создать свой аккаунт на сервере. </p>
                             <p><strong>✅ Приятной игры!</strong></p>
                         </div>
@@ -197,33 +199,46 @@
 
         if (backToTopBtn) {
             backToTopBtn.addEventListener('click', () => {
-                landingPage.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
 
+        let ticking = false;
         if (scrollIndicator) {
-            landingPage.addEventListener('scroll', () => {
-                const scrolled = landingPage.scrollTop;
-                const vh = window.innerHeight;
-                const welcomeSection = document.getElementById('welcome-section');
-                const welcomeContent = welcomeSection?.querySelector('.landing-content');
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrolled = window.scrollY;
+                        const vh = window.innerHeight;
+                        const welcomeSection = document.getElementById('welcome-section');
+                        const welcomeContent = welcomeSection?.querySelector('.landing-content');
 
-                const indicatorOpacity = Math.max(0, 1 - scrolled / 300);
-                scrollIndicator.style.opacity = indicatorOpacity;
-                scrollIndicator.style.visibility = indicatorOpacity <= 0.05 ? 'hidden' : 'visible';
+                        // Handle scroll indicator visibility
+                        const indicatorOpacity = Math.max(0, 1 - scrolled / 300);
+                        scrollIndicator.style.opacity = indicatorOpacity;
+                        scrollIndicator.style.visibility = indicatorOpacity <= 0.05 ? 'hidden' : 'visible';
 
-                if (welcomeSection && scrolled <= vh) {
-                    const scrollRatio = scrolled / vh;
-                    const scale = 1 - (scrollRatio * 0.1);
-                    const opacity = 1 - (scrollRatio * 1.2);
+                        // Only animate welcome section if it's within viewport
+                        if (scrolled <= vh) {
+                            const scrollRatio = Math.min(1, scrolled / vh);
+                            const scale = 1 - (scrollRatio * 0.15);
+                            const opacity = 1 - (scrollRatio * 1.5);
 
-                    if (welcomeContent) {
-                        welcomeContent.style.transform = `translateY(${scrolled * 0.25}px) scale(${scale})`;
-                        welcomeContent.style.opacity = Math.max(0, opacity);
-                    }
-                    welcomeSection.style.filter = `brightness(${1 - scrollRatio * 0.5})`;
+                            if (welcomeContent) {
+                                welcomeContent.style.transform = `translateY(${scrolled * 0.3}px) scale(${scale})`;
+                                welcomeContent.style.opacity = Math.max(0, opacity);
+                            }
+
+                            // Using opacity instead of filter:brightness for better performance
+                            if (welcomeSection) {
+                                welcomeSection.style.opacity = Math.max(0.2, 1 - scrollRatio);
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-            });
+            }, { passive: true });
         }
     </script>
 </body>

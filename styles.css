@@ -46,19 +46,18 @@ body.banner-closed {
 
 /* Landing Page Styles */
 .landing-page {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
   z-index: 2000;
   background: radial-gradient(1200px 600px at 10% -10%, #11234a 0%, transparent 60%),
     radial-gradient(1400px 700px at 100% 0%, #0a3b92 0%, transparent 60%),
     var(--bg);
   padding: 0;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
   scrollbar-width: none;
-  /* Hide scrollbar for a cleaner look */
 }
 
 .landing-page::-webkit-scrollbar {
@@ -71,7 +70,7 @@ body.banner-closed {
   height: 100vh;
   z-index: 1;
   display: flex !important;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  will-change: transform, opacity, filter;
 }
 
 .join-section {
@@ -82,8 +81,8 @@ body.banner-closed {
   background-image:
     radial-gradient(at 0% 0%, rgba(62, 146, 255, 0.1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(11, 35, 74, 0.2) 0px, transparent 50%);
-  box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.9);
   border-top: 1px solid rgba(62, 146, 255, 0.1);
+  /* Heavy shadow removed to improve scroll performance */
 }
 
 .landing-page.is-hidden {
@@ -100,8 +99,6 @@ body.banner-closed {
   justify-content: center;
   padding: 40px 20px;
   position: relative;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .landing-content {
@@ -695,20 +692,19 @@ body.landing-active {
 /* Footer Social Links */
 .footer-social {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 10px;
 }
 
 .social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border: 1.5px solid var(--border);
-  border-radius: 14px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.03);
   color: var(--blue-200);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -719,14 +715,44 @@ body.landing-active {
   background: rgba(62, 146, 255, 0.1);
   border-color: var(--blue-400);
   color: var(--blue-100);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .social-link svg {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .footer-social {
+    margin-top: 0;
+  }
 }
 
 .form-group option {
@@ -1495,12 +1521,14 @@ body.landing-active {
 .join-step {
   display: flex;
   gap: 24px;
-  background: rgba(16, 26, 54, 0.4);
-  backdrop-filter: blur(10px);
+  background: rgba(16, 26, 54, 0.85);
+  /* More opaque background instead of blur */
   padding: 24px;
   border-radius: 20px;
   border: 1px solid rgba(62, 146, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  transform: translateZ(0);
+  /* Hardware acceleration */
 }
 
 .join-step:hover {
@@ -1612,13 +1640,15 @@ body.landing-active {
 }
 
 .feature-card {
-  background: rgba(16, 26, 54, 0.25);
-  backdrop-filter: blur(8px);
+  background: rgba(16, 26, 54, 0.6);
+  /* More opaque background instead of blur */
   padding: 28px;
   border-radius: 24px;
   border: 1px solid rgba(62, 146, 255, 0.08);
   text-align: left;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  transform: translateZ(0);
+  /* Hardware acceleration */
 }
 
 .feature-card:hover {
