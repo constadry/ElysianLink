@@ -5,7 +5,9 @@
     "title": "Rover",
     "price": 99,
     "image": "./assets/priv_Rover.jpg",
-    "description": "Доступные команды:\n/kit rover - набор предметов Rover\n/hat - надеть блок на голову\n/feed - насытиться\n/warp create - установить публичную точку варпа\n/sit - сесть\n\nОсобые возможности:\n1 приватный варп\n1 публичный варп\n4 привата территории"
+    "backgroundColor": "",
+    "description": "Доступные команды:\n/kit rover - набор предметов Rover\n/hat - надеть блок на голову\n/feed - насытиться\n/warp create - установить публичную точку варпа\n/sit - сесть\n\nОсобые возможности:\n1 приватный варп\n1 публичный варп\n4 привата территории",
+    "isActive": 1
   },
   {
     "category": "privileges",
@@ -13,7 +15,9 @@
     "title": "Adept",
     "price": 249,
     "image": "./assets/priv_Adept.jpg",
-    "description": "Включает все возможности Rover +\nНовые команды:\n/kit adept - набор предметов Adept\n/ext - потушиться от огня\n/ignore - игнорировать игроков\n/ec - доступ к эндерсундуку\n/clan create - создать клан\n\nРасширенные возможности:\n2 приватных варпа\n2 публичных варпа\n6 приватов территории"
+    "backgroundColor": "",
+    "description": "Включает все возможности Rover +\nНовые команды:\n/kit adept - набор предметов Adept\n/ext - потушиться от огня\n/ignore - игнорировать игроков\n/ec - доступ к эндерсундуку\n/clan create - создать клан\n\nРасширенные возможности:\n2 приватных варпа\n2 публичных варпа\n6 приватов территории",
+    "isActive": 1
   },
   {
     "category": "privileges",
@@ -21,7 +25,9 @@
     "title": "Mythic",
     "price": 599,
     "image": "./assets/priv_Mythic.jpg",
-    "description": "Включает все возможности Adept +\nНовые команды:\n/kit mythic - набор предметов Mythic\n/fly - полет\n/repair - починка предметов\n/ptime - изменение времени\n/near - просмотр ближайших игроков\n\nУникальные возможности:\nОткрытие шалкера в инвентаре (Shift+ПКМ)\nВозможность переименовать шалкер\n3 приватных варпа\n2 публичных варпа\n8 приватов территории"
+    "backgroundColor": "",
+    "description": "Включает все возможности Adept +\nНовые команды:\n/kit mythic - набор предметов Mythic\n/fly - полет\n/repair - починка предметов\n/ptime - изменение времени\n/near - просмотр ближайших игроков\n\nУникальные возможности:\nОткрытие шалкера в инвентаре (Shift+ПКМ)\nВозможность переименовать шалкер\nВозможность устроиться на 2 работы\n3 приватных варпа\n2 публичных варпа\n8 приватов территории",
+    "isActive": 1
   },
   {
     "category": "privileges",
@@ -29,7 +35,9 @@
     "title": "Linker",
     "price": 999,
     "image": "./assets/priv_Linker.jpg",
-    "description": "Включает все возможности Mythic +\nНовые команды:\n/kit linker - набор предметов Linker\n/tptoggle - отключение телепортов к себе\n/heal - лечение\n/invsee - просмотр инвентаря других игроков\n/nick - установка фейк-ника\n\nЭлитные возможности:\n3 приватных варпа\n3 публичных варпа\n10 приватов территории"
+    "backgroundColor": "",
+    "description": "Включает все возможности Mythic +\nНовые команды:\n/kit linker - набор предметов Linker\n/tptoggle - отключение телепортов к себе\n/heal - лечение\n/invsee - просмотр инвентаря других игроков\n/nick - установка фейк-ника\n\nЭлитные возможности:\n3 приватных варпа\n3 публичных варпа\n10 приватов территории",
+    "isActive": 1
   },
   {
     "category": "privileges",
@@ -37,15 +45,19 @@
     "title": "Nexus",
     "price": 1499,
     "image": "./assets/priv_Nexus.jpg",
-    "description": "Включает все возможности Linker +\nНовые команды:\n/kit nexus - набор предметов Nexus\n/realname - просмотр реального ника\n/time set - изменение времени сервера\n/weather - изменение погоды\n/tempmute - временное заглушение игроков\n/autocollect - автоматический сбор предметов в шалкер\n\nУникальные возможности:\nЦветное имя шалкера\n10 приватных варпов\n5 публичных варпов\n10 приватов территории"
+    "backgroundColor": "",
+    "description": "Включает все возможности Linker +\nНовые команды:\n/kit nexus - набор предметов Nexus\n/realname - просмотр реального ника\n/time set - изменение времени сервера\n/weather - изменение погоды\n/tempmute - временное заглушение игроков\n/autocollect - автоматический сбор предметов в шалкер\n\nУникальные возможности:\nЦветное имя шалкера\n10 приватных варпов\n5 публичных варпов\n10 приватов территории",
+    "isActive": 1
   },
   {
     "category": "privileges",
     "subcategory": "",
-    "title": "Спонсор",
-    "price": 9990,
+    "title": "Sponsor",
+    "price": 17999,
     "image": "./assets/priv_Investor.jpg",
-    "description": "Становясь спонсором вы обсуждаете все нужные вам команды и возможности лично с администратором проекта."
+    "backgroundColor": "",
+    "description": "Становясь спонсором вы обсуждаете все нужные вам команды и возможности лично с администратором проекта.",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -53,7 +65,9 @@
     "title": "100 Линков",
     "price": 99,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -61,7 +75,9 @@
     "title": "250 Линков",
     "price": 229,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -69,7 +85,9 @@
     "title": "500 Линков",
     "price": 439,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -77,7 +95,9 @@
     "title": "1000 Линков",
     "price": 849,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -85,7 +105,9 @@
     "title": "2500 Линков",
     "price": 1999,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -93,7 +115,9 @@
     "title": "5000 Линков",
     "price": 3799,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -101,7 +125,9 @@
     "title": "10000 Линков",
     "price": 6999,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "currency",
@@ -109,7 +135,9 @@
     "title": "25000 Линков",
     "price": 15999,
     "image": "./assets/money.jpg",
-    "description": "Вы получаете игровую валюту на выбранный тип режима"
+    "backgroundColor": "",
+    "description": "Вы получаете игровую валюту на выбранный тип режима",
+    "isActive": 1
   },
   {
     "category": "misc",
@@ -117,14 +145,38 @@
     "title": "Разбан",
     "price": 499,
     "image": "./assets/unban.jpg",
-    "description": "Вы получаете снятие бана на всех режимах"
+    "backgroundColor": "",
+    "description": "Вы получаете снятие бана на всех режимах",
+    "isActive": 1
   },
   {
     "category": "misc",
     "subcategory": "",
-    "title": "Мут",
+    "title": "Размут",
     "price": 249,
     "image": "./assets/unmute.jpg",
-    "description": "Вы получаете снятие мута на всех режимах"
+    "backgroundColor": "",
+    "description": "Вы получаете снятие мута на всех режимах",
+    "isActive": 1
+  },
+  {
+    "category": "misc",
+    "subcategory": "",
+    "title": "ИММУНИТЕТ",
+    "price": 249,
+    "image": "",
+    "backgroundColor": "",
+    "description": "Иммунитет от наказаний привилегированных игроков",
+    "isActive": 1
+  },
+  {
+    "category": "misc",
+    "subcategory": "",
+    "title": "БОЕВОЙ ПРОПУСК",
+    "price": 599,
+    "image": "",
+    "backgroundColor": "",
+    "description": "",
+    "isActive": 1
   }
 ]
