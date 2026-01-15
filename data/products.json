@@ -44,7 +44,7 @@
     "subcategory": "",
     "title": "Спонсор",
     "price": 9990,
-    "image": "./assets/investor.jpg",
+    "image": "./assets/priv_Investor.jpg",
     "description": "Становясь спонсором вы обсуждаете все нужные вам команды и возможности лично с администратором проекта."
   },
   {
@@ -124,7 +124,7 @@
     "subcategory": "",
     "title": "Мут",
     "price": 249,
-    "image": "./assets/mute.jpg",
+    "image": "./assets/unmute.jpg",
     "description": "Вы получаете снятие мута на всех режимах"
   }
 ]

@@ -73,17 +73,23 @@ function createCard(product) {
 }
 
 function placeholderImage() {
-  // Simple SVG data URL with blue gradient
+  // Enhanced SVG data URL with brand text
   const svg = encodeURIComponent(`
-    <svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'>
+    <svg xmlns='http://www.w3.org/2000/svg' width='600' height='667' viewBox='0 0 600 667'>
       <defs>
-        <linearGradient id='g' x1='0' x2='1'>
-          <stop offset='0%' stop-color='%231379ff'/>
+        <linearGradient id='bg' x1='0' y1='0' x2='100%' y2='100%'>
+          <stop offset='0%' stop-color='%230f172a'/>
+          <stop offset='100%' stop-color='%231e293b'/>
+        </linearGradient>
+        <linearGradient id='text-grad' x1='0' y1='0' x2='100%' y2='0%'>
+          <stop offset='0%' stop-color='%233e92ff'/>
           <stop offset='100%' stop-color='%2314b8a6'/>
         </linearGradient>
       </defs>
-      <rect width='100%' height='100%' fill='url(%23g)'/>
-      <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Inter, Arial' font-size='28'>AresMine</text>
+      <rect width='100%' height='100%' fill='url(%23bg)'/>
+      <circle cx='300' cy='333' r='200' fill='rgba(62, 146, 255, 0.03)'/>
+      <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='url(%23text-grad)' font-family='Inter, system-ui, Arial' font-size='42' font-weight='800' letter-spacing='-0.5'>arcweave.ru</text>
+      <text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' fill='rgba(255,255,255,0.3)' font-family='Inter, system-ui, Arial' font-size='12' font-weight='600' letter-spacing='3'>NOT FOUND</text>
     </svg>
   `);
   return `data:image/svg+xml;charset=UTF-8,${svg}`;
