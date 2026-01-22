@@ -158,25 +158,5 @@
     "backgroundColor": "",
     "description": "Вы получаете снятие мута на всех режимах",
     "isActive": 1
-  },
-  {
-    "category": "misc",
-    "subcategory": "",
-    "title": "ИММУНИТЕТ",
-    "price": 249,
-    "image": "",
-    "backgroundColor": "",
-    "description": "Иммунитет от наказаний привилегированных игроков",
-    "isActive": 1
-  },
-  {
-    "category": "misc",
-    "subcategory": "",
-    "title": "БОЕВОЙ ПРОПУСК",
-    "price": 599,
-    "image": "",
-    "backgroundColor": "",
-    "description": "",
-    "isActive": 1
   }
 ]
