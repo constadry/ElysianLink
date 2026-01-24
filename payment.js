@@ -1,11 +1,13 @@
-// Same data sources as on main page
-const API_SOURCES = [
-  'https://raw.githubusercontent.com/constadry/ArcWeave/master/data/products.json',
-  './data/products.json'
-];
+// Backend API configuration from config.js
+const API_CONFIG = {
+  baseURL: typeof CONFIG !== 'undefined' ? CONFIG.API_URL : 'https://localhost:7089',
+  endpoints: {
+    products: '/shopitems'
+  }
+};
 
 const qs = new URLSearchParams(location.search);
-const productId = qs.get('id');
+const productId = decodeURIComponent(qs.get('id') || '');
 
 const ui = {
   card: document.getElementById('payCard'),
@@ -29,13 +31,43 @@ function formatPriceRUB(value) {
 }
 
 async function fetchProducts() {
-  for (const url of API_SOURCES) {
+  // 1. Try backend API first (matching script.js logic)
+  try {
+    const url = `${API_CONFIG.baseURL}${API_CONFIG.endpoints.products}`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      const data = await res.json();
+      return (Array.isArray(data) ? data : [])
+        .map(item => ({
+          id: item.id || item.Id || item.title || item.Title,
+          title: item.title || item.Title,
+          price: item.price || item.Price,
+          category: item.category || item.Category
+        }))
+        .filter(p => (p.category !== 'keys' && p.category !== 'Кейсы'));
+    }
+  } catch (backendError) {
+    console.warn('Backend fetch failed on payment page:', backendError.message);
+  }
+
+  // 2. Fallback to local data
+  const sources = [
+    './data/products.json',
+    'https://raw.githubusercontent.com/constadry/ArcWeave/master/data/products.json'
+  ];
+
+  for (const url of sources) {
     try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(String(res.status));
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) continue;
       const data = await res.json();
       const rawProducts = Array.isArray(data) ? data : (data.products || []);
-      return rawProducts.filter(p => p.category !== 'keys');
+      return rawProducts
+        .filter(p => (p.category !== 'keys' && p.category !== 'Кейсы'))
+        .map(p => ({
+          ...p,
+          id: p.id || p.Id || p.title || p.Title
+        }));
     } catch (e) {
       // try next source
     }
@@ -57,14 +89,17 @@ function validate() {
 }
 
 async function init() {
-  if (!productId) {
+  if (!productId || productId === 'undefined' || productId === 'null') {
     ui.notFound.hidden = false;
     return;
   }
 
   const products = await fetchProducts();
-  const product = products.find(p => p.id === productId);
+  // Find by ID (which could be the title if ID was missing)
+  const product = products.find(p => String(p.id) === productId);
+
   if (!product) {
+    console.warn('Product not found for ID:', productId);
     ui.notFound.hidden = false;
     return;
   }
@@ -75,21 +110,18 @@ async function init() {
 
   // Wire validation
   ['input', 'change'].forEach(ev => {
-    ui.nick.addEventListener(ev, validate);
-    ui.email.addEventListener(ev, validate);
-    ui.agree.addEventListener(ev, validate);
+    ui.nick?.addEventListener(ev, validate);
+    ui.email?.addEventListener(ev, validate);
+    ui.agree?.addEventListener(ev, validate);
   });
   validate();
 
-  ui.cancelBtn.addEventListener('click', () => history.back());
-  ui.form.addEventListener('submit', (e) => {
+  ui.cancelBtn?.addEventListener('click', () => history.back());
+  ui.form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // Stub payment processing
     alert(`Заказ оформлен: ${product.title}\nНик: ${ui.nick.value}\nПочта: ${ui.email.value}`);
   });
 }
 
 init();
-
-

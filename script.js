@@ -313,7 +313,7 @@ async function loadProducts() {
     // Backend uses PascalCase (Id, Title, etc.), frontend expects camelCase
     state.allProducts = Array.isArray(data) ? data
       .map(item => ({
-        id: item.id || item.Id,
+        id: item.id || item.Id || item.title || item.Title,
         category: item.category || item.Category,
         subcategory: item.subcategory || item.Subcategory,
         title: item.title || item.Title,
@@ -322,7 +322,7 @@ async function loadProducts() {
         backgroundColor: item.backgroundColor || item.BackgroundColor,
         note: item.description || item.Description || ''
       }))
-      .filter(p => p.category !== 'keys') : [];
+      .filter(p => (p.category !== 'keys' && p.category !== 'Кейсы')) : [];
 
     elements.notice.hidden = true;
     console.log(`✓ Products loaded from backend API (${state.allProducts.length} items)`);
@@ -342,7 +342,12 @@ async function loadProducts() {
 
       const fallbackData = await fallbackRes.json();
       const rawProducts = Array.isArray(fallbackData) ? fallbackData : (fallbackData.products || []);
-      state.allProducts = rawProducts.filter(p => p.category !== 'keys');
+      state.allProducts = rawProducts
+        .filter(p => (p.category !== 'keys' && p.category !== 'Кейсы'))
+        .map(p => ({
+          ...p,
+          id: p.id || p.Id || p.title || p.Title
+        }));
       elements.notice.textContent = '⚠ Загружены локальные данные (бэкенд недоступен)';
       elements.notice.hidden = false;
       console.log('✓ Products loaded from local file');
