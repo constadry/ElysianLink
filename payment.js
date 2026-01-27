@@ -121,47 +121,37 @@ async function init() {
     e.preventDefault();
     if (!validate()) return;
 
-    if (typeof PaymentIntegration === 'undefined') {
+    // Use PaymentIntegration or integration (T-Bank sometimes uses both)
+    const tbank = window.PaymentIntegration || window.integration;
+
+    if (!tbank) {
       alert('Ошибка: Платежный модуль не загружен. Пожалуйста, обновите страницу.');
       return;
     }
 
-    const orderId = `order_${Date.now()}_${ui.nick.value}`;
-
-    // T-Bank Integration configuration
-    const paymentData = {
-      terminalKey: CONFIG.TINKOFF_TERMINAL_KEY,
-      amount: product.price,
-      orderId: orderId,
-      description: `Покупка товара: ${product.title} (Ник: ${ui.nick.value})`,
-      customerKey: ui.nick.value,
-      email: ui.email.value,
-      // Optional: you can add more fields if needed (receipt, etc.)
-      receipt: {
-        Email: ui.email.value,
-        Taxation: 'usn_income',
-        Items: [
-          {
-            Name: product.title,
-            Price: product.price * 100, // in kopeks
-            Quantity: 1.00,
-            Amount: product.price * 100,
-            Tax: 'none'
-          }
-        ]
-      }
-    };
-
-    PaymentIntegration.pay(paymentData)
+    tbank.pay(paymentData)
       .then(result => {
         console.log('Payment result:', result);
-        // Successful payment logic (usually just closed widget, status should be verified on backend)
       })
       .catch(error => {
         console.error('Payment error:', error);
-        alert('Произошла ошибка при инициализации оплаты: ' + (error.message || error));
+        alert('Ошибка при запуске оплаты: ' + (error.message || 'неизвестная ошибка'));
       });
   });
 }
+
+// Global handler for T-Bank script load
+window.onPaymentIntegrationLoad = function () {
+  if (typeof PaymentIntegration !== 'undefined') {
+    PaymentIntegration.init({
+      terminalKey: CONFIG.TINKOFF_TERMINAL_KEY,
+      product: 'eacq'
+    }).then(() => {
+      console.log('T-Bank Integration initialized successfully');
+    }).catch(err => {
+      console.warn('T-Bank Integration init error:', err);
+    });
+  }
+};
 
 init();
