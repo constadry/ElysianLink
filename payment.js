@@ -120,7 +120,47 @@ async function init() {
   ui.form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validate()) return;
-    alert(`Заказ оформлен: ${product.title}\nНик: ${ui.nick.value}\nПочта: ${ui.email.value}`);
+
+    if (typeof PaymentIntegration === 'undefined') {
+      alert('Ошибка: Платежный модуль не загружен. Пожалуйста, обновите страницу.');
+      return;
+    }
+
+    const orderId = `order_${Date.now()}_${ui.nick.value}`;
+
+    // T-Bank Integration configuration
+    const paymentData = {
+      terminalKey: CONFIG.TINKOFF_TERMINAL_KEY,
+      amount: product.price,
+      orderId: orderId,
+      description: `Покупка товара: ${product.title} (Ник: ${ui.nick.value})`,
+      customerKey: ui.nick.value,
+      email: ui.email.value,
+      // Optional: you can add more fields if needed (receipt, etc.)
+      receipt: {
+        Email: ui.email.value,
+        Taxation: 'usn_income',
+        Items: [
+          {
+            Name: product.title,
+            Price: product.price * 100, // in kopeks
+            Quantity: 1.00,
+            Amount: product.price * 100,
+            Tax: 'none'
+          }
+        ]
+      }
+    };
+
+    PaymentIntegration.pay(paymentData)
+      .then(result => {
+        console.log('Payment result:', result);
+        // Successful payment logic (usually just closed widget, status should be verified on backend)
+      })
+      .catch(error => {
+        console.error('Payment error:', error);
+        alert('Произошла ошибка при инициализации оплаты: ' + (error.message || error));
+      });
   });
 }
 
