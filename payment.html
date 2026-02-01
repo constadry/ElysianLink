@@ -251,6 +251,7 @@
                     <button type="submit" class="btn-primary" id="payBtn" disabled>Оплатить</button>
                 </div>
             </form>
+            <div id="paymentContainer" style="min-height: 400px; display: none; padding: 14px;"></div>
         </div>
         <div class="empty-state" id="notFound" hidden>Товар не найден.</div>
     </main>
@@ -308,7 +309,7 @@
         </div>
     </footer>
 
-    <script src="https://integrationjs.tbank.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
+
     <script src="./payment.js" defer></script>
 </body>
 

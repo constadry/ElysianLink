@@ -8,6 +8,16 @@ const API_CONFIG = {
 
 const qs = new URLSearchParams(location.search);
 const productId = decodeURIComponent(qs.get('id') || '');
+let currentProduct = null;
+let isSubmitting = false;
+
+// Prevent double script initialization
+if (window.__PAYMENT_PAGE_INITIALIZED) {
+  console.warn('Payment script already initialized, skipping.');
+} else {
+  window.__PAYMENT_PAGE_INITIALIZED = true;
+  init();
+}
 
 const ui = {
   card: document.getElementById('payCard'),
@@ -103,6 +113,7 @@ async function init() {
     ui.notFound.hidden = false;
     return;
   }
+  currentProduct = product;
 
   ui.title.textContent = product.title;
   ui.price.textContent = formatPriceRUB(product.price);
@@ -117,41 +128,60 @@ async function init() {
   validate();
 
   ui.cancelBtn?.addEventListener('click', () => history.back());
-  ui.form?.addEventListener('submit', (e) => {
+  ui.form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (isSubmitting || !validate()) return;
 
-    // Use PaymentIntegration or integration (T-Bank sometimes uses both)
-    const tbank = window.PaymentIntegration || window.integration;
+    isSubmitting = true;
+    ui.payBtn.disabled = true;
+    const originalBtnText = ui.payBtn.textContent;
+    ui.payBtn.textContent = 'Переход к оплате...';
 
-    if (!tbank) {
-      alert('Ошибка: Платежный модуль не загружен. Пожалуйста, обновите страницу.');
-      return;
-    }
+    const payload = {
+      nick: ui.nick.value,
+      email: ui.email.value,
+      productId: currentProduct ? currentProduct.id : productId,
+      title: currentProduct ? currentProduct.title : 'Товар',
+      amount: currentProduct ? currentProduct.price : 0,
+      orderId: `order_${Date.now()}_${ui.nick.value}`,
+      description: `Покупка: ${currentProduct ? currentProduct.title : 'Товар'} (Ник: ${ui.nick.value})`
+    };
 
-    tbank.pay(paymentData)
-      .then(result => {
-        console.log('Payment result:', result);
-      })
-      .catch(error => {
-        console.error('Payment error:', error);
-        alert('Ошибка при запуске оплаты: ' + (error.message || 'неизвестная ошибка'));
+    // Add debugging log
+    console.log('Initiating payment with payload:', payload);
+
+    try {
+      // Use configured API URL directly
+      const url = `${API_CONFIG.baseURL}/api/payment/create`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
+
+      if (!response.ok) {
+        throw new Error(`Ошибка сервера: ${response.status}`);
+      }
+
+      const res = await response.json();
+      console.log('Payment init response:', res);
+
+      // Backend returns { url: "..." }
+      const redirectUrl = res.url || res.paymentUrl;
+
+      if (res && redirectUrl) {
+        // Successful initialization - redirect to T-Bank
+        window.location.href = redirectUrl;
+      } else {
+        throw new Error(`Некорректный ответ от сервера (поле url отсутствует). Получено: ${JSON.stringify(res)}`);
+      }
+    } catch (err) {
+      console.error('Payment init error:', err);
+      alert('Ошибка инициализации платежа: ' + (err.message || 'неизвестная ошибка'));
+      isSubmitting = false;
+      ui.payBtn.disabled = false;
+      ui.payBtn.textContent = originalBtnText;
+    }
   });
 }
-
-// Global handler for T-Bank script load
-window.onPaymentIntegrationLoad = function () {
-  if (typeof PaymentIntegration !== 'undefined') {
-    PaymentIntegration.init({
-      terminalKey: CONFIG.TINKOFF_TERMINAL_KEY,
-      product: 'eacq'
-    }).then(() => {
-      console.log('T-Bank Integration initialized successfully');
-    }).catch(err => {
-      console.warn('T-Bank Integration init error:', err);
-    });
-  }
-};
-
-init();
