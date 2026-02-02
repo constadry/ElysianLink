@@ -183,5 +183,58 @@ async function init() {
       ui.payBtn.disabled = false;
       ui.payBtn.textContent = originalBtnText;
     }
+
   });
 }
+
+/**
+ * Initiates a refund/cancellation of a payment.
+ * Requires providing the receipt items for 54-FZ compliance.
+ * 
+ * @param {string} paymentId - The payment ID from T-Bank
+ * @param {number} amountRub - Refund amount in RUB
+ * @param {string} email - Customer email
+ * @param {Array<{Name:string, Price:number, Quantity:number, Amount:number, Tax:string}>} items - List of items. Price and Amount in kopecks.
+ */
+window.doRefund = async function (paymentId, amountRub, email, items) {
+  if (!paymentId || !amountRub || !email || !items || !items.length) {
+    console.error('doRefund: Missing required arguments (paymentId, amount, email, items)');
+    return;
+  }
+
+  const payload = {
+    paymentId: paymentId,
+    amount: amountRub,
+    email: email,
+    items: items
+  };
+
+  console.log('Initiating refund with payload:', payload);
+
+  try {
+    const url = `${API_CONFIG.baseURL}/api/payment/cancel`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Refund response:', result);
+
+    if (result.Success || result.success) { // Handle PascalCase or camelCase
+      alert(`Возврат успешно оформлен! Статус: ${result.Status}`);
+    } else {
+      alert(`Ошибка при возврате: ${result.Message || result.message || 'Unknown error'}`);
+    }
+    return result;
+
+  } catch (err) {
+    console.error('Refund error:', err);
+    alert('Ошибка запроса возврата: ' + err.message);
+  }
+};
