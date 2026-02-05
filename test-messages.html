@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест сообщений об ошибках</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body {
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--panel);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--blue-100);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: var(--blue-200);">Демо: Сообщения об ошибках и успехе</h1>
+
+    <div class="demo-section">
+        <h2>✅ Сообщение об успехе</h2>
+        <div class="form-message success">
+            ✓ Ваше обращение успешно отправлено!
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>❌ Сообщение об ошибке</h2>
+        <div class="form-message error">
+            Ошибка при отправке. Попробуйте позже.
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>❌ Сообщение об ошибке с деталями</h2>
+        <div class="form-message error">
+            Слишком много запросов. Подождите минуту.
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>📝 Пример формы с сообщением</h2>
+        <form class="feedback-form" onsubmit="event.preventDefault(); showMessage();">
+            <div class="form-group">
+                <label for="testInput">Тестовое поле</label>
+                <input type="text" id="testInput" placeholder="Введите текст" required>
+            </div>
+
+            <button type="submit" class="btn-primary btn-submit" id="testBtn">
+                <span class="btn-text">Отправить</span>
+                <span class="btn-loading" hidden>Отправка...</span>
+            </button>
+
+            <div class="form-message" id="testMessage" hidden></div>
+        </form>
+    </div>
+
+    <script>
+        function showMessage() {
+            const btn = document.getElementById('testBtn');
+            const msg = document.getElementById('testMessage');
+
+            // Показываем состояние загрузки
+            btn.disabled = true;
+            msg.hidden = true;
+
+            // Симулируем отправку
+            setTimeout(() => {
+                // Случайно показываем успех или ошибку
+                const isSuccess = Math.random() > 0.5;
+
+                msg.textContent = isSuccess
+                    ? '✓ Сообщение успешно отправлено!'
+                    : 'Ошибка: Не удалось отправить сообщение';
+                msg.className = `form-message ${isSuccess ? 'success' : 'error'}`;
+                msg.hidden = false;
+
+                btn.disabled = false;
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

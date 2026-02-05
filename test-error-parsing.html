@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест обработки ошибок</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--panel);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--blue-100);
+        }
+
+        .code-block {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+
+        .test-btn {
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: var(--blue-200);">Тест обработки ошибок от бекэнда</h1>
+
+    <div class="test-section">
+        <h2>1. Ошибка валидации ASP.NET Core (ModelState)</h2>
+        <p>Формат ответа от бекэнда:</p>
+        <div class="code-block">
+            {
+            "errors": {
+            "Reason": ["Причина должна быть от 20 до 2000 символов"]
+            }
+            }
+        </div>
+        <button class="btn-primary test-btn" onclick="testError1()">Тест</button>
+        <div class="result" id="result1"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Множественные ошибки валидации</h2>
+        <p>Формат ответа от бекэнда:</p>
+        <div class="code-block">
+            {
+            "errors": {
+            "PlayerNick": ["Игровой ник обязателен"],
+            "Message": ["Сообщение должно быть от 10 до 2000 символов"],
+            "ContactInfo": ["Укажите контактные данные"]
+            }
+            }
+        </div>
+        <button class="btn-primary test-btn" onclick="testError2()">Тест</button>
+        <div class="result" id="result2"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Простое сообщение об ошибке</h2>
+        <p>Формат ответа от бекэнда:</p>
+        <div class="code-block">
+            {
+            "success": false,
+            "message": "Слишком много запросов. Подождите минуту."
+            }
+        </div>
+        <button class="btn-primary test-btn" onclick="testError3()">Тест</button>
+        <div class="result" id="result3"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. ProblemDetails формат</h2>
+        <p>Формат ответа от бекэнда:</p>
+        <div class="code-block">
+            {
+            "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            "title": "One or more validation errors occurred.",
+            "status": 400,
+            "errors": {
+            "Discord": ["Укажите Discord"]
+            }
+            }
+        </div>
+        <button class="btn-primary test-btn" onclick="testError4()">Тест</button>
+        <div class="result" id="result4"></div>
+    </div>
+
+    <script>
+        // Копируем функцию extractErrorMessage из script.js
+        function extractErrorMessage(errorResponse) {
+            // Если есть прямое сообщение
+            if (errorResponse.message) {
+                return errorResponse.message;
+            }
+
+            // Если есть errors объект (ASP.NET Core ModelState)
+            if (errorResponse.errors) {
+                const errors = [];
+
+                // Обрабатываем объект errors
+                for (const [field, messages] of Object.entries(errorResponse.errors)) {
+                    if (Array.isArray(messages)) {
+                        errors.push(...messages);
+                    } else if (typeof messages === 'string') {
+                        errors.push(messages);
+                    }
+                }
+
+                if (errors.length > 0) {
+                    return errors.join('; ');
+                }
+            }
+
+            // Если есть title (стандартный формат ProblemDetails)
+            if (errorResponse.title) {
+                return errorResponse.title;
+            }
+
+            // Fallback
+            return 'Ошибка при отправке';
+        }
+
+        function showResult(elementId, errorResponse) {
+            const resultDiv = document.getElementById(elementId);
+            const message = extractErrorMessage(errorResponse);
+
+            resultDiv.innerHTML = `
+                <div class="form-message error">
+                    ${message}
+                </div>
+            `;
+        }
+
+        function testError1() {
+            const errorResponse = {
+                "errors": {
+                    "Reason": ["Причина должна быть от 20 до 2000 символов"]
+                }
+            };
+            showResult('result1', errorResponse);
+        }
+
+        function testError2() {
+            const errorResponse = {
+                "errors": {
+                    "PlayerNick": ["Игровой ник обязателен"],
+                    "Message": ["Сообщение должно быть от 10 до 2000 символов"],
+                    "ContactInfo": ["Укажите контактные данные"]
+                }
+            };
+            showResult('result2', errorResponse);
+        }
+
+        function testError3() {
+            const errorResponse = {
+                "success": false,
+                "message": "Слишком много запросов. Подождите минуту."
+            };
+            showResult('result3', errorResponse);
+        }
+
+        function testError4() {
+            const errorResponse = {
+                "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                "title": "One or more validation errors occurred.",
+                "status": 400,
+                "errors": {
+                    "Discord": ["Укажите Discord"]
+                }
+            };
+            showResult('result4', errorResponse);
+        }
+    </script>
+</body>
+
+</html>

@@ -488,12 +488,9 @@ function closeRulesModal() {
 }
 
 // ============================================
-// Feedback Modal & Telegram Integration
+// Feedback Modal & Backend Telegram Integration
 // ============================================
-const TELEGRAM_CONFIG = {
-  botToken: '8304575234:AAEh5vuo0lbdYC8bKEJ_TOMdnBNcMItCHfM',
-  chatId: '-1003288093469'
-};
+// SECURITY: Telegram токен теперь хранится на бекэнде, а не в клиентском коде
 
 function setupFeedbackModal() {
   const feedbackLinks = document.querySelectorAll('a[href="#feedback"]');
@@ -560,7 +557,7 @@ async function handleFeedbackSubmit(e) {
   formMessage.hidden = true;
 
   try {
-    await sendToTelegram(formData);
+    await sendFeedbackToBackend(formData);
     showFormMessage('✓ Ваше обращение успешно отправлено!', 'success');
     form.reset();
 
@@ -571,44 +568,75 @@ async function handleFeedbackSubmit(e) {
     }, 2000);
   } catch (error) {
     console.error('Error sending feedback:', error);
-    showFormMessage('Ошибка при отправке. Попробуйте позже.', 'error');
+    showFormMessage(error.message || 'Ошибка при отправке. Попробуйте позже.', 'error');
   } finally {
     submitBtn.disabled = false;
   }
 }
 
-async function sendToTelegram(data) {
-  const message = `
-🎮 <b>Новое обращение с сайта ArcWeave</b>
-
-👤 <b>Игровой ник:</b> ${escapeHtml(data.playerNick)}
-📋 <b>Причина:</b> ${escapeHtml(data.reason)}
-💬 <b>Связь:</b> ${escapeHtml(data.contactMethod)} - ${escapeHtml(data.contactInfo)}
-
-📝 <b>Сообщение:</b>
-${escapeHtml(data.message)}
-  `.trim();
-
-  const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+/**
+ * Отправляет обратную связь через безопасный бекэнд API
+ * Токен Telegram хранится только на сервере
+ */
+async function sendFeedbackToBackend(data) {
+  const url = `${CONFIG.API_URL}/telegram/feedback`;
 
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CONFIG.chatId,
-      text: message,
-      parse_mode: 'HTML'
-    })
+    body: JSON.stringify(data)
   });
 
+  const result = await response.json();
+
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(`Telegram API error: ${errorData.description || response.statusText}`);
+    // Логируем полный ответ для отладки
+    console.error('Backend error response:', result);
+
+    // Обработка ошибок валидации от ASP.NET Core
+    const errorMessage = extractErrorMessage(result);
+    throw new Error(errorMessage);
   }
 
-  return response.json();
+  return result;
+}
+
+/**
+ * Извлекает читаемое сообщение об ошибке из ответа бекэнда
+ */
+function extractErrorMessage(errorResponse) {
+  // Если есть прямое сообщение
+  if (errorResponse.message) {
+    return errorResponse.message;
+  }
+
+  // Если есть errors объект (ASP.NET Core ModelState)
+  if (errorResponse.errors) {
+    const errors = [];
+
+    // Обрабатываем объект errors
+    for (const [field, messages] of Object.entries(errorResponse.errors)) {
+      if (Array.isArray(messages)) {
+        errors.push(...messages);
+      } else if (typeof messages === 'string') {
+        errors.push(messages);
+      }
+    }
+
+    if (errors.length > 0) {
+      return errors.join('; ');
+    }
+  }
+
+  // Если есть title (стандартный формат ProblemDetails)
+  if (errorResponse.title) {
+    return errorResponse.title;
+  }
+
+  // Fallback
+  return 'Ошибка при отправке';
 }
 
 function escapeHtml(text) {
@@ -692,7 +720,7 @@ async function handleTeamSubmit(e) {
   document.getElementById(formMessageId).hidden = true;
 
   try {
-    await sendTeamApplicationToTelegram(formData);
+    await sendTeamApplicationToBackend(formData);
     showFormMessage('✓ Ваша заявка успешно отправлена!', 'success', formMessageId);
     form.reset();
 
@@ -702,42 +730,37 @@ async function handleTeamSubmit(e) {
     }, 2500);
   } catch (error) {
     console.error('Error sending team application:', error);
-    showFormMessage('Ошибка при отправке. Попробуйте позже.', 'error', formMessageId);
+    showFormMessage(error.message || 'Ошибка при отправке. Попробуйте позже.', 'error', formMessageId);
   } finally {
     submitBtn.disabled = false;
   }
 }
 
-async function sendTeamApplicationToTelegram(data) {
-  const message = `
-📝 <b>НОВАЯ ЗАЯВКА В КОМАНДУ</b>
-
-👤 <b>Ник:</b> ${escapeHtml(data.playerNick)}
-🌐 <b>Сервер:</b> ${escapeHtml(data.server)}
-🛠 <b>Роль:</b> ${escapeHtml(data.role)}
-⏳ <b>Часы:</b> ${escapeHtml(data.hours)}
-🚫 <b>История наказаний:</b>
-${escapeHtml(data.history)}
-
-📱 <b>Discord:</b> ${escapeHtml(data.discord)}
-
-🎯 <b>Причина/Мотивация:</b>
-${escapeHtml(data.reason)}
-  `.trim();
-
-  const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+/**
+ * Отправляет заявку в команду через безопасный бекэнд API
+ * Токен Telegram хранится только на сервере
+ */
+async function sendTeamApplicationToBackend(data) {
+  const url = `${CONFIG.API_URL}/telegram/team-application`;
 
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CONFIG.chatId,
-      text: message,
-      parse_mode: 'HTML'
-    })
+    body: JSON.stringify(data)
   });
 
-  if (!response.ok) throw new Error('Telegram API error');
-  return response.json();
+  const result = await response.json();
+
+  if (!response.ok) {
+    // Логируем полный ответ для отладки
+    console.error('Backend error response:', result);
+
+    // Обработка ошибок валидации от ASP.NET Core
+    const errorMessage = extractErrorMessage(result);
+    throw new Error(errorMessage);
+  }
+
+  return result;
 }
+
 
