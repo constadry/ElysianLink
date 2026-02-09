@@ -147,13 +147,10 @@ async function init() {
       description: `Покупка: ${currentProduct ? currentProduct.title : 'Товар'} (Ник: ${ui.nick.value})`
     };
 
-    // Add debugging log
     console.log('Initiating payment with payload:', payload);
 
     try {
-      // Use configured API URL directly
       const url = `${API_CONFIG.baseURL}/api/payment/create`;
-
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -165,13 +162,9 @@ async function init() {
       }
 
       const res = await response.json();
-      console.log('Payment init response:', res);
-
-      // Backend returns { url: "..." }
       const redirectUrl = res.url || res.paymentUrl;
 
       if (res && redirectUrl) {
-        // Successful initialization - redirect to T-Bank
         window.location.href = redirectUrl;
       } else {
         throw new Error(`Некорректный ответ от сервера (поле url отсутствует). Получено: ${JSON.stringify(res)}`);
@@ -183,7 +176,51 @@ async function init() {
       ui.payBtn.disabled = false;
       ui.payBtn.textContent = originalBtnText;
     }
+  });
 
+  setupBurgerMenu();
+}
+
+function setupBurgerMenu() {
+  const burgerToggle = document.getElementById('burgerToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('menuClose');
+
+  if (!burgerToggle || !mobileMenu) return;
+
+  const toggleMenu = (show) => {
+    const isExpanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+    const nextState = typeof show === 'boolean' ? show : !isExpanded;
+
+    burgerToggle.setAttribute('aria-expanded', String(nextState));
+    mobileMenu.setAttribute('aria-expanded', String(nextState));
+    document.body.style.overflow = nextState ? 'hidden' : '';
+  };
+
+  burgerToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  if (menuClose) {
+    menuClose.addEventListener('click', () => toggleMenu(false));
+  }
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.getAttribute('aria-expanded') === 'true' &&
+      !mobileMenu.contains(e.target) &&
+      !burgerToggle.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+  // Close menu when clicking on a menu item
+  const menuItems = mobileMenu.querySelectorAll('.menu-item');
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      toggleMenu(false);
+    });
   });
 }
 

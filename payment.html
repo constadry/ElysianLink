@@ -195,17 +195,34 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <nav class="nav-tabs" aria-label="Навигация" style="flex-wrap: nowrap; gap: 8px;">
-                <a href="./index.html" class="header-link home-link" title="Вернуться к начальному экрану">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                    <span>На главную</span>
-                </a>
+            <button class="burger-toggle" id="burgerToggle" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="./index.html" class="header-link home-link desktop-home" title="Вернуться к начальному экрану">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>На главную</span>
+            </a>
+            <nav class="nav-tabs desktop-tabs" aria-label="Навигация">
                 <a class="btn-secondary" href="./shop.html" style="padding: 8px 12px; font-size: 13px;">← В магазин</a>
             </nav>
+
+            <nav class="mobile-menu" id="mobileMenu" aria-label="Навигация" aria-expanded="false">
+                <button class="menu-close" id="menuClose" aria-label="Закрыть меню">&times;</button>
+                <div class="menu-content">
+                    <a href="./index.html" class="menu-item home-item">
+                        🏠 На главную
+                    </a>
+                    <div class="menu-divider">Разделы</div>
+                    <a href="./shop.html" class="menu-item">🛒 Вернуться в магазин</a>
+
+                    <div class="menu-divider">Инфо</div>
+                    <a href="./shop.html#rules" class="menu-item">📜 Правила</a>
+                </div>
+            </nav>
+
             <div class="brand" aria-label="ArcWeave">
                 <img class="brand-logo" src="./assets/Arcweave.jpg" alt="ArcWeave" aria-hidden="true">
                 <div class="brand-text">
