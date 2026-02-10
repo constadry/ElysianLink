@@ -64,24 +64,41 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <a href="./index.html" class="header-link home-link" title="Вернуться к начальному экрану">
+            <button class="burger-toggle" id="burgerToggle" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="./index.html" class="header-link home-link desktop-home" title="Вернуться к начальному экрану">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
                 <span>На главную</span>
             </a>
-            <a href="./shop.html" class="brand"
-                style="text-decoration: none; color: inherit; margin-right: auto; margin-left: 8px;">
-                <img class="brand-logo" src="./assets/Arcweave.jpg" alt="ArcWeave">
+            <nav class="nav-tabs desktop-tabs" aria-label="Навигация">
+                <a class="btn-secondary" href="./shop.html" style="padding: 8px 12px; font-size: 13px;">← В магазин</a>
+            </nav>
+
+            <nav class="mobile-menu" id="mobileMenu" aria-label="Навигация" aria-expanded="false">
+                <button class="menu-close" id="menuClose" aria-label="Закрыть меню">&times;</button>
+                <div class="menu-content">
+                    <a href="./index.html" class="menu-item home-item">
+                        🏠 На главную
+                    </a>
+                    <div class="menu-divider">Разделы</div>
+                    <a href="./shop.html" class="menu-item">🛒 Вернуться в магазин</a>
+
+                    <div class="menu-divider">Инфо</div>
+                    <a href="./shop.html#rules" class="menu-item">📜 Правила</a>
+                </div>
+            </nav>
+
+            <div class="brand" aria-label="ArcWeave">
+                <img class="brand-logo" src="./assets/Arcweave.jpg" alt="ArcWeave" aria-hidden="true">
                 <div class="brand-text">
                     <div class="brand-title">ArcWeave</div>
-                    <div class="brand-subtitle">Minecraft сервер</div>
+                    <div class="brand-subtitle">Соглашение</div>
                 </div>
-            </a>
-            <nav class="header-links">
-                <a href="./shop.html" class="header-link">Вернуться в магазин</a>
-            </nav>
+            </div>
         </div>
         <div class="promo-banner" id="promoBanner">
             <div class="container banner-inner">
@@ -96,9 +113,8 @@
 
     <main class="container">
         <div class="agreement-content">
-            <a href="./shop.html" class="back-link">← Назад на главную</a>
-
-            <h1>Пользовательское соглашение сервера ArcWeave</h1>
+            <h1 class="landing-title" style="font-size: clamp(24px, 5vw, 42px); text-align: left; margin-bottom: 32px;">
+                Пользовательское соглашение сервера ArcWeave</h1>
 
             <p><strong>ВНИМАНИЕ:</strong> начиная игровую сессию и/или подключаясь к серверу ArcWeave, и/или загружая
                 клиентские модификации, и/или используя любой функционал проекта, вы подтверждаете, что внимательно
@@ -329,6 +345,41 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerToggle = document.getElementById('burgerToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuClose = document.getElementById('menuClose');
+
+            if (burgerToggle && mobileMenu) {
+                const toggleMenu = (show) => {
+                    const isExpanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+                    const nextState = typeof show === 'boolean' ? show : !isExpanded;
+
+                    burgerToggle.setAttribute('aria-expanded', String(nextState));
+                    mobileMenu.setAttribute('aria-expanded', String(nextState));
+                    document.body.style.overflow = nextState ? 'hidden' : '';
+                };
+
+                burgerToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+
+                if (menuClose) {
+                    menuClose.addEventListener('click', () => toggleMenu(false));
+                }
+
+                document.addEventListener('click', (e) => {
+                    if (mobileMenu.getAttribute('aria-expanded') === 'true' &&
+                        !mobileMenu.contains(e.target) &&
+                        !burgerToggle.contains(e.target)) {
+                        toggleMenu(false);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
