@@ -142,7 +142,8 @@ async function init() {
       email: ui.email.value,
       productId: currentProduct ? currentProduct.id : productId,
       title: currentProduct ? currentProduct.title : 'Товар',
-      amount: currentProduct ? currentProduct.price : 0,
+      amount: currentProduct ? currentProduct.amount : 0,
+      price: currentProduct ? currentProduct.price : 0,
       orderId: `order_${Date.now()}_${ui.nick.value}`,
       description: `Покупка: ${currentProduct ? currentProduct.title : 'Товар'} (Ник: ${ui.nick.value})`
     };
