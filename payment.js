@@ -2,7 +2,7 @@
 const API_CONFIG = {
   baseURL: typeof CONFIG !== 'undefined' ? CONFIG.API_URL : 'https://localhost:7089',
   endpoints: {
-    products: '/shopitems'
+    products: '/api/shopitems'
   }
 };
 

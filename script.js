@@ -2,7 +2,7 @@
 const API_CONFIG = {
   baseURL: `${CONFIG.API_URL}`,
   endpoints: {
-    products: '/shopitems'  // ASP.NET Core endpoint для получения услуг
+    products: '/api/shopitems'  // ASP.NET Core endpoint для получения услуг
   }
 };
 
